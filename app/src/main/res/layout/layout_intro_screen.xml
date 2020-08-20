@@ -23,7 +23,7 @@
                 android:layout_marginStart="@dimen/small_margin"
                 android:visibility="gone"
                 android:layout_marginEnd="@dimen/small_margin"
-                android:text="@string/dummy_text"
+                android:text="@string/large_dummy_text"
                 android:textAlignment="center" />
 
             <androidx.appcompat.widget.AppCompatImageView

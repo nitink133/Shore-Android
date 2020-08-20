@@ -114,6 +114,7 @@ class IntroScreenActivity : AppCompatActivity() {
             mWelcomePage4?.findViewById<TextView>(id.tvFooter)?.makeLinks(
                 Pair(getString(R.string.txt_activate_not), View.OnClickListener {
                     //Create ToolTip for accessibility services.
+                    startActivity(Intent(this@IntroScreenActivity,MainActivity::class.java))
                 })
             )
             pagerAdapter.addView(mWelcomePage4)

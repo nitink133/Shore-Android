@@ -8,7 +8,9 @@ import android.util.Log
 import android.view.View
 import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.theshoremedia.utils.StringUtils
+import kotlinx.android.synthetic.main.layout_recycler_view.view.*
 
 /**
  * @author- Nitin Khanna
@@ -87,4 +89,10 @@ fun debugView(
         nextNodeInfo = if (rootNodeInfo.childCount > index) rootNodeInfo.getChild(index) else null
 
     }
+}
+
+fun RecyclerView.validateNoDataView() {
+    val counts = this.adapter?.itemCount ?: 0
+    llNoData?.makeVisible(isVisible = counts == 0)
+
 }
