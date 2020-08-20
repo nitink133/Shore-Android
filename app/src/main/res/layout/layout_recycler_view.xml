@@ -23,7 +23,7 @@
             android:layout_height="150dp"
             android:layout_gravity="center"
             app:lottie_autoPlay="true"
-            app:lottie_fileName="no_data.json"
+            app:lottie_fileName="lottie/no_data.json"
             app:lottie_loop="true" />
 
         <androidx.appcompat.widget.AppCompatTextView

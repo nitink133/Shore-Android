@@ -7,4 +7,23 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="grey">#C4C4C4</color>
+
+    <color name="textColorDarkGrey">#373e43</color>
+    <color name="colorGreyDark">#4B4B4B</color>
+    <color name="textColorMenuItem">#4C5156</color>
+
+    <color name="bgColorGrey">#f3f3f3</color>
+    <color name="bgColorGreen">#00C279</color>
+    <color name="dividerColor">#E7EDF1</color>
+    <color name="roundedRectOutlineColor">#D9DEE4</color>
+    <color name="btnBgColorRed">#ED1C24</color>
+    <color name="btnBgColorGrey">#4c5156</color>
+    <color name="errorBgColor">#FFE2E3</color>
+    <color name="successBgColor">#883BBC7C</color>
+    <color name="borderColorGray">#D5D4D4</color>
+    <color name="grayOrColor">#B8BCC0</color>
+    <color name="colorGrayTitle">#9598A2</color>
+    <color name="authHeaderColor">#D4D8D9</color>
+    <color name="colorDivider">#C4C5C7</color>
+    <color name="colorGrey">#7C7C7C</color>
 </resources>

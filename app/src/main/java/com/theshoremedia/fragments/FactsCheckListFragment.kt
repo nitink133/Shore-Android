@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.widget.Toast
 import com.theshoremedia.R
+import com.theshoremedia.modules.base.BaseFragment
+import com.theshoremedia.utils.permissions.AccessibilityPermissionsUtils
+import com.theshoremedia.utils.permissions.OnDrawPermissionsUtils
 
-class FactsCheckListFragment : Fragment() {
 
+class FactsCheckListFragment : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -18,12 +21,21 @@ class FactsCheckListFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_factss_check_list, container, false)
     }
 
-    companion object {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FactsCheckListFragment().apply {
-
+        OnDrawPermissionsUtils.checkPermission(mContext!!) {
+            AccessibilityPermissionsUtils.checkPermission(mContext!!) {
+                Toast.makeText(mContext!!, "Thanks", Toast.LENGTH_LONG).show()
             }
+        }
     }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() =
+            FactsCheckListFragment()
+    }
+
+
 }

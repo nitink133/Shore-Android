@@ -1,5 +1,7 @@
 package com.theshoremedia.utils.extensions
 
+import android.app.AlertDialog
+import android.content.Context
 import android.graphics.Color
 import android.text.*
 import android.text.method.LinkMovementMethod
@@ -9,6 +11,7 @@ import android.view.View
 import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.theshoremedia.modules.base.BaseCustomDialog
 import com.theshoremedia.utils.StringUtils
 import kotlinx.android.synthetic.main.layout_recycler_view.view.*
 
@@ -94,5 +97,13 @@ fun debugView(
 fun RecyclerView.validateNoDataView() {
     val counts = this.adapter?.itemCount ?: 0
     llNoData?.makeVisible(isVisible = counts == 0)
-
 }
+
+fun showCustomDialog(
+    context: Context,
+    view: View,
+    func: BaseCustomDialog.() -> Unit
+): AlertDialog = BaseCustomDialog(context, view).apply {
+    func()
+}.create()
+

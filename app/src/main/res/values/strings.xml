@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">The Shore Media</string>
+    <string name="app_name_accessibility">📰 The Shore Media</string>
+
 
     <string name="a_layer_of_truth">A layer of truth on every forward.</string>
     <string name="intro_screen_1">You read, \'TheShore\' is ready to back you from fake news.</string>
@@ -11,6 +13,7 @@
 
     <string name="large_dummy_text">What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry.</string>
     <string name="small_dummy_text">Lorem Ipsum</string>
+    <string name="medium_dummy_text">What is Lorem Ipsum Lorem Ipsum is simply dummy text?</string>
 
     <string name="whatsapp_package_name">com.whatsapp</string>
 
@@ -49,5 +52,16 @@
 
     <string name="txt_no_data">No Data Found!</string>
 
+
+    <!--    Dialog utils-->
+    <string name="ok">Okay</string>
+    <string name="cancel">Cancel</string>
+
+    <!--    Permission utils-->
+    <string name="permission_title_draw_overlays">Allow Shore Media to draw overlays permission?</string>
+    <string name="permission_message_draw_overlays">You have to enable the draw overlays permission for this app to work.</string>
+
+    <string name="permission_title_accessibility">Allow Shore Media to use accessibility service?</string>
+    <string name="permission_message_accessibility">We need accessibility permission to protect you from fake-news in real time.</string>
 
 </resources>

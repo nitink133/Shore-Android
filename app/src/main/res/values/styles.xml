@@ -33,4 +33,24 @@
     </style>
 
 
+    <style name="defaultBtnStyle" parent="Widget.AppCompat.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/btn_height</item>
+        <item name="android:fontFamily">@font/sanchez_regular</item>
+        <item name="android:background">@drawable/btn_primary</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/btn_text_size</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="defaultBtnSmallStyle" parent="defaultBtnStyle">
+        <item name="android:textSize">@dimen/small_textsize</item>
+        <item name="android:layout_height">@dimen/small_btn_height</item>
+    </style>
+
+    <style name="ProgressDialogCustom">
+        <item name="android:textSize">@dimen/default_textsize</item>
+    </style>
+
+
 </resources>

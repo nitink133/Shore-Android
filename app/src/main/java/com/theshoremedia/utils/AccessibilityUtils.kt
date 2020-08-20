@@ -1,72 +1,36 @@
 package com.theshoremedia.utils
 
+import android.content.ComponentName
 import android.content.Context
 import android.provider.Settings
-import android.provider.Settings.SettingNotFoundException
 import android.text.TextUtils.SimpleStringSplitter
-import android.util.Log
+
 
 object AccessibilityUtils {
     private val TAG = AccessibilityUtils::class.java.simpleName
 
     /**
-     * Check if Accessibility Service is enabled.
-     *
-     * @param mContext
-     * @return `true` if Accessibility Service is ON, otherwise `false`
+     * Based on [com.android.settingslib.accessibility.AccessibilityUtils.getEnabledServicesFromSettings]
+     * @see [AccessibilityUtils](https://github.com/android/platform_frameworks_base/blob/d48e0d44f6676de6fd54fd8a017332edd6a9f096/packages/SettingsLib/src/com/android/settingslib/accessibility/AccessibilityUtils.java.L55)
      */
-    fun isAccessibilitySettingsOn(mContext: Context): Boolean {
-        var accessibilityEnabled = 0
-        //your package /   accesibility service path/class
-        val service =
-            "com.example.sotsys_014.accessibilityexample/com.accessibilityexample.Service.MyAccessibilityService"
-        val accessibilityFound = false
-        try {
-            accessibilityEnabled = Settings.Secure.getInt(
-                mContext.applicationContext.contentResolver,
-                Settings.Secure.ACCESSIBILITY_ENABLED
-            )
-            Log.v(
-                TAG,
-                "accessibilityEnabled = $accessibilityEnabled"
-            )
-        } catch (e: SettingNotFoundException) {
-            Log.e(
-                TAG,
-                "Error finding setting, default accessibility to not found: "
-                        + e.message
-            )
+    fun isAccessibilityServiceEnabled(
+        context: Context,
+        accessibilityService: Class<*>?
+    ): Boolean {
+        val expectedComponentName = ComponentName(context, accessibilityService!!)
+        val enabledServicesSetting: String = Settings.Secure.getString(
+            context.contentResolver,
+            Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
+        )
+            ?: return false
+        val colonSplitter = SimpleStringSplitter(':')
+        colonSplitter.setString(enabledServicesSetting)
+        while (colonSplitter.hasNext()) {
+            val componentNameString = colonSplitter.next()
+            val enabledService =
+                ComponentName.unflattenFromString(componentNameString)
+            if (enabledService != null && enabledService == expectedComponentName) return true
         }
-        val mStringColonSplitter = SimpleStringSplitter(':')
-        if (accessibilityEnabled == 1) {
-            Log.v(
-                TAG,
-                "***ACCESSIBILIY IS ENABLED*** -----------------"
-            )
-            val settingValue = Settings.Secure.getString(
-                mContext.applicationContext.contentResolver,
-                Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
-            )
-            if (settingValue != null) {
-                mStringColonSplitter.setString(settingValue)
-                while (mStringColonSplitter.hasNext()) {
-                    val accessabilityService = mStringColonSplitter.next()
-                    Log.v(
-                        TAG,
-                        "-------------- > accessabilityService :: $accessabilityService"
-                    )
-                    if (accessabilityService.equals(service, ignoreCase = true)) {
-                        Log.v(
-                            TAG,
-                            "We've found the correct setting - accessibility is switched on!"
-                        )
-                        return true
-                    }
-                }
-            }
-        } else {
-            Log.v(TAG, "***ACCESSIBILIY IS DISABLED***")
-        }
-        return accessibilityFound
+        return false
     }
 }

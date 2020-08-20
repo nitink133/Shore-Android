@@ -1,4 +1,4 @@
-package com.theshoremedia.activity
+package com.theshoremedia.modules.base
 
 import android.os.Bundle
 import android.os.PersistableBundle

@@ -1,5 +1,6 @@
 package com.theshoremedia.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -12,12 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.theshoremedia.R
 import com.theshoremedia.databinding.ActivityMainBinding
 import com.theshoremedia.fragments.FactsCheckListFragment
+import com.theshoremedia.modules.base.BaseActivity
 import com.theshoremedia.modules.navigation.adapter.NavigationDrawerAdapter
 import com.theshoremedia.modules.navigation.model.NavigationDataModel
 import com.theshoremedia.utils.AppConstants
 import com.theshoremedia.utils.KeyBoardManager
 import com.theshoremedia.utils.extensions.makeVisible
 import com.theshoremedia.utils.extensions.validateNoDataView
+import com.theshoremedia.utils.permissions.OnDrawPermissionsUtils
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.layout_navigation_view.*
 import kotlinx.android.synthetic.main.layout_recycler_view.*
@@ -49,7 +52,7 @@ class MainActivity : BaseActivity() {
      */
     private fun loadHomeFragment() {
         loadFragment(
-            fragment = FactsCheckListFragment(),
+            fragment = FactsCheckListFragment.newInstance(),
             animateFragment = false
         )
         //Closing drawer on item click
@@ -84,7 +87,7 @@ class MainActivity : BaseActivity() {
 
         val navigationItems = getNavigationItems()
         val adapter = NavigationDrawerAdapter(items = navigationItems) { _, title ->
-            loadFragment(fragment = FactsCheckListFragment(), title = title)
+            loadFragment(fragment = FactsCheckListFragment.newInstance(), title = title)
         }
         recyclerView?.setHasFixedSize(true)
         recyclerView?.layoutManager = LinearLayoutManager(this)
@@ -178,5 +181,13 @@ class MainActivity : BaseActivity() {
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            AppConstants.PermissionsCode.ACTION_MANAGE_OVERLAY -> OnDrawPermissionsUtils.onActivityResult(
+                mContext = this
+            )
+        }
+    }
 
 }
