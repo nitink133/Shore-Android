@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name">TSM</string>
+    <string name="app_name">The Shore Media</string>
+
+    <string name="a_layer_of_truth">A layer of truth on every forward.</string>
+    <string name="intro_screen_1">You read, \'TheShore\' is ready to back you from fake news.</string>
+    <string name="intro_screen_2">Your time is important. So, Why waste it in reading fake news.</string>
+    <string name="intro_screen_3">Whole story behind the fake news is just one click ahead.</string>
+    <string name="intro_screen_4">Cool, I got this!\nActivate Now</string>
+    <string name="txt_activate_not">Activate Now</string>
+    <string name="enable_accessibility">Enable accessibility on the next screen for TheShore to function smoothly</string>
+
+    <string name="dummy_text">What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry.</string>
+
+    <string name="whatsapp_package_name">com.whatsapp</string>
+
 </resources>
