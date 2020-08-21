@@ -21,6 +21,7 @@
     <dimen name="icon_width">35dp</dimen>
     <dimen name="icon_Height">35dp</dimen>
     <dimen name="small_image">24dp</dimen>
+    <dimen name="extra_small_image">20dp</dimen>
     <dimen name="large_image">36dp</dimen>
     <dimen name="lottie_icon_width">130dp</dimen>
     <dimen name="lottie_icon_height">90dp</dimen>
@@ -30,7 +31,8 @@
     <dimen name="add_btn_width">60dp</dimen>
     <dimen name="small_btn_height">32dp</dimen>
 
-    <dimen name="bg_border_radius">8dp</dimen>
+    <dimen name="default_radius">16dp</dimen>
+    <dimen name="small_radius">8dp</dimen>
     <dimen name="btn_round_radius">6dp</dimen>
 
     <dimen name="divider_height">1dp</dimen>

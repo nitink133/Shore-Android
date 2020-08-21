@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <solid android:color="@color/white" />
+
+    <size
+        android:width="@dimen/large_image"
+        android:height="@dimen/large_image" />
+    <padding android:right="@dimen/small_padding"
+        android:left="@dimen/small_padding"
+        android:top="@dimen/small_padding"
+        android:bottom="@dimen/small_padding"></padding>
+</shape>

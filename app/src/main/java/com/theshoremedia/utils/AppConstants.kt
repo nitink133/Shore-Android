@@ -18,4 +18,9 @@ object AppConstants {
         const val ACTION_MANAGE_OVERLAY = 1001
         const val ACTION_ACCESSIBILITY = 1002
     }
+
+    object FloatingViewType{
+        const val ACCESSIBILITY_HELP = 1
+        const val ACCESSIBILITY_SUCCESS_DEMO = 2
+    }
 }

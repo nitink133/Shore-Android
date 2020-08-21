@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/root_container"
+    android:layout_gravity="center_horizontal"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/textColorMenuItem"
+                android:orientation="horizontal"
+                android:padding="@dimen/small_margin">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:layout_marginEnd="@dimen/default_margin"
+                    android:gravity="center"
+                    android:text="@string/app_name"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/heading_textsize"
+                    android:textStyle="bold" />
+            </FrameLayout>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvMessage"
+                style="@style/withAlphaTextView"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/default_margin"
+                android:gravity="center"
+                android:text="@string/help_see_how_shore_works_on_whatsapp"
+                android:textSize="@dimen/large_textsize" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnStart"
+                style="@style/defaultBtnSmallStyle"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:tag="Click"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:text="@string/start" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/llTakeToApp"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/small_margin">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/ivTakeToApp"
+                style="@style/textView"
+                android:tag="Click"
+                android:layout_gravity="center"
+                android:text="@string/no_thanks_take_me_to_app"
+                android:textColor="@color/white"
+                android:textSize="@dimen/large_textsize" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:tint="@color/white"
+                android:src="@drawable/ic_right_arrow" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

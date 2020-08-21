@@ -1,8 +1,8 @@
 ## The Shore Media
 
 ##### TODO-
-- [ ] Accessibility settings connection with help tooltips
-- [ ] Callbacks handling for permission access
+- [x] Accessibility settings connection with help tooltips
+- [x] Callbacks handling for permission access
 - [ ] Show cc/av on whatsapp
 - [ ] forwarded message data cleaning
 - [ ] show cc/a when forwarded msg has been detected on whatsapp

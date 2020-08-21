@@ -7,6 +7,7 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="grey">#C4C4C4</color>
+    <color name="blue">#3F51B5</color>
 
     <color name="textColorDarkGrey">#373e43</color>
     <color name="colorGreyDark">#4B4B4B</color>
@@ -26,4 +27,5 @@
     <color name="authHeaderColor">#D4D8D9</color>
     <color name="colorDivider">#C4C5C7</color>
     <color name="colorGrey">#7C7C7C</color>
+
 </resources>

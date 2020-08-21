@@ -56,6 +56,8 @@
     <!--    Dialog utils-->
     <string name="ok">Okay</string>
     <string name="cancel">Cancel</string>
+    <string name="start">Start</string>
+    <string name="no_thanks_take_me_to_app">No Thanks! Take me to the app</string>
 
     <!--    Permission utils-->
     <string name="permission_title_draw_overlays">Allow Shore Media to draw overlays permission?</string>
@@ -63,5 +65,10 @@
 
     <string name="permission_title_accessibility">Allow Shore Media to use accessibility service?</string>
     <string name="permission_message_accessibility">We need accessibility permission to protect you from fake-news in real time.</string>
+
+    <string name="help_look_for_shore_in_the_list_and_click">Look for \'TheShore\' is the list and click</string>
+    <string name="help_see_how_shore_works_on_whatsapp">See how \'TheShore\' works on WhatsApp.</string>
+
+    <string name="err_work_is_under_process">Work is under-process!</string>
 
 </resources>

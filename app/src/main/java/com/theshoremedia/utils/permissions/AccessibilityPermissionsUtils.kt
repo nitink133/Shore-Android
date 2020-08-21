@@ -10,8 +10,9 @@ import android.provider.Settings
 import com.theshoremedia.R
 import com.theshoremedia.services.CustomAccessibilityService
 import com.theshoremedia.utils.AccessibilityUtils
-import com.theshoremedia.utils.AppConstants
 import com.theshoremedia.utils.DialogUtility
+import com.theshoremedia.views.AccessibilityGrantedDemoView
+import com.theshoremedia.views.AccessibilityPermissionsHelpView
 
 /**
  * @author- Nitin Khanna
@@ -50,15 +51,12 @@ class AccessibilityPermissionsUtils {
                 mContext,
                 mContext.getString(R.string.permission_title_accessibility),
                 message = mContext.getString(R.string.permission_message_accessibility),
-                hideCancelButton = true,
                 responseListener = { action ->
                     if (action == R.string.ok) {
+
+                        AccessibilityPermissionsHelpView.getInstance(mContext).init()
                         val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
-//                        (mContext as Activity).startActivity(intent)
-                        (mContext as Activity).startActivityForResult(
-                            intent,
-                            AppConstants.PermissionsCode.ACTION_ACCESSIBILITY
-                        )
+                        (mContext as Activity).startActivity(intent)
 
                     }
                     dialogVisible =
@@ -75,7 +73,7 @@ class AccessibilityPermissionsUtils {
                     verifyPermission(mContext) { isEnabled ->
                         if (isEnabled) {
                             mContext.contentResolver.unregisterContentObserver(this);
-                            listener.invoke()
+                            AccessibilityGrantedDemoView.getInstance(mContext).init()
                         }
                     }
                 }
