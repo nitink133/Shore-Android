@@ -1,4 +1,4 @@
-package com.theshoremedia.floatingview.credibility.ui
+package com.theshoremedia.floatingview.credibility_checker.ui
 
 import android.content.Context
 import android.view.View
@@ -12,23 +12,26 @@ import com.facebook.rebound.SimpleSpringListener
 import com.facebook.rebound.Spring
 import com.facebook.rebound.SpringSystem
 import com.theshoremedia.R
-import com.theshoremedia.floatingview.credibility.services.CredibilityCheckerService
+import com.theshoremedia.floatingview.credibility_checker.services.CredibilityCheckerService
 import com.theshoremedia.modules.factchecks.adapter.FactCheckAdapter
 import com.theshoremedia.modules.factchecks.model.NewsModel
 import com.theshoremedia.utils.configs.SpringConfigs
 import com.theshoremedia.utils.extensions.changeBackgroundColor
 import com.theshoremedia.utils.extensions.validateNoDataView
 
-class CredibilityCheckerContentView(context: Context) : LinearLayout(context) {
+class ContentView(context: Context) : LinearLayout(context) {
     private val springSystem = SpringSystem.create()
     private val scaleSpring = springSystem.createSpring()
 
+
     private var recyclerView: RecyclerView? = null
 
-    var mAdapter = FactCheckAdapter(
+    private var mAdapter = FactCheckAdapter(
         this.context,
         arrayListOf(NewsModel(), NewsModel(), NewsModel(), NewsModel(), NewsModel())
-    )
+    ) {
+        CredibilityCheckerService.getInstance().rootView.showArticleView()
+    }
     var layoutManager = LinearLayoutManager(context)
 
     init {
@@ -49,13 +52,10 @@ class CredibilityCheckerContentView(context: Context) : LinearLayout(context) {
 
         findViewById<View>(R.id.llRecyclerView).changeBackgroundColor(if (mAdapter.itemCount > 0) android.R.color.transparent else R.color.colorPrimary)
 
-
-
-
-
         recyclerView?.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
             //TODO
         }
+
 
         scaleSpring.addListener(object : SimpleSpringListener() {
             override fun onSpringUpdate(spring: Spring) {
@@ -71,8 +71,8 @@ class CredibilityCheckerContentView(context: Context) : LinearLayout(context) {
 
 
     fun hideContent() {
-        CredibilityCheckerService.getInstance().chatHeads.handler.removeCallbacks(
-            CredibilityCheckerService.getInstance().chatHeads.showContentRunnable
+        CredibilityCheckerService.getInstance().rootView.handler.removeCallbacks(
+            CredibilityCheckerService.getInstance().rootView.showContentRunnable
         )
 
         scaleSpring.endValue = 0.0

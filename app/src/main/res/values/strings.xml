@@ -9,6 +9,7 @@
     <string name="txt_activate_not">Activate Now</string>
     <string name="enable_accessibility">Enable accessibility on the next screen for TheShore to function smoothly</string>
 
+    <string name="extra_large_dummy_text">What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry. \n\nWhat is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry. \n What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry. \n\nWhat is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry.</string>
     <string name="large_dummy_text">What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry.</string>
     <string name="small_dummy_text">Lorem Ipsum</string>
     <string name="tiny_dummy_text">Lorem</string>

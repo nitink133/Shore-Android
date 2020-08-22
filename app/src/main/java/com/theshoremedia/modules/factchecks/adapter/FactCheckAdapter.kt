@@ -12,7 +12,8 @@ import com.theshoremedia.utils.extensions.verticleText
 
 class FactCheckAdapter(
     private val context: Context,
-    var items: List<NewsModel>
+    var items: List<NewsModel>,
+    private var callBacks: ((position: Int) -> Unit)
 ) : RecyclerView.Adapter<FactCheckAdapter.ViewHolder>() {
     override fun getItemCount(): Int {
         return items.size
@@ -43,6 +44,9 @@ class FactCheckAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(model: NewsModel) {
             //TODO
+            binding.root.setOnClickListener {
+                callBacks.invoke(adapterPosition)
+            }
 
             binding.tvNewsSource.verticleText()
         }

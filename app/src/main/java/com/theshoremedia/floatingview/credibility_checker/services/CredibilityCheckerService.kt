@@ -1,4 +1,4 @@
-package com.theshoremedia.floatingview.credibility.services
+package com.theshoremedia.floatingview.credibility_checker.services
 
 import android.app.*
 import android.content.Context
@@ -14,7 +14,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.theshoremedia.R
 import com.theshoremedia.activity.MainActivity
-import com.theshoremedia.floatingview.credibility.ui.CredibilityCheckerRootView
+import com.theshoremedia.floatingview.credibility_checker.ui.RootView
 
 /**
  * @author- Nitin Khanna
@@ -35,7 +35,7 @@ class CredibilityCheckerService : Service() {
     }
 
     lateinit var windowManager: WindowManager
-    lateinit var chatHeads: CredibilityCheckerRootView
+    lateinit var rootView: RootView
 
 
     private lateinit var innerReceiver: CredibilityCheckerReceiver
@@ -48,10 +48,9 @@ class CredibilityCheckerService : Service() {
 
         windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
-        chatHeads =
-            CredibilityCheckerRootView(
-                this
-            )
+        rootView = RootView(
+            this
+        )
 
         innerReceiver =
             CredibilityCheckerReceiver()
@@ -110,8 +109,8 @@ class CredibilityCheckerService : Service() {
     }
 
     fun removeBubbleView() {
-        chatHeads.collapse()
-        stopSelf()
+        rootView.collapse()
+        rootView.removeAllViews()
     }
 
     fun updateViewLayout(view: View, params: ViewGroup.LayoutParams) {

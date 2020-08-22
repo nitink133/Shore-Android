@@ -1,4 +1,4 @@
-package com.theshoremedia.floatingview.credibility.ui
+package com.theshoremedia.floatingview.credibility_checker.ui
 
 import android.graphics.Paint
 import android.view.Gravity
@@ -20,8 +20,8 @@ import com.theshoremedia.utils.extensions.getScreenSize
 import kotlin.math.pow
 
 
-class CredibilityCheckerBubbleView(var chatHeads: CredibilityCheckerRootView) :
-    FrameLayout(chatHeads.context), View.OnTouchListener,
+class BubbleView(var rootView: RootView) :
+    FrameLayout(rootView.context), View.OnTouchListener,
     SpringListener {
     var params = FloatingViewsLayoutParamsUtils.getDefaultParams(
         flag = 0
@@ -95,7 +95,7 @@ class CredibilityCheckerBubbleView(var chatHeads: CredibilityCheckerRootView) :
 
         this.setLayerType(View.LAYER_TYPE_HARDWARE, paint)
 
-        chatHeads.addView(this, params)
+        rootView.addView(this, params)
 
         this.setOnTouchListener(this)
 
@@ -106,11 +106,11 @@ class CredibilityCheckerBubbleView(var chatHeads: CredibilityCheckerRootView) :
         if (spring !== this.springX && spring !== this.springY) return
         val totalVelocity = Math.hypot(springX.velocity, springY.velocity).toInt()
 
-        chatHeads.onChatHeadSpringUpdate(this, spring, totalVelocity)
+        rootView.onContentSpringUpdate(this, spring, totalVelocity)
     }
 
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-        val currentChatHead = chatHeads
+        val currentChatHead = rootView
 
         val metrics = getScreenSize()
 
@@ -126,18 +126,14 @@ class CredibilityCheckerBubbleView(var chatHeads: CredibilityCheckerRootView) :
             }
             MotionEvent.ACTION_UP -> {
                 if (!moving) {
-                    if (currentChatHead == chatHeads) {
-                        chatHeads.collapse()
-                    } else {
-                        chatHeads = currentChatHead
-                    }
+                    rootView.collapse()
                 } else {
                     springX.endValue =
                         metrics.widthPixels - width - 0 * (width + AppConstants.OverlayViewSize.CHAT_HEAD_EXPANDED_PADDING).toDouble()
                     springY.endValue =
                         AppConstants.OverlayViewSize.CHAT_HEAD_EXPANDED_MARGIN_TOP.toDouble()
 
-                    chatHeads.showContentView()
+                    rootView.showContentView()
                 }
 
                 scaleX = 1f
@@ -155,7 +151,7 @@ class CredibilityCheckerBubbleView(var chatHeads: CredibilityCheckerRootView) :
                 ) {
                     moving = true
 
-                    chatHeads.hideContentView()
+                    rootView.hideContentView()
                 }
 
                 if (moving) {

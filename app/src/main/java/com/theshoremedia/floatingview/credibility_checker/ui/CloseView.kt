@@ -1,4 +1,4 @@
-package com.theshoremedia.floatingview.credibility.ui
+package com.theshoremedia.floatingview.credibility_checker.ui
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -14,14 +14,14 @@ import com.facebook.rebound.SimpleSpringListener
 import com.facebook.rebound.Spring
 import com.facebook.rebound.SpringSystem
 import com.theshoremedia.R
-import com.theshoremedia.floatingview.credibility.services.CredibilityCheckerService
+import com.theshoremedia.floatingview.credibility_checker.services.CredibilityCheckerService
 import com.theshoremedia.utils.AppConstants
 import com.theshoremedia.utils.FloatingViewsLayoutParamsUtils
 import com.theshoremedia.utils.configs.SpringConfigs
 import com.theshoremedia.utils.extensions.dpToPx
 import com.theshoremedia.utils.extensions.getScreenSize
 
-class CredibilityCheckerCloseView(var chatHeads: CredibilityCheckerRootView) :
+class CloseView(var chatHeads: RootView) :
     View(chatHeads.context) {
     private var params = FloatingViewsLayoutParamsUtils.getDefaultParams(
         width = AppConstants.OverlayViewSize.CLOSE_SIZE + AppConstants.OverlayViewSize.CLOSE_ADDITIONAL_SIZE,
@@ -85,10 +85,10 @@ class CredibilityCheckerCloseView(var chatHeads: CredibilityCheckerRootView) :
 
     fun onPositionUpdate() {
         if (chatHeads.closeCaptured) {
-            chatHeads.chatHead!!.springX.endValue =
-                springX.endValue + width / 2 - chatHeads.chatHead!!.params.width / 2 + 2
-            chatHeads.chatHead!!.springY.endValue =
-                springY.endValue + height / 2 - chatHeads.chatHead!!.params.height / 2 + 2
+            chatHeads.bubbleView!!.springX.endValue =
+                springX.endValue + width / 2 - chatHeads.bubbleView!!.params.width / 2 + 2
+            chatHeads.bubbleView!!.springY.endValue =
+                springY.endValue + height / 2 - chatHeads.bubbleView!!.params.height / 2 + 2
         }
     }
 
@@ -103,7 +103,7 @@ class CredibilityCheckerCloseView(var chatHeads: CredibilityCheckerRootView) :
                 y = spring.currentValue.toFloat()
 
                 if (chatHeads.closeCaptured && chatHeads.wasMoving) {
-                    chatHeads.chatHead!!.springY.currentValue = spring.currentValue
+                    chatHeads.bubbleView!!.springY.currentValue = spring.currentValue
                 }
 
                 onPositionUpdate()

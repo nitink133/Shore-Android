@@ -2,7 +2,7 @@ package com.theshoremedia.views
 
 import android.content.Context
 import android.content.Intent
-import com.theshoremedia.floatingview.credibility.services.CredibilityCheckerService
+import com.theshoremedia.floatingview.credibility_checker.services.CredibilityCheckerService
 import com.theshoremedia.utils.permissions.OnDrawPermissionsUtils
 
 /**
@@ -14,7 +14,6 @@ import com.theshoremedia.utils.permissions.OnDrawPermissionsUtils
 class BubbleCredibilityCheckerView(
     private val mContext: Context
 ) {
-
     var isShow = false
 
     fun create() {
@@ -37,10 +36,14 @@ class BubbleCredibilityCheckerView(
         }
     }
 
+    fun close() {
+        isShow = false
+        mContext.stopService(Intent(mContext, CredibilityCheckerService::class.java))
+    }
+
     fun init() {
         if (isShow) return
         instance?.create()
-
     }
 
 }

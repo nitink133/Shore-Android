@@ -1,4 +1,4 @@
-package com.theshoremedia.floatingview.credibility.services
+package com.theshoremedia.floatingview.credibility_checker.services
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -16,7 +16,7 @@ class CredibilityCheckerReceiver : BroadcastReceiver() {
             intent.getStringExtra("reason") ?: return
             CredibilityCheckerService.getInstance()
                 .removeBubbleView()
-            BubbleCredibilityCheckerView.getInstance(context).isShow = false
+            BubbleCredibilityCheckerView.getInstance(context).close()
         }
     }
 }

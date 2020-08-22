@@ -22,10 +22,10 @@
             android:name=".activity.SplashActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
 <!--            <intent-filter>-->
-            <!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--            </intent-filter>-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity android:name=".activity.MainActivity">
             <intent-filter>
@@ -52,7 +52,7 @@
 
         <service android:name=".floatingview.general.FloatingLayoutService" />
         <service
-            android:name=".floatingview.credibility.services.CredibilityCheckerService"
+            android:name=".floatingview.credibility_checker.services.CredibilityCheckerService"
             android:exported="true" />
     </application>
 

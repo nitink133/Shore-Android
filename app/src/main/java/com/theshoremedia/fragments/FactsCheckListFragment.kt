@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.theshoremedia.R
 import com.theshoremedia.modules.base.BaseFragment
+import com.theshoremedia.utils.permissions.AccessibilityPermissionsUtils
 import com.theshoremedia.utils.permissions.OnDrawPermissionsUtils
-import com.theshoremedia.views.BubbleCredibilityCheckerView
 
 
 class FactsCheckListFragment : BaseFragment() {
@@ -23,10 +23,10 @@ class FactsCheckListFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
 
         OnDrawPermissionsUtils.checkPermission(mContext!!) {
-//            AccessibilityPermissionsUtils.checkPermission(mContext!!) {
-////                Toast.makeText(mContext!!, "Thanks", Toast.LENGTH_LONG).show()
-////            }
-            BubbleCredibilityCheckerView.getInstance(mContext!!).init()
+            AccessibilityPermissionsUtils.checkPermission(mContext!!) {
+//                Toast.makeText(mContext!!, "Thanks", Toast.LENGTH_LONG).show()
+            }
+//            BubbleCredibilityCheckerView.getInstance(mContext!!).init()
         }
     }
 
