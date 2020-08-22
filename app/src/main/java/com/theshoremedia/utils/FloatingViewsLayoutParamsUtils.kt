@@ -11,32 +11,36 @@ import android.view.WindowManager
  */
 object FloatingViewsLayoutParamsUtils {
 
-    fun getWindowType(): Int {
-        var windowType = WindowManager.LayoutParams.TYPE_PHONE
-        // Set to TYPE_SYSTEM_ALERT so that the Service can display it
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            windowType = WindowManager.LayoutParams.TYPE_TOAST
-        }
+    private fun getWindowType(): Int {
+        var windowType = WindowManager.LayoutParams.TYPE_TOAST
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             windowType = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
         }
         return windowType
     }
 
-    fun getDefaultParams(): WindowManager.LayoutParams {
-        return WindowManager.LayoutParams(
-            WindowManager.LayoutParams.WRAP_CONTENT,
-            WindowManager.LayoutParams.WRAP_CONTENT,
+    fun getDefaultParams(
+        width: Int = WindowManager.LayoutParams.WRAP_CONTENT,
+        height: Int = WindowManager.LayoutParams.WRAP_CONTENT,
+        gravity: Int = Gravity.CENTER,
+        flag: Int = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+        verticalMargin: Float = 0F,
+        horizontalMargin: Float = 0F,
+        dimAmount: Float? = null
+    ): WindowManager.LayoutParams {
+        val params = WindowManager.LayoutParams(
+            width,
+            height,
             getWindowType(),
-            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+            flag,
             PixelFormat.TRANSLUCENT
         )
-    }
-
-    fun getParamsForAccessibilityPerHelpView(): WindowManager.LayoutParams {
-        val params = getDefaultParams()
-        params.gravity = Gravity.TOP or Gravity.END
-        params.verticalMargin = .2F
+        params.gravity = gravity
+        params.verticalMargin = verticalMargin
+        params.horizontalMargin = horizontalMargin
+        if (dimAmount != null) params.dimAmount = dimAmount
         return params
     }
+
+
 }

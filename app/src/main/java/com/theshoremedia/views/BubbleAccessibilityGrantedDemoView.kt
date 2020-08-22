@@ -3,8 +3,8 @@ package com.theshoremedia.views
 import android.content.Context
 import android.view.View
 import com.theshoremedia.R
-import com.theshoremedia.floatingview.CallBack
-import com.theshoremedia.floatingview.FloatingLayout
+import com.theshoremedia.floatingview.general.CallBack
+import com.theshoremedia.floatingview.general.FloatingLayout
 import com.theshoremedia.utils.AppConstants
 import com.theshoremedia.utils.ApplicationUtils
 import com.theshoremedia.utils.ToastUtils
@@ -14,14 +14,14 @@ import com.theshoremedia.utils.ToastUtils
  * @date -
  */
 
-class AccessibilityGrantedDemoView {
+class BubbleAccessibilityGrantedDemoView {
     private var mContext: Context? = null
 
     companion object {
-        private var instance: AccessibilityGrantedDemoView? = null
-        fun getInstance(mContext: Context): AccessibilityGrantedDemoView {
+        private var instance: BubbleAccessibilityGrantedDemoView? = null
+        fun getInstance(mContext: Context): BubbleAccessibilityGrantedDemoView {
             if (instance == null) {
-                instance = AccessibilityGrantedDemoView().apply {
+                instance = BubbleAccessibilityGrantedDemoView().apply {
                     this.mContext = mContext
                 }
             }
@@ -37,7 +37,8 @@ class AccessibilityGrantedDemoView {
                 R.layout.bubble_accessibility_success,
                 mFloatingViewType = AppConstants.FloatingViewType.ACCESSIBILITY_SUCCESS_DEMO,
                 callBack =
-                object : CallBack {
+                object :
+                    CallBack {
                     override fun onClickListener(resourceId: Int) {
                         floatingLayout?.close()
                         when (resourceId) {

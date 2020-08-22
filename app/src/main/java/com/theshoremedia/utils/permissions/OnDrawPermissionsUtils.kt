@@ -7,7 +7,7 @@ import android.net.Uri
 import android.provider.Settings
 import com.theshoremedia.R
 import com.theshoremedia.utils.AppConstants
-import com.theshoremedia.utils.DialogUtility
+import com.theshoremedia.utils.DialogUtils
 
 /**
  * @author- Nitin Khanna
@@ -33,7 +33,7 @@ class OnDrawPermissionsUtils {
             // this thread waiting for the user's response! After the user
             // sees the explanation, try again to request the permission.
             dialogVisible = true
-            DialogUtility.showDialog(
+            DialogUtils.showDialog(
                 mContext,
                 mContext.getString(R.string.permission_title_draw_overlays),
                 message = mContext.getString(R.string.permission_message_draw_overlays),

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
+        app:cardCornerRadius="@dimen/small_radius">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvNewsSource"
+                style="@style/textView"
+                android:layout_height="match_parent"
+                android:background="@color/grey"
+                android:gravity="center"
+                android:padding="@dimen/small_padding"
+                android:text="@string/tiny_dummy_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_margin"
+                android:layout_marginEnd="@dimen/small_margin"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:paddingBottom="@dimen/small_padding">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvNewsHeading"
+                    style="@style/textView"
+                    android:padding="@dimen/small_padding"
+                    android:text="@string/medium_dummy_text"
+                    android:textAlignment="gravity"
+                    android:textSize="@dimen/large_textsize"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivNewsIcon"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="@dimen/extra_small_margin"
+                    android:src="@drawable/ic_logo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvNewsHeading" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvNewsDescription"
+                    style="@style/withAlphaTextView"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="@dimen/extra_small_margin"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@string/large_dummy_text"
+                    android:textAlignment="gravity"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ivNewsIcon"
+                    app:layout_constraintTop_toTopOf="@+id/ivNewsIcon" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvNewsDate"
+                    style="@style/withAlphaTextView"
+                    android:layout_marginStart="@dimen/extra_small_margin"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:layout_marginEnd="@dimen/extra_small_margin"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@string/small_dummy_text"
+                    android:textAlignment="gravity"
+                    app:layout_constraintStart_toEndOf="@+id/ivNewsIcon"
+                    app:layout_constraintTop_toBottomOf="@+id/tvNewsDescription" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivBookMark"
+                    android:layout_width="@dimen/small_image"
+                    android:layout_height="@dimen/small_image"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:src="@drawable/ic_logo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvNewsDescription" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

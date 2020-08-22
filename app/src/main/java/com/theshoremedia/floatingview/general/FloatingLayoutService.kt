@@ -1,4 +1,4 @@
-package com.theshoremedia.floatingview
+package com.theshoremedia.floatingview.general
 
 /**
  * @author- Nitin Khanna
@@ -66,15 +66,15 @@ class FloatingLayoutService : Service(), View.OnClickListener {
 
     override fun onStart(intent: Intent?, startId: Int) {
         super.onStart(intent, startId)
-        if (intent != null) {
-            mResource = intent.getIntExtra(LAYOUT_RESOURCE, 0)
-            mLayoutMovable = intent.getBooleanExtra(LAYOUT_MOVABLE, true)
-            mFloatingViewType = intent.getIntExtra(LAYOUT_VIEW_TYPE, 0)
-            mReceiver = intent.getParcelableExtra(RECEIVER) as? ResultReceiver
+        if (intent == null) return
 
-            onDestroyView()
-            createView()
-        }
+        mResource = intent.getIntExtra(LAYOUT_RESOURCE, 0)
+        mLayoutMovable = intent.getBooleanExtra(LAYOUT_MOVABLE, true)
+        mFloatingViewType = intent.getIntExtra(LAYOUT_VIEW_TYPE, 0)
+        mReceiver = intent.getParcelableExtra(RECEIVER) as? ResultReceiver
+
+        onDestroyView()
+        createView()
     }
 
     override fun onDestroy() {
@@ -89,14 +89,16 @@ class FloatingLayoutService : Service(), View.OnClickListener {
 
     private fun createView() {
         val params: WindowManager.LayoutParams = when (mFloatingViewType) {
-            AppConstants.FloatingViewType.ACCESSIBILITY_HELP -> FloatingViewsLayoutParamsUtils.getParamsForAccessibilityPerHelpView()
+            AppConstants.FloatingViewType.ACCESSIBILITY_HELP -> FloatingViewsLayoutParamsUtils.getDefaultParams(
+                gravity = Gravity.TOP or Gravity.END,
+                verticalMargin = .2F
+            )
             else -> FloatingViewsLayoutParamsUtils.getDefaultParams()
         }
         mWindowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val layoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         mFloatingView = layoutInflater.inflate(mResource, null)
-
-        mWindowManager!!.addView(mFloatingView, params)
+        mWindowManager?.addView(mFloatingView, params)
         mRootContainer = mFloatingView?.findViewById(ROOT_CONTAINER_ID)
 
         setMoveView(params)

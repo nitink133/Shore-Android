@@ -1,11 +1,10 @@
 package com.theshoremedia.views
 
 import android.content.Context
-import android.view.Gravity
 import android.view.View
 import com.theshoremedia.R
-import com.theshoremedia.floatingview.CallBack
-import com.theshoremedia.floatingview.FloatingLayout
+import com.theshoremedia.floatingview.general.CallBack
+import com.theshoremedia.floatingview.general.FloatingLayout
 import com.theshoremedia.utils.AppConstants
 
 /**
@@ -13,14 +12,14 @@ import com.theshoremedia.utils.AppConstants
  * @date -
  */
 
-class AccessibilityPermissionsHelpView {
+class BubbleAccessibilityPermissionsHelpView {
     private var mContext: Context? = null
 
     companion object {
-        private var instance: AccessibilityPermissionsHelpView? = null
-        fun getInstance(mContext: Context): AccessibilityPermissionsHelpView {
+        private var instance: BubbleAccessibilityPermissionsHelpView? = null
+        fun getInstance(mContext: Context): BubbleAccessibilityPermissionsHelpView {
             if (instance == null) {
-                instance = AccessibilityPermissionsHelpView().apply {
+                instance = BubbleAccessibilityPermissionsHelpView().apply {
                     this.mContext = mContext
                 }
             }
@@ -37,7 +36,8 @@ class AccessibilityPermissionsHelpView {
                 mFloatingViewType = AppConstants.FloatingViewType.ACCESSIBILITY_HELP,
                 mLayoutMovable = false,
                 callBack =
-                object : CallBack {
+                object :
+                    CallBack {
                     override fun onClickListener(resourceId: Int) {
                         floatingLayout?.close()
                     }

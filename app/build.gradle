@@ -63,5 +63,7 @@ dependencies {
     implementation 'com.airbnb.android:lottie:3.4.1'
 
     implementation 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:3.0.0-RC2'
+
+    implementation 'com.facebook.rebound:rebound:0.3.8'
 }
 

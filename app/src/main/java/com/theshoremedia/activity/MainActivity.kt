@@ -92,7 +92,7 @@ class MainActivity : BaseActivity() {
         recyclerView?.setHasFixedSize(true)
         recyclerView?.layoutManager = LinearLayoutManager(this)
         recyclerView?.adapter = adapter
-        recyclerView?.validateNoDataView()
+        recyclerView?.validateNoDataView(llNoData)
 
         supportFragmentManager.addOnBackStackChangedListener {
             val fragment = supportFragmentManager.findFragmentById(R.id.frame)

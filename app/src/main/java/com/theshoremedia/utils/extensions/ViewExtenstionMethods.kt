@@ -2,18 +2,19 @@ package com.theshoremedia.utils.extensions
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Color
+import android.os.Handler
+import android.os.Looper
 import android.text.*
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
-import android.util.Log
+import android.util.DisplayMetrics
+import android.util.TypedValue
 import android.view.View
-import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.theshoremedia.modules.base.BaseCustomDialog
-import com.theshoremedia.utils.StringUtils
-import kotlinx.android.synthetic.main.layout_recycler_view.view.*
 
 /**
  * @author- Nitin Khanna
@@ -61,9 +62,15 @@ fun TextView.makeLinks(vararg links: Pair<String, View.OnClickListener>) {
 }
 
 
-fun RecyclerView.validateNoDataView() {
+fun RecyclerView.validateNoDataView(llNoData: View?) {
     val counts = this.adapter?.itemCount ?: 0
     llNoData?.makeVisible(isVisible = counts == 0)
+}
+
+fun View.changeBackgroundColor(colorCode: Int) {
+    val context = this.context
+    this.setBackgroundColor(context.resources.getColor(colorCode))
+
 }
 
 fun showCustomDialog(
@@ -73,4 +80,27 @@ fun showCustomDialog(
 ): AlertDialog = BaseCustomDialog(context, view).apply {
     func()
 }.create()
+
+fun getScreenSize(): DisplayMetrics {
+    return Resources.getSystem().displayMetrics
+}
+
+fun dpToPx(dp: Float): Int {
+    return (dp * Resources.getSystem().displayMetrics.density).toInt()
+}
+
+fun spToPx(sp: Float): Float {
+    return TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_SP,
+        sp,
+        Resources.getSystem().displayMetrics
+    )
+}
+
+fun runOnMainLoop(fn: () -> Unit) {
+    Handler(Looper.getMainLooper()).post {
+        fn()
+    }
+}
+
 

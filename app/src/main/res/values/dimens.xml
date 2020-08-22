@@ -4,6 +4,7 @@
     <dimen name="default_padding">16dp</dimen>
     <dimen name="large_padding">24dp</dimen>
 
+
     <dimen name="tiny_small_margin">2dp</dimen>
     <dimen name="extra_small_margin">4dp</dimen>
     <dimen name="small_margin">8dp</dimen>
@@ -33,10 +34,10 @@
 
     <dimen name="default_radius">16dp</dimen>
     <dimen name="small_radius">8dp</dimen>
+    <dimen name="extra_small_radius">4dp</dimen>
     <dimen name="btn_round_radius">6dp</dimen>
 
     <dimen name="divider_height">1dp</dimen>
-
 
 
 </resources>

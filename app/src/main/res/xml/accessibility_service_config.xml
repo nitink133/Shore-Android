@@ -5,4 +5,6 @@
     android:accessibilityFeedbackType="feedbackAllMask"
     android:accessibilityFlags="flagDefault"
     android:packageNames="@string/whatsapp_package_name"
+    android:description="@string/app_name"
+    android:settingsActivity="com.theshoremedia.activity.MainActivity"
     android:canRetrieveWindowContent="true" />

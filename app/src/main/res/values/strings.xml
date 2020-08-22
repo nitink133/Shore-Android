@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">The Shore Media</string>
-    <string name="app_name_accessibility">📰 The Shore Media</string>
-
 
     <string name="a_layer_of_truth">A layer of truth on every forward.</string>
     <string name="intro_screen_1">You read, \'TheShore\' is ready to back you from fake news.</string>
@@ -13,6 +11,7 @@
 
     <string name="large_dummy_text">What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry.</string>
     <string name="small_dummy_text">Lorem Ipsum</string>
+    <string name="tiny_dummy_text">Lorem</string>
     <string name="medium_dummy_text">What is Lorem Ipsum Lorem Ipsum is simply dummy text?</string>
 
     <string name="whatsapp_package_name">com.whatsapp</string>
@@ -70,5 +69,7 @@
     <string name="help_see_how_shore_works_on_whatsapp">See how \'TheShore\' works on WhatsApp.</string>
 
     <string name="err_work_is_under_process">Work is under-process!</string>
+
+    <string name="the_shore_is_active">The Shore is Active</string>
 
 </resources>

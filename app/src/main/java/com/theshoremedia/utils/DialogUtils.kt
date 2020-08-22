@@ -12,8 +12,8 @@ import com.theshoremedia.utils.extensions.showCustomDialog
 import kotlinx.android.synthetic.main.dialog_lottie.view.*
 
 
-object DialogUtility {
-    private var TAG = DialogUtility::class.java.simpleName
+object DialogUtils {
+    private var TAG = DialogUtils::class.java.simpleName
     private var loadingMsg: String = "Loading..."
     private var pDialog: ProgressDialog? = null
 

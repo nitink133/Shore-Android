@@ -1,4 +1,4 @@
-package com.theshoremedia.floatingview
+package com.theshoremedia.floatingview.general
 
 /**
  * @author- Nitin Khanna
@@ -10,6 +10,7 @@ import android.content.Intent
 import android.os.Handler
 import android.view.Gravity
 import androidx.annotation.LayoutRes
+import com.theshoremedia.utils.permissions.OnDrawPermissionsUtils
 
 class FloatingLayout(
     private val mContext: Context,
@@ -22,13 +23,22 @@ class FloatingLayout(
     private var isShow = false
 
     override fun onCreate() {
-        val intent = Intent(mContext, FloatingLayoutService::class.java)
-        intent.putExtra(FloatingLayoutService.LAYOUT_RESOURCE, mResource)
-        intent.putExtra(FloatingLayoutService.LAYOUT_VIEW_TYPE, mFloatingViewType)
-        intent.putExtra(FloatingLayoutService.LAYOUT_MOVABLE, mLayoutMovable)
-        intent.putExtra(FloatingLayoutService.RECEIVER, ServiceReceiver(Handler(), callBack))
+        OnDrawPermissionsUtils.verifyPermission(mContext) { isEnabled ->
+            if (!isEnabled) return@verifyPermission
 
-        mContext.startService(intent)
+            val intent = Intent(mContext, FloatingLayoutService::class.java)
+            intent.putExtra(FloatingLayoutService.LAYOUT_RESOURCE, mResource)
+            intent.putExtra(FloatingLayoutService.LAYOUT_VIEW_TYPE, mFloatingViewType)
+            intent.putExtra(FloatingLayoutService.LAYOUT_MOVABLE, mLayoutMovable)
+            intent.putExtra(
+                FloatingLayoutService.RECEIVER,
+                ServiceReceiver(
+                    Handler(),
+                    callBack
+                )
+            )
+            mContext.startService(intent)
+        }
     }
 
     override fun onClose() {

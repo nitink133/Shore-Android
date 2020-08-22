@@ -1,7 +1,5 @@
 package com.theshoremedia.modules.base
 
-import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -12,9 +10,6 @@ import com.theshoremedia.utils.AppConstants
  * @date -
  */
 abstract class BaseActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
-    }
 
 
     abstract fun loadFragment(

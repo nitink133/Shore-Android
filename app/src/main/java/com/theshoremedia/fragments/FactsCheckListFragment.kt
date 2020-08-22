@@ -4,13 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.theshoremedia.R
-import com.theshoremedia.activity.MainActivity
 import com.theshoremedia.modules.base.BaseFragment
-import com.theshoremedia.utils.permissions.AccessibilityPermissionsUtils
 import com.theshoremedia.utils.permissions.OnDrawPermissionsUtils
-import com.theshoremedia.views.AccessibilityGrantedDemoView
+import com.theshoremedia.views.BubbleCredibilityCheckerView
 
 
 class FactsCheckListFragment : BaseFragment() {
@@ -19,7 +16,6 @@ class FactsCheckListFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_factss_check_list, container, false)
     }
 
@@ -27,9 +23,10 @@ class FactsCheckListFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
 
         OnDrawPermissionsUtils.checkPermission(mContext!!) {
-            AccessibilityPermissionsUtils.checkPermission(mContext!!) {
-                Toast.makeText(mContext!!, "Thanks", Toast.LENGTH_LONG).show()
-            }
+//            AccessibilityPermissionsUtils.checkPermission(mContext!!) {
+////                Toast.makeText(mContext!!, "Thanks", Toast.LENGTH_LONG).show()
+////            }
+            BubbleCredibilityCheckerView.getInstance(mContext!!).init()
         }
     }
 
