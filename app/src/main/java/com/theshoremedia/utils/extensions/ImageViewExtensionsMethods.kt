@@ -10,3 +10,8 @@ import com.bumptech.glide.Glide
 fun ImageView.loadImage(resource: Int) {
     Glide.with(this.context).load(resource).into(this)
 }
+
+fun ImageView.loadImage(image: String?) {
+    if (image.isNullOrEmpty()) return
+    Glide.with(this.context).load(image).into(this)
+}

@@ -73,4 +73,12 @@
 
     <string name="the_shore_is_active">The Shore is Active</string>
 
+    <string name="share">Share</string>
+    <string name="mark_as_favourite">Mark as Favourite</string>
+    <string name="remove_from_favorite">Remove from favourite</string>
+    <string name="delete">Delete</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

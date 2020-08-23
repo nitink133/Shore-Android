@@ -2,7 +2,7 @@ package com.theshoremedia.views
 
 import android.content.Context
 import android.content.Intent
-import com.theshoremedia.floatingview.credibility_checker.services.CredibilityCheckerService
+import com.theshoremedia.modules.floatingview.credibility_checker.services.CredibilityCheckerService
 import com.theshoremedia.utils.permissions.OnDrawPermissionsUtils
 
 /**

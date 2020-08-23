@@ -1,5 +1,4 @@
-package com.theshoremedia.modules.factchecks.adapter
-
+package com.theshoremedia.modules.floatingview.credibility_checker.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,14 +7,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.theshoremedia.R
 import com.theshoremedia.database.entity.FactCheckHistoryModel
-import com.theshoremedia.databinding.RowFactCheckBinding
+import com.theshoremedia.databinding.RowOverlayFactChecksBinding
 import com.theshoremedia.utils.extensions.loadImage
+import com.theshoremedia.utils.extensions.verticleText
 
-class FactCheckAdapter(
+class OverlayFactCheckAdapter(
     private val context: Context,
     var items: ArrayList<FactCheckHistoryModel>,
-    private var callBacks: ((position: Int, item: FactCheckHistoryModel) -> Unit)
-) : RecyclerView.Adapter<FactCheckAdapter.ViewHolder>() {
+    private var callBacks: ((position: Int) -> Unit)
+) : RecyclerView.Adapter<OverlayFactCheckAdapter.ViewHolder>() {
     override fun getItemCount(): Int {
         return items.size
     }
@@ -34,7 +34,7 @@ class FactCheckAdapter(
         return ViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.row_fact_check,
+                R.layout.row_overlay_fact_checks,
                 parent,
                 false
             )
@@ -47,14 +47,16 @@ class FactCheckAdapter(
 
     }
 
-    inner class ViewHolder(private val binding: RowFactCheckBinding) :
+    inner class ViewHolder(private val binding: RowOverlayFactChecksBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(model: FactCheckHistoryModel) {
+            //TODO
             binding.model = model
             binding.root.setOnClickListener {
-                callBacks.invoke(adapterPosition, model)
+                callBacks.invoke(adapterPosition)
             }
 
+            binding.tvNewsSource.verticleText(model.source)
 
             binding.ivNewsIcon.loadImage(model.icon)
         }

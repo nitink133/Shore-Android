@@ -1,4 +1,4 @@
-package com.theshoremedia.adapter;
+package com.theshoremedia.modules.base.adapter;
 
 import android.view.View;
 import android.view.ViewGroup;

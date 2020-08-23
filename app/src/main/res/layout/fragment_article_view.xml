@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.theshoremedia.database.entity.FactCheckHistoryModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_rounded">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/small_padding"
+            android:paddingEnd="@dimen/small_padding"
+            android:paddingBottom="@dimen/small_padding">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/textView"
+                android:layout_marginTop="@dimen/default_margin"
+                android:text="@{model.title}"
+                android:textSize="@dimen/heading_textsize" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/withAlphaTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:maxLines="1"
+                    android:text="@{model.source}"
+                    android:textColor="@color/btnBgColorRed" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/withAlphaTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:maxLines="1"
+                    android:text="@{model.date}" />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivNewsIcon"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="@dimen/small_margin" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/textView"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/default_margin"
+                android:text="@{model.description}"
+                android:textAlignment="viewStart"
+                android:textSize="@dimen/large_textsize" />
+        </LinearLayout>
+    </ScrollView>
+</layout>

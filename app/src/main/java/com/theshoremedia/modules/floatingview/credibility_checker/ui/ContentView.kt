@@ -1,4 +1,4 @@
-package com.theshoremedia.floatingview.credibility_checker.ui
+package com.theshoremedia.modules.floatingview.credibility_checker.ui
 
 import android.content.Context
 import android.view.View
@@ -12,9 +12,10 @@ import com.facebook.rebound.SimpleSpringListener
 import com.facebook.rebound.Spring
 import com.facebook.rebound.SpringSystem
 import com.theshoremedia.R
-import com.theshoremedia.floatingview.credibility_checker.services.CredibilityCheckerService
-import com.theshoremedia.modules.factchecks.adapter.FactCheckAdapter
-import com.theshoremedia.modules.factchecks.model.NewsModel
+import com.theshoremedia.database.entity.FactCheckHistoryModel
+import com.theshoremedia.database.helper.FactCheckHistoryDatabaseHelper
+import com.theshoremedia.modules.floatingview.credibility_checker.adapter.OverlayFactCheckAdapter
+import com.theshoremedia.modules.floatingview.credibility_checker.services.CredibilityCheckerService
 import com.theshoremedia.utils.configs.SpringConfigs
 import com.theshoremedia.utils.extensions.changeBackgroundColor
 import com.theshoremedia.utils.extensions.validateNoDataView
@@ -26,17 +27,17 @@ class ContentView(context: Context) : LinearLayout(context) {
 
     private var recyclerView: RecyclerView? = null
 
-    private var mAdapter = FactCheckAdapter(
-        this.context,
-        arrayListOf(NewsModel(), NewsModel(), NewsModel(), NewsModel(), NewsModel())
-    ) {
-        CredibilityCheckerService.getInstance().rootView.showArticleView()
-    }
+    private var mAdapter =
+        OverlayFactCheckAdapter(
+            this.context,
+            arrayListOf()
+        ) {
+            CredibilityCheckerService.getInstance().rootView.showArticleView()
+        }
     var layoutManager = LinearLayoutManager(context)
 
     init {
         inflate(context, R.layout.bubble_credibility_checker, this)
-
 
         recyclerView =
             findViewById<FrameLayout>(R.id.layoutRecycler)?.findViewById(R.id.recyclerView)
@@ -44,11 +45,14 @@ class ContentView(context: Context) : LinearLayout(context) {
 
         recyclerView?.layoutManager = layoutManager
         recyclerView?.adapter = mAdapter
-        recyclerView?.validateNoDataView(
-            findViewById<FrameLayout>(R.id.layoutRecycler)?.findViewById(
-                R.id.llNoData
+        FactCheckHistoryDatabaseHelper.instance?.getUnreadNews {
+            mAdapter.addAll(items = it as ArrayList<FactCheckHistoryModel>)
+            recyclerView?.validateNoDataView(
+                findViewById<FrameLayout>(R.id.layoutRecycler)?.findViewById(
+                    R.id.llNoData
+                )
             )
-        )
+        }
 
         findViewById<View>(R.id.llRecyclerView).changeBackgroundColor(if (mAdapter.itemCount > 0) android.R.color.transparent else R.color.colorPrimary)
 

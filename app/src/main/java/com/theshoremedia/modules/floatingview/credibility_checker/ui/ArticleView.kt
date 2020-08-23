@@ -1,4 +1,4 @@
-package com.theshoremedia.floatingview.credibility_checker.ui
+package com.theshoremedia.modules.floatingview.credibility_checker.ui
 
 import android.content.Context
 import android.view.animation.AlphaAnimation
@@ -9,7 +9,7 @@ import com.facebook.rebound.SimpleSpringListener
 import com.facebook.rebound.Spring
 import com.facebook.rebound.SpringSystem
 import com.theshoremedia.R
-import com.theshoremedia.floatingview.credibility_checker.services.CredibilityCheckerService
+import com.theshoremedia.modules.floatingview.credibility_checker.services.CredibilityCheckerService
 import com.theshoremedia.utils.configs.SpringConfigs
 
 /**
@@ -45,8 +45,7 @@ class ArticleView(context: Context) : LinearLayout(context) {
 
     fun hide() {
         isVisible = false
-//        CredibilityCheckerService.getInstance().rootView.collapse()
-//
+
         CredibilityCheckerService.getInstance().rootView.handler.removeCallbacks(
             CredibilityCheckerService.getInstance().rootView.showArticleRunnable
         )

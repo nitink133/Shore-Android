@@ -1,4 +1,4 @@
-package com.theshoremedia.floatingview.general
+package com.theshoremedia.modules.floatingview.general
 
 import android.os.Bundle
 import android.os.Handler

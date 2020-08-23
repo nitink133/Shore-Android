@@ -1,4 +1,4 @@
-package com.theshoremedia.floatingview.credibility_checker.ui
+package com.theshoremedia.modules.floatingview.credibility_checker.ui
 
 import android.graphics.Paint
 import android.view.Gravity

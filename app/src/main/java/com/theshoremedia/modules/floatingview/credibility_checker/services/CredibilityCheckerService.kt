@@ -1,4 +1,4 @@
-package com.theshoremedia.floatingview.credibility_checker.services
+package com.theshoremedia.modules.floatingview.credibility_checker.services
 
 import android.app.*
 import android.content.Context
@@ -14,7 +14,8 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.theshoremedia.R
 import com.theshoremedia.activity.MainActivity
-import com.theshoremedia.floatingview.credibility_checker.ui.RootView
+import com.theshoremedia.modules.floatingview.credibility_checker.ui.RootView
+import com.theshoremedia.utils.permissions.OnDrawPermissionsUtils
 
 /**
  * @author- Nitin Khanna
@@ -42,43 +43,45 @@ class CredibilityCheckerService : Service() {
 
     override fun onCreate() {
         super.onCreate()
+        OnDrawPermissionsUtils.checkPermission(this) {
 
-        instance = this
-        initialized = true
+            instance = this
+            initialized = true
 
-        windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+            windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
-        rootView = RootView(
-            this
-        )
+            rootView = RootView(
+                this
+            )
 
-        innerReceiver =
-            CredibilityCheckerReceiver()
-        val intentFilter = IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)
-        registerReceiver(innerReceiver, intentFilter)
+            innerReceiver =
+                CredibilityCheckerReceiver()
+            val intentFilter = IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)
+            registerReceiver(innerReceiver, intentFilter)
 
-        val channelId =
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                createNotificationChannel("overlay_service", getString(R.string.app_name))
-            } else {
-                ""
-            }
+            val channelId =
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    createNotificationChannel("overlay_service", getString(R.string.app_name))
+                } else {
+                    ""
+                }
 
-        val notificationIntent = Intent(this, MainActivity::class.java)
+            val notificationIntent = Intent(this, MainActivity::class.java)
 
-        val pendingIntent = PendingIntent.getActivity(
-            this, 0,
-            notificationIntent, 0
-        )
+            val pendingIntent = PendingIntent.getActivity(
+                this, 0,
+                notificationIntent, 0
+            )
 
-        val notification = NotificationCompat.Builder(this, channelId)
-            .setOngoing(true)
-            .setContentTitle(getString(R.string.the_shore_is_active))
-            .setSmallIcon(R.drawable.ic_logo)
-            .setCategory(Notification.CATEGORY_SERVICE)
-            .setContentIntent(pendingIntent).build()
+            val notification = NotificationCompat.Builder(this, channelId)
+                .setOngoing(true)
+                .setContentTitle(getString(R.string.the_shore_is_active))
+                .setSmallIcon(R.drawable.ic_logo)
+                .setCategory(Notification.CATEGORY_SERVICE)
+                .setContentIntent(pendingIntent).build()
 
-        startForeground(101, notification)
+            startForeground(101, notification)
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

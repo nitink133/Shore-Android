@@ -6,6 +6,8 @@ import android.os.Handler
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.theshoremedia.R
+import com.theshoremedia.utils.AppConstants
+import com.theshoremedia.utils.PreferenceUtils
 
 class SplashActivity : AppCompatActivity() {
 
@@ -19,7 +21,12 @@ class SplashActivity : AppCompatActivity() {
         val timeInMil = 2000L
         val handler = Handler()
         handler.postDelayed({
-            val intent = Intent(this, IntroScreenActivity::class.java)
+            val intent = Intent(
+                this,
+                if (PreferenceUtils.getPref<Boolean>(AppConstants.Preference.IS_FIRST_TIME_USER) != false
+                ) IntroScreenActivity::class.java
+                else MainActivity::class.java
+            )
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
             startActivity(intent)

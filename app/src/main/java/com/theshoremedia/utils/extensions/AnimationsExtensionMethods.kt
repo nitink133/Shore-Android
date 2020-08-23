@@ -2,7 +2,6 @@ package com.theshoremedia.utils.extensions
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
-import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.TextView
@@ -56,13 +55,12 @@ fun View.hideWithAnimation() {
 
 }
 
-fun TextView.verticleText() {
-    val text = this.text
+fun TextView.verticleText(text: String?) {
+    if (text.isNullOrEmpty()) return
     var newText = ""
     repeat(text.toString().length) {
         if (text[it].toString() != " ")
             newText += text[it] + "\n"
     }
-    Log.d("Nitin", newText)
     this.text = newText
 }

@@ -4,6 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import com.theshoremedia.BuildConfig
+import com.theshoremedia.database.entity.FactCheckHistoryModel
+import java.io.IOException
+import java.io.InputStream
+import java.nio.charset.Charset
 
 
 /**
@@ -28,5 +32,22 @@ object ApplicationUtils {
             }
         }
         mContext.startActivity(intent)
+    }
+
+    fun getDummyData(context: Context): List<FactCheckHistoryModel> {
+        var json: String? = null
+        val charset: Charset = Charsets.UTF_8
+        json = try {
+            val `is`: InputStream = context.assets.open("dummy_data.json")
+            val size: Int = `is`.available()
+            val buffer = ByteArray(size)
+            `is`.read(buffer)
+            `is`.close()
+            String(buffer, charset)
+        } catch (ex: IOException) {
+            ex.printStackTrace()
+            return arrayListOf()
+        }
+        return ObjectUtils.parseListTOData(json)
     }
 }

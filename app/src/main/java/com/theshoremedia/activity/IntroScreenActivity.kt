@@ -1,23 +1,20 @@
 package com.theshoremedia.activity
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import android.view.accessibility.AccessibilityEvent
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentActivity
 import androidx.viewpager.widget.ViewPager
 import com.theshoremedia.R
 import com.theshoremedia.R.*
-import com.theshoremedia.adapter.DynamicViewPagerAdapter
 import com.theshoremedia.databinding.ActivityIntroScreenBinding
+import com.theshoremedia.modules.base.adapter.DynamicViewPagerAdapter
+import com.theshoremedia.utils.AppConstants
+import com.theshoremedia.utils.PreferenceUtils
 import com.theshoremedia.utils.extensions.*
 
 
@@ -113,8 +110,10 @@ class IntroScreenActivity : AppCompatActivity() {
 
             mWelcomePage4?.findViewById<TextView>(id.tvFooter)?.makeLinks(
                 Pair(getString(R.string.txt_activate_not), View.OnClickListener {
-                    //Create ToolTip for accessibility services.
-                    startActivity(Intent(this@IntroScreenActivity,MainActivity::class.java))
+                    PreferenceUtils.savePref(AppConstants.Preference.IS_FIRST_TIME_USER, false)
+                    val intent = Intent(this@IntroScreenActivity, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
                 })
             )
             pagerAdapter.addView(mWelcomePage4)

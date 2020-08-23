@@ -1,4 +1,4 @@
-package com.theshoremedia.floatingview.credibility_checker.services
+package com.theshoremedia.modules.floatingview.credibility_checker.services
 
 import android.content.BroadcastReceiver
 import android.content.Context

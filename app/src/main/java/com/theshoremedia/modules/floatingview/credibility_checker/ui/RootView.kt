@@ -1,4 +1,4 @@
-package com.theshoremedia.floatingview.credibility_checker.ui
+package com.theshoremedia.modules.floatingview.credibility_checker.ui
 
 
 import android.content.Context
@@ -7,7 +7,7 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import com.facebook.rebound.Spring
 import com.facebook.rebound.SpringChain
-import com.theshoremedia.floatingview.credibility_checker.services.CredibilityCheckerService
+import com.theshoremedia.modules.floatingview.credibility_checker.services.CredibilityCheckerService
 import com.theshoremedia.utils.AppConstants
 import com.theshoremedia.utils.FloatingViewsLayoutParamsUtils
 import com.theshoremedia.utils.configs.SpringConfigs

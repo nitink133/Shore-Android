@@ -28,4 +28,5 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
+
 }

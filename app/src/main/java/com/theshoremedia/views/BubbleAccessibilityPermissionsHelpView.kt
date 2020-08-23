@@ -3,8 +3,8 @@ package com.theshoremedia.views
 import android.content.Context
 import android.view.View
 import com.theshoremedia.R
-import com.theshoremedia.floatingview.general.CallBack
-import com.theshoremedia.floatingview.general.FloatingLayout
+import com.theshoremedia.modules.floatingview.general.CallBack
+import com.theshoremedia.modules.floatingview.general.FloatingLayout
 import com.theshoremedia.utils.AppConstants
 
 /**
