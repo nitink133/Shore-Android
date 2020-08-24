@@ -7,6 +7,7 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import com.facebook.rebound.Spring
 import com.facebook.rebound.SpringChain
+import com.theshoremedia.database.entity.FactCheckHistoryModel
 import com.theshoremedia.modules.floatingview.credibility_checker.services.CredibilityCheckerService
 import com.theshoremedia.utils.AppConstants
 import com.theshoremedia.utils.FloatingViewsLayoutParamsUtils
@@ -642,14 +643,15 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
     }
 
 
-    fun showArticleView() {
+    fun showArticleView(item: FactCheckHistoryModel) {
+
         onTouchMotionActionUp(true)
             showArticleRunnable?.let {
                 handler.removeCallbacks(it)
             }
 
             showArticleRunnable = Runnable {
-                article.show()
+                article.show(item)
             }
             showArticleRunnable?.let {
                 handler.postDelayed(it, 200)

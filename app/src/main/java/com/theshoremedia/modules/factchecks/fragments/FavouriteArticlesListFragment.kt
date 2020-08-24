@@ -22,7 +22,7 @@ import com.theshoremedia.utils.extensions.validateNoDataView
 import com.theshoremedia.utils.permissions.OnDrawPermissionsUtils
 
 
-class FactsCheckListFragment : BaseFragment() {
+class FavouriteArticlesListFragment : BaseFragment() {
     private lateinit var binding: FragmentFactsCheckListBinding
     private var mAdapter: FactCheckAdapter? = null
     private var isBookMarkStatusChanged: Boolean = false
@@ -71,7 +71,7 @@ class FactsCheckListFragment : BaseFragment() {
                     }
                     else -> {
                         val direction =
-                            FactsCheckListFragmentDirections.actionToArticle(it.tag as FactCheckHistoryModel)
+                            FavouriteArticlesListFragmentDirections.actionToFavArticle(it.tag as FactCheckHistoryModel)
                         val mainNavView = requireActivity().findViewById<View>(R.id.frame)
                         Navigation.findNavController(mainNavView).navigate(direction)
                     }
@@ -80,10 +80,10 @@ class FactsCheckListFragment : BaseFragment() {
         recyclerView?.layoutManager = layoutManager
         recyclerView?.adapter = mAdapter
 
-        FactCheckHistoryDatabaseHelper.instance?.getAllNews(this) {
+        FactCheckHistoryDatabaseHelper.instance?.getFavouriteNews(this) {
             if (isBookMarkStatusChanged) {
                 isBookMarkStatusChanged = false
-                return@getAllNews
+                return@getFavouriteNews
             }
             mAdapter?.addAll(items = it as ArrayList<FactCheckHistoryModel>)
             recyclerView?.validateNoDataView(
@@ -93,18 +93,19 @@ class FactsCheckListFragment : BaseFragment() {
             )
         }
 
+
     }
 
     companion object {
         @JvmStatic
-        fun newInstance() =
-            FactsCheckListFragment()
+        fun newInstance(isFavouriteListRequest: Boolean = false) =
+            FavouriteArticlesListFragment()
     }
+
 
     override fun onPageRefreshListener(data: Bundle?) {
         super.onPageRefreshListener(data)
-        (mContext as MainActivity).setTitle()
+        (mContext as MainActivity).setTitle(getString(R.string.bookmark))
     }
-
 
 }

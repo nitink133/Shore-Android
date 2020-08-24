@@ -14,10 +14,20 @@ interface FactCheckHistoryDio {
     @get:Query("SELECT * FROM tableFactChecksHistory")
     val all: LiveData<List<FactCheckHistoryModel>?>
 
+
+    @get:Query("SELECT * FROM tableFactChecksHistory")
+    val getAllItems: List<FactCheckHistoryModel>?
+
+    @Query("SELECT * FROM tableFactChecksHistory WHERE isFavourite = (:isFav)")
+    fun getFavouriteNewsLive(isFav: Boolean? = true): LiveData<List<FactCheckHistoryModel>?>
+
     @Query("SELECT * FROM tableFactChecksHistory WHERE isFavourite = (:isFav)")
     fun getFavouriteNews(isFav: Boolean? = true): List<FactCheckHistoryModel>?
 
-    @Query("SELECT * FROM tableFactChecksHistory WHERE isFavourite = (:isRead)")
+    @Query("SELECT * FROM tableFactChecksHistory WHERE isRead = (:isRead)")
+    fun getUnreadNewsLive(isRead: Boolean? = false): LiveData<List<FactCheckHistoryModel>?>
+
+    @Query("SELECT * FROM tableFactChecksHistory WHERE isRead = (:isRead)")
     fun getUnreadNews(isRead: Boolean? = false): List<FactCheckHistoryModel>?
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

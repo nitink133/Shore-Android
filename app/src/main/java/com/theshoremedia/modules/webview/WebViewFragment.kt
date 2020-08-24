@@ -9,6 +9,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import com.theshoremedia.R
+import com.theshoremedia.activity.MainActivity
 import com.theshoremedia.modules.base.BaseFragment
 
 
@@ -39,6 +40,12 @@ class WebViewFragment : BaseFragment() {
         @JvmStatic
         fun newInstance() =
             WebViewFragment()
+    }
+
+
+    override fun onPageRefreshListener(data: Bundle?) {
+        super.onPageRefreshListener(data)
+        (mContext as MainActivity).setTitle()
     }
 
 }

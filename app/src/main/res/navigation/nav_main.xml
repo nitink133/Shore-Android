@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/nav_home">
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.theshoremedia.modules.factchecks.fragments.FactsCheckListFragment"
+        tools:layout="@layout/fragment_facts_check_list">
+        <action
+            android:id="@+id/action_to_article"
+            app:destination="@id/nav_article" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_favorite"
+        android:name="com.theshoremedia.modules.factchecks.fragments.FavouriteArticlesListFragment"
+        android:label="@string/bookmark"
+        tools:layout="@layout/fragment_facts_check_list">
+        <action
+            android:id="@+id/action_to_fav_article"
+            app:destination="@id/nav_article" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_webview"
+        android:name="com.theshoremedia.modules.webview.WebViewFragment"
+        tools:layout="@layout/fragment_web_view">
+
+        <argument
+            android:name="type"
+            app:argType="integer" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_article"
+        android:name="com.theshoremedia.modules.factchecks.fragments.ArticleFragment"
+        tools:layout="@layout/fragment_article_view">
+        <argument
+            android:name="articleModel"
+            app:argType="com.theshoremedia.database.entity.FactCheckHistoryModel" />
+
+    </fragment>
+
+</navigation>

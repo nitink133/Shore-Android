@@ -7,7 +7,7 @@
 - [x] show cc/a when forwarded msg has been detected on whatsapp
 - [x] (D) UI for multiple fact-checks
 - [x] Local database for forwarded msg
-- [ ] **(Critical Issue) Backgroud service handling**
+- [ ] **(Critical Issue) Background service handling**
 - [ ] forwarded message data cleaning
 - [ ] show list of all forwarded msg on app(with share icon)
 - [ ] Flow connectivity of favourite/unfavourite article

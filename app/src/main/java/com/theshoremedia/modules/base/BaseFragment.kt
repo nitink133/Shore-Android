@@ -1,14 +1,16 @@
 package com.theshoremedia.modules.base
 
 import android.content.Context
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 
 /**
  * @author- Nitin Khanna
  * @date -
  */
-open class BaseFragment :Fragment(){
+open class BaseFragment : Fragment() {
     var mContext: Context? = null
+    var TAG: String = ""
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -18,5 +20,9 @@ open class BaseFragment :Fragment(){
     override fun onDetach() {
         super.onDetach()
         mContext = null
+    }
+
+    open fun onPageRefreshListener(data: Bundle? = null) {
+
     }
 }

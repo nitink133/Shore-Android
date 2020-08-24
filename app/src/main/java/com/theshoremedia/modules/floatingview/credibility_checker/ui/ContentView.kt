@@ -29,10 +29,9 @@ class ContentView(context: Context) : LinearLayout(context) {
 
     private var mAdapter =
         OverlayFactCheckAdapter(
-            this.context,
             arrayListOf()
-        ) {
-            CredibilityCheckerService.getInstance().rootView.showArticleView()
+        ) { _, item ->
+            CredibilityCheckerService.getInstance().rootView.showArticleView(item)
         }
     var layoutManager = LinearLayoutManager(context)
 
@@ -47,14 +46,15 @@ class ContentView(context: Context) : LinearLayout(context) {
         recyclerView?.adapter = mAdapter
         FactCheckHistoryDatabaseHelper.instance?.getUnreadNews {
             mAdapter.addAll(items = it as ArrayList<FactCheckHistoryModel>)
+            CredibilityCheckerService.getInstance().rootView.bubbleView?.notifications = it.size
             recyclerView?.validateNoDataView(
                 findViewById<FrameLayout>(R.id.layoutRecycler)?.findViewById(
                     R.id.llNoData
                 )
             )
+            findViewById<View>(R.id.llRecyclerView).changeBackgroundColor(if (mAdapter.itemCount > 0) android.R.color.transparent else R.color.colorPrimary)
         }
 
-        findViewById<View>(R.id.llRecyclerView).changeBackgroundColor(if (mAdapter.itemCount > 0) android.R.color.transparent else R.color.colorPrimary)
 
         recyclerView?.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
             //TODO

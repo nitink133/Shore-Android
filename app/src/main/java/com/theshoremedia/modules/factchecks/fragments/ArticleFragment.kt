@@ -8,6 +8,7 @@ import com.theshoremedia.activity.MainActivity
 import com.theshoremedia.database.entity.FactCheckHistoryModel
 import com.theshoremedia.databinding.FragmentArticleViewBinding
 import com.theshoremedia.modules.base.BaseFragment
+import com.theshoremedia.modules.factchecks.fragments.ArticleFragmentArgs.fromBundle
 import com.theshoremedia.utils.ToastUtils
 import com.theshoremedia.utils.extensions.loadImage
 
@@ -15,13 +16,14 @@ import com.theshoremedia.utils.extensions.loadImage
 class ArticleFragment : BaseFragment() {
 
     private lateinit var binding: FragmentArticleViewBinding
-    private lateinit var factCheckDataModel: FactCheckHistoryModel
+    private val factCheckDataModel: FactCheckHistoryModel by lazy {
+        fromBundle(arguments!!).articleModel
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        (mContext as MainActivity).showBackButtons(isShow = true)
     }
 
     override fun onCreateView(
@@ -44,9 +46,7 @@ class ArticleFragment : BaseFragment() {
 
         @JvmStatic
         fun newInstance(factCheckDataModel: FactCheckHistoryModel) =
-            ArticleFragment().apply {
-                this.factCheckDataModel = factCheckDataModel
-            }
+            ArticleFragment()
     }
 
 
@@ -58,6 +58,7 @@ class ArticleFragment : BaseFragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            android.R.id.home -> requireActivity().onBackPressed()
             R.id.nav_delete -> {
                 // Not implemented here
                 ToastUtils.makeToast(mContext, getString(R.string.err_work_is_under_process))
@@ -72,9 +73,8 @@ class ArticleFragment : BaseFragment() {
         return false
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        (mContext as MainActivity).showBackButtons(isShow = false)
-
+    override fun onPageRefreshListener(data: Bundle?) {
+        super.onPageRefreshListener(data)
+        (mContext as MainActivity).setTitle()
     }
 }

@@ -1,6 +1,5 @@
 package com.theshoremedia.modules.floatingview.credibility_checker.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -12,9 +11,8 @@ import com.theshoremedia.utils.extensions.loadImage
 import com.theshoremedia.utils.extensions.verticleText
 
 class OverlayFactCheckAdapter(
-    private val context: Context,
     var items: ArrayList<FactCheckHistoryModel>,
-    private var callBacks: ((position: Int) -> Unit)
+    private var callBacks: (position: Int, item: FactCheckHistoryModel) -> Unit
 ) : RecyclerView.Adapter<OverlayFactCheckAdapter.ViewHolder>() {
     override fun getItemCount(): Int {
         return items.size
@@ -53,7 +51,7 @@ class OverlayFactCheckAdapter(
             //TODO
             binding.model = model
             binding.root.setOnClickListener {
-                callBacks.invoke(adapterPosition)
+                callBacks.invoke(adapterPosition, model)
             }
 
             binding.tvNewsSource.verticleText(model.source)

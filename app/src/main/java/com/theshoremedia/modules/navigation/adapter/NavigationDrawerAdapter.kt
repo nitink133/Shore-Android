@@ -10,7 +10,7 @@ import com.theshoremedia.modules.navigation.model.NavigationDataModel
 
 class NavigationDrawerAdapter(
     private var items: ArrayList<NavigationDataModel> = arrayListOf(),
-    private var callBacks: ((position: Int, title: String?) -> Unit)
+    private var callBacks: ((position: Int, title: String?) -> Unit)? = null
 ) :
     RecyclerView.Adapter<NavigationDrawerAdapter.ViewHolder>() {
 
@@ -45,7 +45,7 @@ class NavigationDrawerAdapter(
         fun bind(model: NavigationDataModel) {
             binding.model = model
             binding.root.setOnClickListener {
-                callBacks.invoke(position, model.toolbarTitle)
+                callBacks?.invoke(position, model.toolbarTitle)
             }
         }
     }

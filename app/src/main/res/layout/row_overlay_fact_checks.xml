@@ -7,6 +7,7 @@
             name="model"
             type="com.theshoremedia.database.entity.FactCheckHistoryModel" />
     </data>
+
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -27,10 +28,10 @@
                 android:background="@color/grey"
                 android:gravity="center"
                 android:padding="@dimen/small_padding"
-                tools:text="@string/tiny_dummy_text"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/tiny_dummy_text" />
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,12 +48,12 @@
                     style="@style/textView"
                     android:padding="@dimen/small_padding"
                     android:text="@{model.title}"
-                    tools:text="@string/medium_dummy_text"
                     android:textAlignment="gravity"
                     android:textSize="@dimen/large_textsize"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/medium_dummy_text" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivNewsIcon"
@@ -67,16 +68,16 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvNewsDescription"
                     style="@style/withAlphaTextView"
-                    android:text="@{model.description}"
                     android:layout_width="0dp"
                     android:layout_marginStart="@dimen/extra_small_margin"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    tools:text="@string/large_dummy_text"
+                    android:text="@{model.description}"
                     android:textAlignment="gravity"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/ivNewsIcon"
-                    app:layout_constraintTop_toTopOf="@+id/ivNewsIcon" />
+                    app:layout_constraintTop_toTopOf="@+id/ivNewsIcon"
+                    tools:text="@string/large_dummy_text" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvNewsDate"
@@ -85,22 +86,22 @@
                     android:layout_marginTop="@dimen/small_margin"
                     android:layout_marginEnd="@dimen/extra_small_margin"
                     android:ellipsize="end"
-                    android:text="@{model.date}"
                     android:maxLines="2"
-                    tools:text="@string/small_dummy_text"
+                    android:text="@{model.date}"
                     android:textAlignment="gravity"
                     app:layout_constraintStart_toEndOf="@+id/ivNewsIcon"
-                    app:layout_constraintTop_toBottomOf="@+id/tvNewsDescription" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvNewsDescription"
+                    tools:text="@string/small_dummy_text" />
 
-
-                <androidx.appcompat.widget.AppCompatImageView
+                <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/ivBookMark"
-                    android:layout_width="@dimen/small_image"
-                    android:layout_height="@dimen/small_image"
+                    android:layout_width="@dimen/large_image"
+                    android:layout_height="@dimen/large_image"
+                    android:layout_gravity="center"
                     android:layout_marginTop="@dimen/small_margin"
-                    android:src="@drawable/ic_bookmark_blank"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvNewsDescription" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvNewsDescription"
+                    app:lottie_fileName="lottie/favourite.json" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
