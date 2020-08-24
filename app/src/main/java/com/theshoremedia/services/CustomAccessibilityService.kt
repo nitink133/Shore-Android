@@ -7,7 +7,6 @@ import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
 import com.theshoremedia.R
 import com.theshoremedia.utils.WhatsAppUtils
-import com.theshoremedia.views.BubbleCredibilityCheckerView
 
 /**
  * Created by sotsys-014 on 4/10/16.
@@ -26,8 +25,8 @@ class CustomAccessibilityService : AccessibilityService() {
     override fun onAccessibilityEvent(event: AccessibilityEvent) {
         if (event.eventType == AccessibilityEvent.TYPE_VIEW_SCROLLED) {
             val currentNode: AccessibilityNodeInfo = rootInActiveWindow
-            WhatsAppUtils.debugView(currentNode)
-            BubbleCredibilityCheckerView.getInstance(mContext = this).init()
+            WhatsAppUtils.debugView(this, currentNode)
+
         }
     }
 
