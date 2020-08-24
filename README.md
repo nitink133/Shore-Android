@@ -14,3 +14,6 @@
 - [ ] Article delete/share functionality
 - [ ] 'TheShore' option in long select popup-view
 - [ ] 'TheShore option handling'
+
+
+#### Usecase of Background Services
