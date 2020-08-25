@@ -65,6 +65,10 @@
 
     <string name="permission_title_accessibility">Allow Shore Media to use accessibility service?</string>
     <string name="permission_message_accessibility">We need accessibility permission to protect you from fake-news in real time.</string>
+    <string name="permission_accessibility_description">Switch \'ON\' in the top right corner to save time as The Shore unlocks these cool features for you:\n- Real time Fake news detections on WhatsApp forwards\n- Share real story instead of fake forward\n\nNote:\nYou may receive a standard warning after this screen. Don\'t worry about it, The Shore will never collect your personal information. Contact info@nitinsworld.com for any concerns.</string>
+
+    <string name="permission_title_battery_optimization">Allow Shore Media to run in Battery saving mode?</string>
+    <string name="permission_message_battery_optimization">We need battery optimization permission to run in saving mode.</string>
 
     <string name="help_look_for_shore_in_the_list_and_click">Look for \'TheShore\' is the list and click</string>
     <string name="help_see_how_shore_works_on_whatsapp">See how \'TheShore\' works on WhatsApp.</string>
@@ -78,7 +82,13 @@
     <string name="remove_from_favorite">Remove from favourite</string>
     <string name="delete">Delete</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="news_stories">News stories</string>
+    <string name="hide">Hide</string>
+
+    <string name="auto_detect_fake_news_on_whatsapp">Auto detect fake news on WhatsApp</string>
+    <string name="run_in_battery_optimization_mode">Run in Battery optimization mode</string>
+
+    <string name="key_auto_detect">key_auto_detect</string>
+    <string name="key_allow_battery_optimization">key_allow_battery_optimization</string>
 
 </resources>

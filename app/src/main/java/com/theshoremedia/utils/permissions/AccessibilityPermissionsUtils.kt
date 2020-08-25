@@ -10,6 +10,7 @@ import android.provider.Settings
 import com.theshoremedia.R
 import com.theshoremedia.services.CustomAccessibilityService
 import com.theshoremedia.utils.AccessibilityUtils
+import com.theshoremedia.utils.AppConstants
 import com.theshoremedia.utils.DialogUtils
 import com.theshoremedia.views.BubbleAccessibilityGrantedDemoView
 import com.theshoremedia.views.BubbleAccessibilityPermissionsHelpView
@@ -21,12 +22,12 @@ import com.theshoremedia.views.BubbleAccessibilityPermissionsHelpView
 
 class AccessibilityPermissionsUtils {
     companion object {
-        private lateinit var listener: (() -> Unit)
+        private lateinit var listener: ((isEnabled: Boolean) -> Unit)
         private var dialogVisible: Boolean = false
 
         fun checkPermission(
             mContext: Context,
-            listener: (() -> Unit)
+            listener: ((isEnabled: Boolean) -> Unit)
         ) {
             Companion.listener = listener
             if (dialogVisible) return
@@ -56,8 +57,10 @@ class AccessibilityPermissionsUtils {
 
                         BubbleAccessibilityPermissionsHelpView.getInstance(mContext).init()
                         val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
-                        (mContext as Activity).startActivity(intent)
+                        (mContext as Activity).startActivityForResult(intent,AppConstants.PermissionsCode.ACTION_ACCESSIBILITY)
 
+                    } else {
+                        listener.invoke(false)
                     }
                     dialogVisible =
                         false
@@ -66,7 +69,7 @@ class AccessibilityPermissionsUtils {
 
         }
 
-        private fun registerListener(mContext: Context, listener: () -> Unit) {
+        private fun registerListener(mContext: Context, listener: (isEnabled: Boolean) -> Unit) {
             val observer: ContentObserver = object : ContentObserver(Handler()) {
                 override fun onChange(selfChange: Boolean) {
                     super.onChange(selfChange)
@@ -88,7 +91,7 @@ class AccessibilityPermissionsUtils {
 
         fun invoke() {
             dialogVisible = false
-            listener.invoke()
+            listener.invoke(true)
         }
 
         private fun verifyPermission(
@@ -109,13 +112,7 @@ class AccessibilityPermissionsUtils {
         ) {
             if (mContext == null) return
             verifyPermission(mContext) { isEnabled ->
-                if (isEnabled)
-                    listener.invoke()
-                else
-                    checkPermission(
-                        mContext,
-                        listener
-                    )
+                listener.invoke(isEnabled)
             }
 
         }

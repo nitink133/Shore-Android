@@ -27,11 +27,14 @@ class ContentView(context: Context) : LinearLayout(context) {
 
     private var recyclerView: RecyclerView? = null
 
+    var isDisable: Boolean = false
+
     private var mAdapter =
         OverlayFactCheckAdapter(
             arrayListOf()
         ) { _, item ->
-            CredibilityCheckerService.getInstance().rootView.showArticleView(item)
+            if (!isDisable)
+                CredibilityCheckerService.getInstance().rootView.showArticleView(item)
         }
     var layoutManager = LinearLayoutManager(context)
 

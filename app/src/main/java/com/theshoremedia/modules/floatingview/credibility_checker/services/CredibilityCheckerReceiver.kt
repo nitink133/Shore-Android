@@ -3,6 +3,7 @@ package com.theshoremedia.modules.floatingview.credibility_checker.services
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import com.theshoremedia.utils.AppConstants
 import com.theshoremedia.views.BubbleCredibilityCheckerView
 
 /**
@@ -12,11 +13,20 @@ import com.theshoremedia.views.BubbleCredibilityCheckerView
 class CredibilityCheckerReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val action = intent.action
+        //TODO: There is an issue, related to System dialog closing. Need to check this with backgronud service calling scenario.
         if (Intent.ACTION_CLOSE_SYSTEM_DIALOGS == action) {
             intent.getStringExtra("reason") ?: return
-            CredibilityCheckerService.getInstance()
-                .removeBubbleView()
+            if (CredibilityCheckerService.isInitialized())
+                CredibilityCheckerService.getInstance().removeBubbleView()
             BubbleCredibilityCheckerView.getInstance(context).close()
+
+            return
+        }
+
+        val requestCode = intent.getIntExtra(AppConstants.Key.REQUEST_CODE, 0)
+        if (requestCode == 1001) {
+            if (CredibilityCheckerService.isInitialized())
+                CredibilityCheckerService.getInstance().removeBubbleView()
         }
     }
 }

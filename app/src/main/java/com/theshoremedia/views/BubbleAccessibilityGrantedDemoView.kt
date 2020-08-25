@@ -49,7 +49,6 @@ class BubbleAccessibilityGrantedDemoView {
                                 )
                             R.id.ivTakeToApp ->
                                 ApplicationUtils.startApp(mContext)
-
                         }
                     }
 

@@ -15,7 +15,9 @@ import androidx.core.app.NotificationCompat
 import com.theshoremedia.R
 import com.theshoremedia.activity.MainActivity
 import com.theshoremedia.modules.floatingview.credibility_checker.ui.RootView
+import com.theshoremedia.utils.AppConstants
 import com.theshoremedia.utils.permissions.OnDrawPermissionsUtils
+
 
 /**
  * @author- Nitin Khanna
@@ -41,8 +43,31 @@ class CredibilityCheckerService : Service() {
 
     private lateinit var innerReceiver: CredibilityCheckerReceiver
 
-    override fun onCreate() {
-        super.onCreate()
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun createNotificationChannel(channelId: String, channelName: String): String {
+        val chan = NotificationChannel(
+            channelId,
+            channelName, NotificationManager.IMPORTANCE_NONE
+        )
+        chan.lightColor = Color.BLUE
+        chan.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
+        val service = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        service.createNotificationChannel(chan)
+        return channelId
+    }
+
+    override fun onDestroy() {
+        initialized = false
+        unregisterReceiver(innerReceiver)
+        removeBubbleView()
+        super.onDestroy()
+    }
+
+    override fun onBind(intent: Intent?): IBinder? {
+        return null
+    }
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         OnDrawPermissionsUtils.checkPermission(this) {
 
             instance = this
@@ -66,54 +91,46 @@ class CredibilityCheckerService : Service() {
                     ""
                 }
 
-            val notificationIntent = Intent(this, MainActivity::class.java)
-
             val pendingIntent = PendingIntent.getActivity(
                 this, 0,
-                notificationIntent, 0
+                Intent(this, MainActivity::class.java), 0
             )
+            val cancelIntent = Intent(
+                "com.theshoremedia.cancel"
+            )
+            cancelIntent.putExtra(AppConstants.Key.REQUEST_CODE, 1001)
+            val cancelPendingIntent = PendingIntent.getBroadcast(
+                applicationContext, 1001, cancelIntent, 0
+            )
+
+
+            val cancelAction: NotificationCompat.Action = NotificationCompat.Action(
+                R.drawable.ic_logo,
+                getString(R.string.cancel),
+                cancelPendingIntent
+            )
+
 
             val notification = NotificationCompat.Builder(this, channelId)
                 .setOngoing(true)
                 .setContentTitle(getString(R.string.the_shore_is_active))
                 .setSmallIcon(R.drawable.ic_logo)
+                .addAction(cancelAction)
                 .setCategory(Notification.CATEGORY_SERVICE)
                 .setContentIntent(pendingIntent).build()
 
+
             startForeground(101, notification)
         }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun createNotificationChannel(channelId: String, channelName: String): String {
-        val chan = NotificationChannel(
-            channelId,
-            channelName, NotificationManager.IMPORTANCE_NONE
-        )
-        chan.lightColor = Color.BLUE
-        chan.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
-        val service = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        service.createNotificationChannel(chan)
-        return channelId
-    }
-
-    override fun onDestroy() {
-        initialized = false
-        unregisterReceiver(innerReceiver)
-        super.onDestroy()
-    }
-
-    override fun onBind(intent: Intent?): IBinder? {
-        return null
-    }
-
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        return START_STICKY
+        //stopSelf();
+        return START_NOT_STICKY;
     }
 
     fun removeBubbleView() {
         rootView.collapse()
-        rootView.removeAllViews()
+        rootView.onClose()
+        stopForeground(true)
+        initialized = false
     }
 
     fun updateViewLayout(view: View, params: ViewGroup.LayoutParams) {

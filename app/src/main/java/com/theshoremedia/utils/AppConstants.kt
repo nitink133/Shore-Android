@@ -21,6 +21,7 @@ object AppConstants {
     object PermissionsCode {
         const val ACTION_MANAGE_OVERLAY = 1001
         const val ACTION_ACCESSIBILITY = 1002
+        const val ACTION_BATTERY_SAVER = 1003
     }
 
     object FloatingViewType {
@@ -58,6 +59,11 @@ object AppConstants {
 
     object Preference {
         const val IS_FIRST_TIME_USER = "is_first_time_user"
+    }
+
+    object Key{
+        const val REQUEST_CODE= "request_code"
+        const val NOTIFICATION_ID= "notification_id"
     }
 
 }

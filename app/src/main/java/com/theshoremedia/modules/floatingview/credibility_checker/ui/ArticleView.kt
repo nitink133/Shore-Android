@@ -49,6 +49,7 @@ class ArticleView(context: Context) : LinearLayout(context) {
     fun hide() {
         isVisible = false
 
+        CredibilityCheckerService.getInstance().rootView.makeContentViewEnable()
         CredibilityCheckerService.getInstance().rootView.handler.removeCallbacks(
             CredibilityCheckerService.getInstance().rootView.showArticleRunnable
         )

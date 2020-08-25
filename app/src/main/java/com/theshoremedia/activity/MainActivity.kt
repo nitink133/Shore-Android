@@ -29,6 +29,8 @@ import com.theshoremedia.utils.KeyBoardManager
 import com.theshoremedia.utils.ToastUtils
 import com.theshoremedia.utils.extensions.makeVisible
 import com.theshoremedia.utils.extensions.validateNoDataView
+import com.theshoremedia.utils.permissions.AccessibilityPermissionsUtils
+import com.theshoremedia.utils.permissions.BatteryOptimizationPermissionsUtils
 import com.theshoremedia.utils.permissions.OnDrawPermissionsUtils
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.layout_navigation_view.*
@@ -67,6 +69,7 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.nav_bookmark -> setTitle(getString(R.string.bookmark))
+                R.id.nav_settings -> setTitle(getString(R.string.settings))
                 else -> setTitle()
             }
         }
@@ -111,6 +114,10 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
             }
             AppConstants.NavigationItem.BOOKMARK -> {
                 navController.navigate(R.id.nav_favorite)
+            }
+
+            AppConstants.NavigationItem.SETTINGS -> {
+                navController.navigate(R.id.nav_settings)
             }
 
             AppConstants.NavigationItem.ABOUT_US,
@@ -180,6 +187,14 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             AppConstants.PermissionsCode.ACTION_MANAGE_OVERLAY -> OnDrawPermissionsUtils.onActivityResult(
+                mContext = this
+            )
+
+            AppConstants.PermissionsCode.ACTION_ACCESSIBILITY -> AccessibilityPermissionsUtils.onActivityResult(
+                mContext = this
+            )
+
+            AppConstants.PermissionsCode.ACTION_BATTERY_SAVER -> BatteryOptimizationPermissionsUtils.onActivityResult(
                 mContext = this
             )
         }

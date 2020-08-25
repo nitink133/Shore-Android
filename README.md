@@ -16,4 +16,8 @@
 - [ ] 'TheShore option handling'
 
 
-#### Usecase of Background Services
+#### Use cases of Background Services
+1. Helper floating views(Demo app, Accessibility service helper, etc.)(Foreground service)   - Working
+2. **Background accessibility service(Regular Whatsapp checking)**  
+3. Information floating view(Foreground service)  - Working
+    

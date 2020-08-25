@@ -7,6 +7,9 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <!-- Foreground Service permission(API level 28 or higher) -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission  android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
 
 
     <application
@@ -23,18 +26,22 @@
         <activity
             android:name=".activity.SplashActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                        <intent-filter>
+                            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                            <category android:name="android.intent.category.LAUNCHER" />
+                        </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.MainActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
 
         <service
-            android:name=".services.CustomAccessibilityService"
-            android:enabled="true"
-            android:exported="true"
+            android:name="com.theshoremedia.services.CustomAccessibilityService"
             android:label="@string/app_name"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
@@ -49,7 +56,19 @@
         <service android:name="com.theshoremedia.modules.floatingview.general.FloatingLayoutService" />
         <service
             android:name="com.theshoremedia.modules.floatingview.credibility_checker.services.CredibilityCheckerService"
-            android:exported="true" />
+            />
+
+        <receiver android:name=".modules.floatingview.credibility_checker.services.CredibilityCheckerReceiver">
+            <intent-filter android:priority="999">
+                <action android:name="com.theshoremedia.cancel" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".receiver.BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

@@ -3,6 +3,7 @@ package com.theshoremedia.utils
 import android.content.Context
 import android.util.Log
 import android.view.accessibility.AccessibilityNodeInfo
+import com.theshoremedia.views.BubbleCredibilityCheckerView
 
 /**
  * @author- Nitin Khanna
@@ -25,6 +26,7 @@ object WhatsAppUtils {
             if (currentNode.childCount > 0) {
                 debugView(mContext, currentNode, parentView = currentNode)
             } else if (parentView?.className == "android.view.ViewGroup" && currentNode.className == "android.widget.TextView") {
+                BubbleCredibilityCheckerView.getInstance(mContext = mContext).init()
                 Log.d("Nitin", lastNodeInfo?.className.toString())
                 if (lastNodeInfo == null || nextNodeInfo == null) return
                 if (lastNodeInfo.className.toString() != "android.widget.LinearLayout" || nextNodeInfo.className?.toString() != "android.widget.TextView") return

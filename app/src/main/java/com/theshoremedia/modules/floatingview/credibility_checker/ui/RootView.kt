@@ -70,7 +70,7 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
     private var isOnRight = true
         set(value) {
             field = value
-
+            if(bubbleView == null)return
             val lp = bubbleView!!.llUnreadCount.layoutParams as LayoutParams
             lp.gravity = if (value) Gravity.START else Gravity.END
             bubbleView!!.llUnreadCount.layoutParams = lp
@@ -229,7 +229,7 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
             close.enlarge()
 
             postDelayed({
-                onClose()
+                CredibilityCheckerService.getInstance().removeBubbleView()
             }, 100)
         }
 
@@ -299,7 +299,7 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
         if (bubbleView == null) return true
 
-        when (event!!.action) {
+        when (event?.action) {
             MotionEvent.ACTION_DOWN -> {
                 onTouchMotionActionDown(event)
             }
@@ -316,6 +316,7 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
     }
 
     private fun onTouchMotionActionMove(event: MotionEvent) {
+        if(bubbleView == null)return
         val metrics = getScreenSize()
         if (AppConstants.OverlayViewSize.distance(
                 initialTouchX,
@@ -399,7 +400,8 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
         }, 100)
 
         if (closeCaptured) {
-            onClose()
+//            onClose()
+            CredibilityCheckerService.getInstance().removeBubbleView()
             return
         }
 
@@ -509,6 +511,7 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
     }
 
     private fun onTouchMotionActionDown(event: MotionEvent) {
+        if(bubbleView == null)return
         initialX = bubbleView!!.springX.currentValue.toFloat()
         initialY = bubbleView!!.springY.currentValue.toFloat()
         initialTouchX = event.rawX
@@ -598,7 +601,7 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
     }
 
 
-    private fun onClose() {
+     fun onClose() {
         destroySpringChains()
         this.removeView(bubbleView)
         bubbleView = null
@@ -637,7 +640,6 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
     fun hideContentView() {
         if (article.isVisible) {
             article.hide()
-//            return
         }
         content.hideContent()
     }
@@ -645,17 +647,22 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
 
     fun showArticleView(item: FactCheckHistoryModel) {
 
-        onTouchMotionActionUp(true)
-            showArticleRunnable?.let {
-                handler.removeCallbacks(it)
-            }
+        content.isDisable = true
 
-            showArticleRunnable = Runnable {
-                article.show(item)
-            }
-            showArticleRunnable?.let {
-                handler.postDelayed(it, 200)
-            }
+        onTouchMotionActionUp(true)
+        showArticleRunnable?.let {
+            handler.removeCallbacks(it)
+        }
+
+        showArticleRunnable = Runnable {
+            article.show(item)
+        }
+        showArticleRunnable?.let {
+            handler.postDelayed(it, 200)
+        }
     }
 
+    fun makeContentViewEnable(){
+        content.isDisable = false
+    }
 }

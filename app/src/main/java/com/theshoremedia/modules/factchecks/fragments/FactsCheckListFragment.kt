@@ -19,7 +19,9 @@ import com.theshoremedia.modules.factchecks.adapter.FactCheckAdapter
 import com.theshoremedia.utils.extensions.setFullAnimation
 import com.theshoremedia.utils.extensions.setZeroAnimation
 import com.theshoremedia.utils.extensions.validateNoDataView
+import com.theshoremedia.utils.permissions.AccessibilityPermissionsUtils
 import com.theshoremedia.utils.permissions.OnDrawPermissionsUtils
+import com.theshoremedia.views.BubbleCredibilityCheckerView
 
 
 class FactsCheckListFragment : BaseFragment() {
@@ -41,12 +43,11 @@ class FactsCheckListFragment : BaseFragment() {
 
         OnDrawPermissionsUtils.checkPermission(mContext!!) {
 //            AccessibilityPermissionsUtils.checkPermission(mContext!!) {
-//                //TODO
-////                BubbleCredibilityCheckerView.getInstance(mContext!!).init()
+//                BubbleCredibilityCheckerView.getInstance(mContext!!).init()
 //            }
         }
-
         initializeRecyclerView()
+
     }
 
     private fun initializeRecyclerView() {

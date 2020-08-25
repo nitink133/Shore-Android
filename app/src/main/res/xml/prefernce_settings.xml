@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <SwitchPreference
+        app:icon="@drawable/ic_accessibility_24px"
+        app:defaultValue="false"
+        app:key="@string/key_auto_detect"
+        app:title="@string/auto_detect_fake_news_on_whatsapp" />
+
+
+    <SwitchPreference
+        app:icon="@drawable/ic_miscellaneous_services"
+        app:defaultValue="false"
+        app:key="@string/key_allow_battery_optimization"
+        app:title="@string/run_in_battery_optimization_mode" />
+
+</PreferenceScreen>
