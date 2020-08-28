@@ -91,4 +91,7 @@ dependencies {
     implementation "androidx.preference:preference:1.0.0"
     implementation 'com.orhanobut:logger:2.2.0'
 
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+
 }

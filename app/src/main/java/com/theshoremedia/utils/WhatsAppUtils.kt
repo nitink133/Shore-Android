@@ -36,6 +36,7 @@ class WhatsAppUtils {
             if (forwardedMessagesList.contains(rootNodeInfo.text.toString())) return
         }
 
+        Log.d("Nitin", "debugView")
         while (index < count) {
             val currentNode = rootNodeInfo.getChild(index) ?: continue
             if (currentNode.childCount > 0) {

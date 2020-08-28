@@ -47,9 +47,9 @@ class CustomAccessibilityService : AccessibilityService() {
 
         try {
             if (event.eventType != AccessibilityEvent.TYPE_VIEW_SCROLLED) return
-            Log.d("Nitin", "eventCall Enter")
-
+            if (event.className.toString() != "android.widget.ListView") return
             if (PreferenceUtils.getPref<Boolean>(getString(R.string.key_auto_detect)) == false) return
+
             if (!AccessibilityUtils.isContinuousScrolling(
                     lastTriggeredTime = lastTriggeredTime,
                     currentTriggeredTime = event.eventTime
@@ -61,25 +61,28 @@ class CustomAccessibilityService : AccessibilityService() {
 
             lastTriggeredTime = event.eventTime
 
+            Log.d("Nitin", "eventCall Enter")
+
             val currentNode: AccessibilityNodeInfo = rootInActiveWindow ?: return
             WhatsAppUtils.getInstance(this).debugView(rootNodeInfo = currentNode)
         } catch (e: Exception) {
-            Log.d("Nitin", "catchError in onAccessibilityService")
-            Log.e(message = e.message.toString())
             CredibilityCheckerService.getInstance().removeBubbleView()
         }
     }
 
     override fun onInterrupt() {
-        Log.e("Nitin", "onInterrupt")
         initialized = false
+        if (CredibilityCheckerService.isInitialized())
+            CredibilityCheckerService.getInstance().removeBubbleView()
+        Log.d("Nitin", "AccessibilityService- onDestroy()")
     }
 
     override fun onDestroy() {
         super.onDestroy()
         initialized = false
         Log.d("Nitin", "AccessibilityService- onDestroy()")
-        CredibilityCheckerService.getInstance().removeBubbleView()
+        if (CredibilityCheckerService.isInitialized())
+            CredibilityCheckerService.getInstance().removeBubbleView()
     }
 
     override fun onCreate() {
