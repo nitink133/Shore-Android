@@ -22,7 +22,7 @@ import com.theshoremedia.views.BubbleAccessibilityPermissionsHelpView
 
 class AccessibilityPermissionsUtils {
     companion object {
-        private lateinit var listener: ((isEnabled: Boolean) -> Unit)
+        private var listener: ((isEnabled: Boolean) -> Unit)? = null
         private var dialogVisible: Boolean = false
 
         fun checkPermission(
@@ -91,10 +91,10 @@ class AccessibilityPermissionsUtils {
 
         fun invoke() {
             dialogVisible = false
-            listener.invoke(true)
+            listener?.invoke(true)
         }
 
-        private fun verifyPermission(
+         fun verifyPermission(
             mContext: Context,
             listener: ((isEnabled: Boolean) -> Unit)
         ) {
@@ -112,7 +112,7 @@ class AccessibilityPermissionsUtils {
         ) {
             if (mContext == null) return
             verifyPermission(mContext) { isEnabled ->
-                listener.invoke(isEnabled)
+                listener?.invoke(isEnabled)
             }
 
         }

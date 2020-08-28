@@ -1,7 +1,6 @@
 package com.theshoremedia.utils
 
 import android.content.Context
-import android.util.Log
 import android.view.accessibility.AccessibilityNodeInfo
 import com.theshoremedia.views.BubbleCredibilityCheckerView
 
@@ -9,34 +8,49 @@ import com.theshoremedia.views.BubbleCredibilityCheckerView
  * @author- Nitin Khanna
  * @date -
  */
-object WhatsAppUtils {
+class WhatsAppUtils {
+    private var forwardedMessagesList: ArrayList<String> = arrayListOf()
+
+    companion object {
+        private var instance: WhatsAppUtils? = null
+        private var mContext: Context? = null
+        fun getInstance(context: Context): WhatsAppUtils {
+            if (instance == null)
+                instance = WhatsAppUtils().apply { mContext = context }
+            return instance!!
+        }
+    }
 
     fun debugView(
-        mContext: Context,
         rootNodeInfo: AccessibilityNodeInfo,
         parentView: AccessibilityNodeInfo? = null
     ) {
 
+        if (mContext == null) return
         var index = 0
         val count = rootNodeInfo.childCount
         var lastNodeInfo: AccessibilityNodeInfo? = null
         var nextNodeInfo: AccessibilityNodeInfo? = null
+
+        if (rootNodeInfo.className == "android.widget.TextView") {
+            if (forwardedMessagesList.contains(rootNodeInfo.text.toString())) return
+        }
+
         while (index < count) {
             val currentNode = rootNodeInfo.getChild(index) ?: continue
             if (currentNode.childCount > 0) {
-                debugView(mContext, currentNode, parentView = currentNode)
+                debugView(currentNode, parentView = currentNode)
             } else if (parentView?.className == "android.view.ViewGroup" && currentNode.className == "android.widget.TextView") {
-                BubbleCredibilityCheckerView.getInstance(mContext = mContext).init()
-                Log.d("Nitin", lastNodeInfo?.className.toString())
                 if (lastNodeInfo == null || nextNodeInfo == null) return
                 if (lastNodeInfo.className.toString() != "android.widget.LinearLayout" || nextNodeInfo.className?.toString() != "android.widget.TextView") return
                 if (!StringUtils.isTimeView(nextNodeInfo.text.toString())) return
                 val text = currentNode.text.toString()
                 if (StringUtils.isTimeView(text) || StringUtils.isDateView(text)) return
-                Log.d("Nitin", index.toString())
-                Log.d("Nitin", currentNode.className.toString())
-                Log.d("Nitin", "ContentInfo: " + currentNode.text.toString())
-//                BubbleCredibilityCheckerView.getInstance(mContext = mContext).init()
+                Log.d(
+                    message = "Index: " + index.toString() + "/n ClassName: " + currentNode.className.toString() + "\n ContentInfo: " + currentNode.text.toString()
+                )
+                forwardedMessagesList.add(currentNode.text.toString())
+                BubbleCredibilityCheckerView.getInstance(mContext = mContext!!).init()
             }
 
             lastNodeInfo = currentNode

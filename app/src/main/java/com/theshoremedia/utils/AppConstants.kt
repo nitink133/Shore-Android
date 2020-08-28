@@ -66,4 +66,9 @@ object AppConstants {
         const val NOTIFICATION_ID= "notification_id"
     }
 
+    object AccessibilityService{
+        const val TRIGGERED_TIME = 3000
+        const val STOP_SERVICE = "stop_service"
+        const val START_SERVICE = "start_service"
+    }
 }

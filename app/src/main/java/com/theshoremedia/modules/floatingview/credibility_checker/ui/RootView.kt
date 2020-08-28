@@ -70,7 +70,7 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
     private var isOnRight = true
         set(value) {
             field = value
-            if(bubbleView == null)return
+            if (bubbleView == null) return
             val lp = bubbleView!!.llUnreadCount.layoutParams as LayoutParams
             lp.gravity = if (value) Gravity.START else Gravity.END
             bubbleView!!.llUnreadCount.layoutParams = lp
@@ -78,7 +78,7 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
 
     private var velocityTracker: VelocityTracker? = null
 
-    private var motionTracker = LinearLayout(context)
+    var motionTracker = LinearLayout(context)
 
     private var detectedOutOfBounds = false
 
@@ -87,14 +87,14 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
     var showContentRunnable: Runnable? = null
     var showArticleRunnable: Runnable? = null
 
-    private var motionTrackerParams = FloatingViewsLayoutParamsUtils.getDefaultParams(
+    var motionTrackerParams = FloatingViewsLayoutParamsUtils.getDefaultParams(
         width = AppConstants.OverlayViewSize.CHAT_HEAD_SIZE,
         height = AppConstants.OverlayViewSize.CHAT_HEAD_SIZE + 16,
         gravity = Gravity.START or Gravity.TOP,
         flag = WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS or WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
     )
 
-    private var params = FloatingViewsLayoutParamsUtils.getDefaultParams(
+    var params = FloatingViewsLayoutParamsUtils.getDefaultParams(
         width = WindowManager.LayoutParams.MATCH_PARENT,
         height = WindowManager.LayoutParams.MATCH_PARENT,
         flag = WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS or WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
@@ -104,18 +104,16 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
     )
 
     init {
+
         CredibilityCheckerService.getInstance().windowManager.addView(
             motionTracker,
             motionTrackerParams
         )
-        CredibilityCheckerService.getInstance().windowManager.addView(this, params)
         this.addView(content)
         this.addView(article)
-
         isFocusableInTouchMode = true
 
         motionTracker.setOnTouchListener(this)
-        addShoreBubble()
         setOnTouchListener { v, event ->
             v.performClick()
 
@@ -131,13 +129,11 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
         }
     }
 
-    private fun addShoreBubble() {
+    fun addShoreBubble() {
         val metrics = getScreenSize()
-
         val lx =
             metrics.widthPixels - AppConstants.OverlayViewSize.CHAT_HEAD_SIZE - 16 + AppConstants.OverlayViewSize.CHAT_HEAD_OUT_OF_SCREEN_X.toDouble()
         val ly = 0.0
-
         if (bubbleView == null) {
             bubbleView =
                 BubbleView(
@@ -155,12 +151,10 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
         motionTrackerParams.y = bubbleView!!.springY.currentValue.toInt()
         motionTrackerParams.flags =
             motionTrackerParams.flags and WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE.inv()
-
         CredibilityCheckerService.getInstance().windowManager.updateViewLayout(
             motionTracker,
             motionTrackerParams
         )
-
     }
 
 
@@ -316,7 +310,7 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
     }
 
     private fun onTouchMotionActionMove(event: MotionEvent) {
-        if(bubbleView == null)return
+        if (bubbleView == null) return
         val metrics = getScreenSize()
         if (AppConstants.OverlayViewSize.distance(
                 initialTouchX,
@@ -400,8 +394,8 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
         }, 100)
 
         if (closeCaptured) {
-//            onClose()
-            CredibilityCheckerService.getInstance().removeBubbleView()
+            if (CredibilityCheckerService.isInitialized())
+                CredibilityCheckerService.getInstance().removeBubbleView()
             return
         }
 
@@ -511,7 +505,7 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
     }
 
     private fun onTouchMotionActionDown(event: MotionEvent) {
-        if(bubbleView == null)return
+        if (bubbleView == null) return
         initialX = bubbleView!!.springX.currentValue.toFloat()
         initialY = bubbleView!!.springY.currentValue.toFloat()
         initialTouchX = event.rawX
@@ -601,9 +595,10 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
     }
 
 
-     fun onClose() {
+    fun onClose() {
+        collapse()
         destroySpringChains()
-        this.removeView(bubbleView)
+        removeAllViews()
         bubbleView = null
         closeCaptured = false
         movingOutOfClose = false
@@ -662,7 +657,7 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
         }
     }
 
-    fun makeContentViewEnable(){
+    fun makeContentViewEnable() {
         content.isDisable = false
     }
 }

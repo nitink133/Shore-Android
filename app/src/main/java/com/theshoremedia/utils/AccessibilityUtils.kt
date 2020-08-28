@@ -33,4 +33,9 @@ object AccessibilityUtils {
         }
         return false
     }
+
+    fun isContinuousScrolling(lastTriggeredTime: Long, currentTriggeredTime: Long): Boolean {
+        val triggeredTime = currentTriggeredTime - lastTriggeredTime
+        return triggeredTime >= AppConstants.AccessibilityService.TRIGGERED_TIME
+    }
 }

@@ -90,7 +90,7 @@ object DialogUtils {
         try {
             pDialog!!.show()
         } catch (e: Exception) {
-            LogManager.printStackTrace(e)
+            Log.printStackTrace(e)
         }
     }
 
@@ -101,7 +101,7 @@ object DialogUtils {
                 pDialog = null
             }
         } catch (e: Exception) {
-            LogManager.printStackTrace(e)
+            Log.printStackTrace(e)
         }
     }
 

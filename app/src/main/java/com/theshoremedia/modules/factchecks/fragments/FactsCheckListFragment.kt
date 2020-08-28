@@ -41,13 +41,7 @@ class FactsCheckListFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        OnDrawPermissionsUtils.checkPermission(mContext!!) {
-//            AccessibilityPermissionsUtils.checkPermission(mContext!!) {
-//                BubbleCredibilityCheckerView.getInstance(mContext!!).init()
-//            }
-        }
         initializeRecyclerView()
-
     }
 
     private fun initializeRecyclerView() {

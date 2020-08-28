@@ -1,7 +1,10 @@
 package com.theshoremedia
 
 import android.app.Application
+import com.orhanobut.logger.AndroidLogAdapter
+import com.orhanobut.logger.Logger
 import com.theshoremedia.utils.PreferenceUtils
+
 
 /**
  * @author- Nitin Khanna
@@ -20,6 +23,7 @@ class AppController : Application() {
         super.onCreate()
         instance = this
         PreferenceUtils.init(this)
+        Logger.addLogAdapter(AndroidLogAdapter())
     }
 
 

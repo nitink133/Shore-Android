@@ -26,6 +26,7 @@ import com.theshoremedia.modules.navigation.adapter.NavigationDrawerAdapter
 import com.theshoremedia.modules.navigation.model.NavigationDataModel
 import com.theshoremedia.utils.AppConstants
 import com.theshoremedia.utils.KeyBoardManager
+import com.theshoremedia.utils.PreferenceUtils
 import com.theshoremedia.utils.ToastUtils
 import com.theshoremedia.utils.extensions.makeVisible
 import com.theshoremedia.utils.extensions.validateNoDataView
@@ -47,6 +48,12 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(toolbar)
+
+        OnDrawPermissionsUtils.checkPermission(mContext = this) {
+            AccessibilityPermissionsUtils.verifyPermission(mContext = this) {
+                PreferenceUtils.savePref(getString(R.string.key_auto_detect), it)
+            }
+        }
 
         // initializing navigation menu
         setUpNavigationView()

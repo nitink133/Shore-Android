@@ -2,32 +2,39 @@ package com.theshoremedia.utils
 
 
 import android.util.Log
+import com.orhanobut.logger.Logger
 import com.theshoremedia.BuildConfig
 
 /**
  * LogManager
  */
-object LogManager {
-    fun d(tag: String, message: String?) {
+object Log {
+    fun d(tag: String = "", message: String?) {
         if (BuildConfig.DEBUG) {
             if (message == null) {
                 return
             }
-            Log.d(tag, message)
+            if (tag.isNotEmpty()) {
+                Log.d(tag, message)
+                return
+            }
+            Logger.d(message)
         }
     }
 
-    fun e(tag: String, message: String) {
+    fun e(tag: String = "", message: String) {
         if (BuildConfig.DEBUG) {
-            Log.e(tag, message)
+            if (tag.isNotEmpty()) {
+                Log.e(tag, message)
+                return
+            }
+            Logger.e(message)
         }
     }
 
     fun v(tag: String = "WHO: ", message: String) {
         if (BuildConfig.DEBUG) {
             Log.v(tag, message)
-        } else {
-            // do nothing
         }
     }
 

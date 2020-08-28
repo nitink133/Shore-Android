@@ -78,7 +78,7 @@ class ContentView(context: Context) : LinearLayout(context) {
 
 
     fun hideContent() {
-        CredibilityCheckerService.getInstance().rootView.handler.removeCallbacks(
+        CredibilityCheckerService.getInstance().rootView.handler?.removeCallbacks(
             CredibilityCheckerService.getInstance().rootView.showContentRunnable
         )
 

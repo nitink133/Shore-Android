@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import com.theshoremedia.utils.AppConstants
-import com.theshoremedia.views.BubbleCredibilityCheckerView
 
 /**
  * @author- Nitin Khanna
@@ -17,8 +16,7 @@ class CredibilityCheckerReceiver : BroadcastReceiver() {
         if (Intent.ACTION_CLOSE_SYSTEM_DIALOGS == action) {
             intent.getStringExtra("reason") ?: return
             if (CredibilityCheckerService.isInitialized())
-                CredibilityCheckerService.getInstance().removeBubbleView()
-            BubbleCredibilityCheckerView.getInstance(context).close()
+                CredibilityCheckerService.getInstance().rootView.collapse()
 
             return
         }

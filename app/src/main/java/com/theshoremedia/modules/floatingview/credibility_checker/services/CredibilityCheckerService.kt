@@ -7,6 +7,7 @@ import android.content.IntentFilter
 import android.graphics.Color
 import android.os.Build
 import android.os.IBinder
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -17,6 +18,7 @@ import com.theshoremedia.activity.MainActivity
 import com.theshoremedia.modules.floatingview.credibility_checker.ui.RootView
 import com.theshoremedia.utils.AppConstants
 import com.theshoremedia.utils.permissions.OnDrawPermissionsUtils
+import com.theshoremedia.views.BubbleCredibilityCheckerView
 
 
 /**
@@ -57,7 +59,6 @@ class CredibilityCheckerService : Service() {
     }
 
     override fun onDestroy() {
-        initialized = false
         unregisterReceiver(innerReceiver)
         removeBubbleView()
         super.onDestroy()
@@ -69,7 +70,6 @@ class CredibilityCheckerService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         OnDrawPermissionsUtils.checkPermission(this) {
-
             instance = this
             initialized = true
 
@@ -78,6 +78,9 @@ class CredibilityCheckerService : Service() {
             rootView = RootView(
                 this
             )
+            Log.d("Nitin","Root view added")
+            windowManager.addView(rootView, rootView.params)
+            rootView.addShoreBubble()
 
             innerReceiver =
                 CredibilityCheckerReceiver()
@@ -122,15 +125,16 @@ class CredibilityCheckerService : Service() {
 
             startForeground(101, notification)
         }
-        //stopSelf();
-        return START_NOT_STICKY;
+        return START_STICKY
     }
 
+
     fun removeBubbleView() {
-        rootView.collapse()
-        rootView.onClose()
-        stopForeground(true)
         initialized = false
+        rootView.onClose()
+        BubbleCredibilityCheckerView.getInstance(this).close()
+        windowManager.removeViewImmediate(rootView)
+        stopForeground(true)
     }
 
     fun updateViewLayout(view: View, params: ViewGroup.LayoutParams) {
@@ -139,5 +143,6 @@ class CredibilityCheckerService : Service() {
             params
         )
     }
+
 }
 

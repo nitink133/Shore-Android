@@ -1,11 +1,14 @@
 package com.theshoremedia.modules.factchecks.fragments
 
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import com.theshoremedia.R
+import com.theshoremedia.services.CustomAccessibilityService
 import com.theshoremedia.utils.permissions.AccessibilityPermissionsUtils
 import com.theshoremedia.utils.permissions.BatteryOptimizationPermissionsUtils
 
@@ -25,11 +28,14 @@ class SettingsFragment : PreferenceFragmentCompat(),
         view.setBackgroundColor(resources.getColor(R.color.colorPrimary))
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         when (key) {
             null -> return
             getString(R.string.key_auto_detect) -> {
-                if (!(findPreference(key) as SwitchPreference).isChecked) return
+                if (!(findPreference(key) as SwitchPreference).isChecked) {
+                    return
+                }
                 AccessibilityPermissionsUtils.checkPermission(mContext = this.requireContext()) { isEnabled ->
                     (findPreference(key) as SwitchPreference).isChecked = isEnabled
                 }
