@@ -90,5 +90,6 @@
 
     <string name="key_auto_detect">key_auto_detect</string>
     <string name="key_allow_battery_optimization">key_allow_battery_optimization</string>
+    <string name="check_it_with_shore">Check it with Shore</string>
 
 </resources>

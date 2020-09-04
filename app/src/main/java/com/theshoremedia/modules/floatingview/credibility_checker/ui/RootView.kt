@@ -111,7 +111,7 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
         )
         this.addView(content)
         this.addView(article)
-        isFocusableInTouchMode = true
+//        isFocusableInTouchMode = true
 
         motionTracker.setOnTouchListener(this)
         setOnTouchListener { v, event ->

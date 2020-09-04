@@ -46,9 +46,12 @@ class WhatsAppUtils {
                 if (lastNodeInfo.className.toString() != "android.widget.LinearLayout" || nextNodeInfo.className?.toString() != "android.widget.TextView") return
                 if (!StringUtils.isTimeView(nextNodeInfo.text.toString())) return
                 val text = currentNode.text.toString()
+                if (lastNodeInfo.childCount > 0) return
                 if (StringUtils.isTimeView(text) || StringUtils.isDateView(text)) return
                 Log.d(
-                    message = "Index: " + index.toString() + "/n ClassName: " + currentNode.className.toString() + "\n ContentInfo: " + currentNode.text.toString()
+                    message = "Index: " + index.toString() + "\n ClassName: " + currentNode.className.toString() + "\n ContentInfo: " + currentNode.text.toString()
+                            + "\n Next Node Info: " + nextNodeInfo.className.toString() + "\n Last Node Info: " + lastNodeInfo.className.toString()
+                            + "\n Last Node Child Info: " + lastNodeInfo.childCount
                 )
                 forwardedMessagesList.add(currentNode.text.toString())
                 BubbleCredibilityCheckerView.getInstance(mContext = mContext!!).init()

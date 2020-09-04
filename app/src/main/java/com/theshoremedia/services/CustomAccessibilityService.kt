@@ -25,9 +25,6 @@ class CustomAccessibilityService : AccessibilityService() {
         fun getInstance(): CustomAccessibilityService {
             return instance
         }
-
-        fun isInitialized(): Boolean =
-            initialized
     }
 
     override fun onServiceConnected() {
@@ -45,10 +42,12 @@ class CustomAccessibilityService : AccessibilityService() {
 
     override fun onAccessibilityEvent(event: AccessibilityEvent) {
 
+        Log.d("Nitin", "onAccessibilityEvent")
         try {
             if (event.eventType != AccessibilityEvent.TYPE_VIEW_SCROLLED) return
             if (event.className.toString() != "android.widget.ListView") return
-            if (PreferenceUtils.getPref<Boolean>(getString(R.string.key_auto_detect)) == false) return
+
+//            if (PreferenceUtils.getPref<Boolean>(getString(R.string.key_auto_detect)) == false) return
 
             if (!AccessibilityUtils.isContinuousScrolling(
                     lastTriggeredTime = lastTriggeredTime,

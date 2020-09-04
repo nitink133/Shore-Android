@@ -1,23 +1,48 @@
-## The Shore Media
 
-##### TODO-
-- [x] Accessibility settings connection with help tooltips
-- [x] Callbacks handling for permission access
-- [x] Show cc/av on whatsapp
-- [x] show cc/a when forwarded msg has been detected on whatsapp
-- [x] (D) UI for multiple fact-checks
-- [x] Local database for forwarded msg
-- [ ] **(Critical Issue) Background service handling**
-- [ ] forwarded message data cleaning
-- [ ] show list of all forwarded msg on app(with share icon)
-- [ ] Flow connectivity of favourite/unfavourite article
-- [ ] Article delete/share functionality
-- [ ] 'TheShore' option in long select popup-view
-- [ ] 'TheShore option handling'
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://www.theshoremedia.com/">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
+
+  <h3 align="center">The Shore Media</h3>
+
+  <p align="center">
+    A layer of truth on every forward.
+    <br />
+    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://www.dropbox.com/s/k6tncbxivd5t9ot/VID-20200823-WA0000.mp4?dl=0">View Demo</a>
+    ·
+    <a href="https://github.com/itsnitinsworld/The-Shore-Media/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/itsnitinsworld/The-Shore-Media/issues">Request Feature</a>
+  </p>
+</p>
 
 
-#### Use cases of Background Services
-1. Helper floating views(Demo app, Accessibility service helper, etc.)(Foreground service)   - Working
-2. **Background accessibility service(Regular Whatsapp checking)**  
-3. Information floating view(Foreground service)  - Working
-    
+
+
+<!-- TABLE OF CONTENTS -->
+## Table of Contents
+
+* [About the Project](#about-the-project)
+  * [Built With](#built-with)
+* [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
+* [Usage](#usage)
+* [Roadmap](#roadmap)
+* [Contributing](#contributing)
+* [License](#license)
+* [Contact](#contact)
+* [Acknowledgements](#acknowledgements)
+
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+[![Product Name Screen Shot](images/collage.jpg)
