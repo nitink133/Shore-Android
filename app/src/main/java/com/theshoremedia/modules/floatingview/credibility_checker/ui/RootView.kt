@@ -22,51 +22,27 @@ import kotlin.math.pow
 
 /**
  * @author- Nitin Khanna
- * @date -
+ * @date - 25/08/2020
  */
 
 class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
-    private var article =
-        ArticleView(
-            context
-        )
-    private var content =
-        ContentView(
-            context
-        )
-
-    private var close =
-        CloseView(
-            this
-        )
-
+    private var articleView = ArticleView(context)
+    private var contentView = ContentView(context)
+    private var closeView = CloseView(this)
     var bubbleView: BubbleView? = null
 
-    var wasMoving = false
-    var closeCaptured = false
-    private var closeVelocityCaptured = false
-    private var movingOutOfClose = false
-
-    private var initialX = 0.0f
-    private var initialY = 0.0f
-
-    private var initialTouchX = 0.0f
-    private var initialTouchY = 0.0f
-
-    var initialVelocityX = 0.0
-    var initialVelocityY = 0.0
-
-    private var lastY = 0.0
-
+    //Variable for handling UI animations
     private var moving = false
     private var toggled = false
     private var motionTrackerUpdated = false
     private var collapsing = false
     private var blockAnim = false
-
-    private var horizontalSpringChain: SpringChain? = null
-    private var verticalSpringChain: SpringChain? = null
-
+    var wasMoving = false
+    var closeCaptured = false
+    private var closeVelocityCaptured = false
+    private var movingOutOfClose = false
+    private var detectedOutOfBounds = false
+    private var animatingChatHeadInExpandedView = false
     private var isOnRight = true
         set(value) {
             field = value
@@ -76,18 +52,23 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
             bubbleView!!.llUnreadCount.layoutParams = lp
         }
 
+    private var initialX = 0.0f
+    private var initialY = 0.0f
+    private var initialTouchX = 0.0f
+    private var initialTouchY = 0.0f
+    private var initialVelocityX = 0.0
+    private var initialVelocityY = 0.0
+
+    private var horizontalSpringChain: SpringChain? = null
+    private var verticalSpringChain: SpringChain? = null
+
     private var velocityTracker: VelocityTracker? = null
-
-    var motionTracker = LinearLayout(context)
-
-    private var detectedOutOfBounds = false
-
-    private var animatingChatHeadInExpandedView = false
+    private var motionTracker = LinearLayout(context)
 
     var showContentRunnable: Runnable? = null
     var showArticleRunnable: Runnable? = null
 
-    var motionTrackerParams = FloatingViewsLayoutParamsUtils.getDefaultParams(
+    private var motionTrackerParams = FloatingViewsLayoutParamsUtils.getDefaultParams(
         width = AppConstants.OverlayViewSize.CHAT_HEAD_SIZE,
         height = AppConstants.OverlayViewSize.CHAT_HEAD_SIZE + 16,
         gravity = Gravity.START or Gravity.TOP,
@@ -100,63 +81,7 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
         flag = WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS or WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
         gravity = Gravity.START or Gravity.TOP,
         dimAmount = 0.7f
-
     )
-
-    init {
-
-        CredibilityCheckerService.getInstance().windowManager.addView(
-            motionTracker,
-            motionTrackerParams
-        )
-        this.addView(content)
-        this.addView(article)
-//        isFocusableInTouchMode = true
-
-        motionTracker.setOnTouchListener(this)
-        setOnTouchListener { v, event ->
-            v.performClick()
-
-            when (event.action) {
-                MotionEvent.ACTION_UP -> {
-                    if (v == this) {
-                        collapse()
-                    }
-                }
-            }
-
-            return@setOnTouchListener false
-        }
-    }
-
-    fun addShoreBubble() {
-        val metrics = getScreenSize()
-        val lx =
-            metrics.widthPixels - AppConstants.OverlayViewSize.CHAT_HEAD_SIZE - 16 + AppConstants.OverlayViewSize.CHAT_HEAD_OUT_OF_SCREEN_X.toDouble()
-        val ly = 0.0
-        if (bubbleView == null) {
-            bubbleView =
-                BubbleView(
-                    this
-                )
-        }
-
-        if (!moving) blockAnim = true
-
-        bubbleView!!.springX.currentValue = lx
-        bubbleView!!.springY.currentValue = ly
-
-
-        motionTrackerParams.x = bubbleView!!.springX.currentValue.toInt()
-        motionTrackerParams.y = bubbleView!!.springY.currentValue.toInt()
-        motionTrackerParams.flags =
-            motionTrackerParams.flags and WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE.inv()
-        CredibilityCheckerService.getInstance().windowManager.updateViewLayout(
-            motionTracker,
-            motionTrackerParams
-        )
-    }
-
 
     fun onContentSpringUpdate(
         chatHead: BubbleView,
@@ -178,22 +103,22 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
         val coordinatesX =
             (if (animatingChatHeadInExpandedView) chatHead.springX.endValue else chatHead.springX.currentValue).toFloat()
 
-        content.x =
+        contentView.x =
             coordinatesX - metrics.widthPixels.toFloat() + 0 * (chatHead.params.width + AppConstants.OverlayViewSize.CHAT_HEAD_EXPANDED_PADDING) + chatHead.params.width
-        content.y =
+        contentView.y =
             chatHead.springY.currentValue.toFloat() - AppConstants.OverlayViewSize.CHAT_HEAD_EXPANDED_MARGIN_TOP
-        content.pivotX =
+        contentView.pivotX =
             metrics.widthPixels.toFloat() - chatHead.width / 2 - 0 * (chatHead.params.width + AppConstants.OverlayViewSize.CHAT_HEAD_EXPANDED_PADDING)
 
-        content.pivotY = chatHead.height.toFloat()
+        contentView.pivotY = chatHead.height.toFloat()
 
         val width = dpToPx(100f)
         val height = dpToPx(50f)
         val r1 = Rectangle(
-            close.x.toDouble() - if (isOnRight) dpToPx(32f) else width,
-            close.y.toDouble() - height / 2,
-            close.width.toDouble() + width,
-            close.height.toDouble() + height
+            closeView.x.toDouble() - if (isOnRight) dpToPx(32f) else width,
+            closeView.y.toDouble() - height / 2,
+            closeView.width.toDouble() + width,
+            closeView.height.toDouble() + height
         )
 
         val x = chatHead.springX.currentValue + chatHead.params.width / 2
@@ -210,17 +135,17 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
             !moving &&
             initialVelocityY > 5000.0 &&
             l1.intersects(r1) &&
-            close.visibility == VISIBLE &&
+            closeView.visibility == VISIBLE &&
             !closeVelocityCaptured
         ) {
             closeVelocityCaptured = true
 
             chatHead.springX.endValue =
-                close.springX.endValue + close.width / 2 - chatHead.params.width / 2 + 2
+                closeView.springX.endValue + closeView.width / 2 - chatHead.params.width / 2 + 2
             chatHead.springY.endValue =
-                close.springY.endValue + close.height / 2 - chatHead.params.height / 2 + 2
+                closeView.springY.endValue + closeView.height / 2 - chatHead.params.height / 2 + 2
 
-            close.enlarge()
+            closeView.enlarge()
 
             postDelayed({
                 CredibilityCheckerService.getInstance().removeBubbleView()
@@ -230,7 +155,6 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
         if (wasMoving) {
             motionTrackerParams.x = if (isOnRight) metrics.widthPixels - chatHead.width else 0
 
-            lastY = chatHead.springY.currentValue
 
             if (!detectedOutOfBounds && !closeCaptured && !closeVelocityCaptured) {
                 if (chatHead.springY.currentValue < 0) {
@@ -278,14 +202,13 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
             if (Math.abs(totalVelocity) % 10 == 0 && !moving) {
                 motionTrackerParams.y = chatHead.springY.currentValue.toInt()
 
-                CredibilityCheckerService.getInstance().windowManager.updateViewLayout(
+                CredibilityCheckerService.getInstance().updateViewLayout(
                     motionTracker,
                     motionTrackerParams
                 )
             }
         }
     }
-
 
     /**
      * onTouch event listener for motionTracker
@@ -325,18 +248,18 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
         velocityTracker?.addMovement(event)
 
         if (moving) {
-            close.springX.endValue =
-                (metrics.widthPixels / 2) + (((event.rawX + bubbleView!!.width / 2) / 7) - metrics.widthPixels / 2 / 7) - close.width.toDouble() / 2
-            close.springY.endValue =
+            closeView.springX.endValue =
+                (metrics.widthPixels / 2) + (((event.rawX + bubbleView!!.width / 2) / 7) - metrics.widthPixels / 2 / 7) - closeView.width.toDouble() / 2
+            closeView.springY.endValue =
                 (metrics.heightPixels - AppConstants.OverlayViewSize.CLOSE_SIZE) + max(
-                    ((event.rawY + close.height / 2) / 10) - metrics.heightPixels / 10,
+                    ((event.rawY + closeView.height / 2) / 10) - metrics.heightPixels / 10,
                     -dpToPx(30f).toFloat()
                 ) - dpToPx(60f).toDouble()
 
             if (AppConstants.OverlayViewSize.distance(
-                    close.springX.endValue.toFloat() + close.width / 2,
+                    closeView.springX.endValue.toFloat() + closeView.width / 2,
                     event.rawX,
-                    close.springY.endValue.toFloat() + close.height / 2,
+                    closeView.springY.endValue.toFloat() + closeView.height / 2,
                     event.rawY
                 ) < AppConstants.OverlayViewSize.CLOSE_CAPTURE_DISTANCE.toDouble().pow(2)
             ) {
@@ -345,7 +268,7 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
                 bubbleView!!.springY.springConfig =
                     SpringConfigs.CAPTURING
 
-                close.enlarge()
+                closeView.enlarge()
 
                 closeCaptured = true
             } else if (closeCaptured) {
@@ -354,7 +277,7 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
                 bubbleView!!.springY.springConfig =
                     SpringConfigs.CAPTURING
 
-                close.resetScale()
+                closeView.resetScale()
 
                 bubbleView!!.springX.endValue =
                     initialX + (event.rawX - initialTouchX).toDouble()
@@ -390,11 +313,11 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
         if (moving) wasMoving = true
 
         postDelayed({
-            close.hide()
+            closeView.hide()
         }, 100)
 
         if (closeCaptured) {
-            if (CredibilityCheckerService.isInitialized())
+            if (CredibilityCheckerService.isInitialized)
                 CredibilityCheckerService.getInstance().removeBubbleView()
             return
         }
@@ -421,7 +344,7 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
                         handler.removeCallbacks(it)
                     }
                     showContentRunnable = Runnable {
-                        content.showContent()
+                        contentView.showContent()
                     }
                     showContentRunnable?.let {
                         handler.postDelayed(it, 200)
@@ -517,7 +440,7 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
         detectedOutOfBounds = false
         closeVelocityCaptured = false
 
-        close.show()
+        closeView.show()
 
         bubbleView!!.scaleX = 0.92f
         bubbleView!!.scaleY = 0.92f
@@ -563,6 +486,30 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
         }
     }
 
+    override fun dispatchKeyEvent(event: KeyEvent): Boolean {
+        return if (event.keyCode == KeyEvent.KEYCODE_BACK) {
+            collapse()
+            true
+        } else super.dispatchKeyEvent(event)
+    }
+
+    private fun destroySpringChains() {
+        if (horizontalSpringChain != null) {
+            for (spring in horizontalSpringChain!!.allSprings) {
+                spring.destroy()
+            }
+        }
+
+        if (verticalSpringChain != null) {
+            for (spring in verticalSpringChain!!.allSprings) {
+                spring.destroy()
+            }
+        }
+
+        verticalSpringChain = null
+        horizontalSpringChain = null
+    }
+
     fun collapse() {
         toggled = false
         collapsing = true
@@ -594,6 +541,56 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
         CredibilityCheckerService.getInstance().updateViewLayout(this, params)
     }
 
+    fun makeContentViewEnable() {
+        contentView.isDisable = false
+    }
+
+
+
+    init {
+        CredibilityCheckerService.getInstance().addView(motionTracker, motionTrackerParams)
+        addView(contentView)
+        addView(articleView)
+
+        motionTracker.setOnTouchListener(this)
+        setOnTouchListener { v, event ->
+            v.performClick()
+
+            when (event.action) {
+                MotionEvent.ACTION_UP -> {
+                    if (v == this) {
+                        collapse()
+                    }
+                }
+            }
+
+            return@setOnTouchListener false
+        }
+    }
+
+    fun addShoreBubble() {
+        val metrics = getScreenSize()
+        val lx =
+            metrics.widthPixels - AppConstants.OverlayViewSize.CHAT_HEAD_SIZE - 16 + AppConstants.OverlayViewSize.CHAT_HEAD_OUT_OF_SCREEN_X.toDouble()
+        val ly = 0.0
+        if (bubbleView == null) {
+            bubbleView = BubbleView(this)
+        }
+        if (!moving) blockAnim = true
+
+        bubbleView!!.springX.currentValue = lx
+        bubbleView!!.springY.currentValue = ly
+
+
+        motionTrackerParams.x = bubbleView!!.springX.currentValue.toInt()
+        motionTrackerParams.y = bubbleView!!.springY.currentValue.toInt()
+        motionTrackerParams.flags =
+            motionTrackerParams.flags and WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE.inv()
+        CredibilityCheckerService.getInstance().updateViewLayout(
+            motionTracker,
+            motionTrackerParams
+        )
+    }
 
     fun onClose() {
         collapse()
@@ -604,45 +601,20 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
         movingOutOfClose = false
     }
 
-    override fun dispatchKeyEvent(event: KeyEvent): Boolean {
-        return if (event.keyCode == KeyEvent.KEYCODE_BACK) {
-            collapse()
-            true
-        } else super.dispatchKeyEvent(event)
-    }
-
-    private fun destroySpringChains() {
-        if (horizontalSpringChain != null) {
-            for (spring in horizontalSpringChain!!.allSprings) {
-                spring.destroy()
-            }
-        }
-
-        if (verticalSpringChain != null) {
-            for (spring in verticalSpringChain!!.allSprings) {
-                spring.destroy()
-            }
-        }
-
-        verticalSpringChain = null
-        horizontalSpringChain = null
-    }
-
     fun showContentView() {
-        content.showContent()
+        contentView.showContent()
     }
 
     fun hideContentView() {
-        if (article.isVisible) {
-            article.hide()
+        if (articleView.isVisible) {
+            articleView.hide()
         }
-        content.hideContent()
+        contentView.hideContent()
     }
-
 
     fun showArticleView(item: FactCheckHistoryModel) {
 
-        content.isDisable = true
+        contentView.isDisable = true
 
         onTouchMotionActionUp(true)
         showArticleRunnable?.let {
@@ -650,14 +622,11 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
         }
 
         showArticleRunnable = Runnable {
-            article.show(item)
+            articleView.show(item)
         }
         showArticleRunnable?.let {
             handler.postDelayed(it, 200)
         }
     }
 
-    fun makeContentViewEnable() {
-        content.isDisable = false
-    }
 }

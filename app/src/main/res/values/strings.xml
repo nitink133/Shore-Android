@@ -92,4 +92,8 @@
     <string name="key_allow_battery_optimization">key_allow_battery_optimization</string>
     <string name="check_it_with_shore">Check it with Shore</string>
 
+
+    <string name="something_went_wrong">Something went wrong!</string>
+    <string name="exception_message_no_connection">Internet connection error</string>
+
 </resources>

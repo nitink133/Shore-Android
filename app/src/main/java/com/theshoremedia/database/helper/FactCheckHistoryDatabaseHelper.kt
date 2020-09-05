@@ -111,4 +111,25 @@ class FactCheckHistoryDatabaseHelper {
             AppDatabase.appDatabase!!.factChecksHistoryDao()?.markedAsFav(item)
         }
     }
+
+    fun getNews(
+        forwardMessage: String,
+        callBack: ((item: FactCheckHistoryModel?) -> Unit)
+    ) {
+        handler?.post {
+            if (AppDatabase.appDatabase == null) return@post
+
+            callBack.invoke(
+                AppDatabase.appDatabase!!.factChecksHistoryDao()!!.getNews(forwardMessage)
+            )
+        }
+    }
+
+    fun insertNews(model: FactCheckHistoryModel) {
+        handler?.post {
+            if (AppDatabase.appDatabase == null) return@post
+            AppDatabase.appDatabase!!.factChecksHistoryDao()!!.insertNew(model)
+        }
+    }
+
 }

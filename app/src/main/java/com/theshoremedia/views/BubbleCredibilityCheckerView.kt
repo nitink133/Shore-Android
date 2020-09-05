@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat
 import com.theshoremedia.modules.floatingview.credibility_checker.services.CredibilityCheckerService
 import com.theshoremedia.utils.Log
 import com.theshoremedia.utils.permissions.OnDrawPermissionsUtils
+import com.theshoremedia.utils.whatsapp.WhatsAppUtils
 
 
 /**
@@ -20,11 +21,13 @@ class BubbleCredibilityCheckerView(
     private var isShow: Boolean = false
 
     fun create() {
-        OnDrawPermissionsUtils.verifyPermission(mContext) { isEnabled ->
+        if (WhatsAppUtils.mContext == null) return
+        OnDrawPermissionsUtils.verifyPermission(WhatsAppUtils.mContext!!) { isEnabled ->
             if (!isEnabled) return@verifyPermission
             isShow = true
-            val serviceIntent = Intent(mContext, CredibilityCheckerService::class.java)
-            ContextCompat.startForegroundService(mContext, serviceIntent)
+            val serviceIntent =
+                Intent(mContext, CredibilityCheckerService::class.java)
+            ContextCompat.startForegroundService(WhatsAppUtils.mContext!!, serviceIntent)
         }
     }
 
@@ -42,11 +45,18 @@ class BubbleCredibilityCheckerView(
             }
             return instance!!
         }
+
+        fun getInstance(): BubbleCredibilityCheckerView? = instance
     }
 
 
-    fun init() {
-        if (CredibilityCheckerService.isInitialized()) return
+    fun init(isNewData: Boolean = false) {
+
+        if (CredibilityCheckerService.isInitialized ) {
+            if (isNewData)
+                CredibilityCheckerService.getInstance().newDataListener.invoke()
+            return
+        }
         if (isShow) return
         Log.d("Nitin", "initService")
         instance?.create()

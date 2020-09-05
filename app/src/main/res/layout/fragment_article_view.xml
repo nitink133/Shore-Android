@@ -25,7 +25,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/textView"
                 android:layout_marginTop="@dimen/default_margin"
-                android:text="@{model.title}"
+                android:text="@{model.articleTitle}"
                 android:textSize="@dimen/heading_textsize" />
 
             <LinearLayout
@@ -39,7 +39,7 @@
                     android:layout_weight="1"
                     android:gravity="start"
                     android:maxLines="1"
-                    android:text="@{model.source}"
+                    android:text="@{model.sourceName}"
                     android:textColor="@color/btnBgColorRed" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -62,7 +62,7 @@
                 style="@style/textView"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/default_margin"
-                android:text="@{model.description}"
+                android:text="@{model.article}"
                 android:textAlignment="viewStart"
                 android:textSize="@dimen/large_textsize" />
         </LinearLayout>

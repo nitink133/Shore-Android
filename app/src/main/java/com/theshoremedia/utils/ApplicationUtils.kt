@@ -3,11 +3,13 @@ package com.theshoremedia.utils
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import com.theshoremedia.BuildConfig
 import com.theshoremedia.database.entity.FactCheckHistoryModel
 import java.io.IOException
 import java.io.InputStream
 import java.nio.charset.Charset
+import java.util.*
 
 
 /**
@@ -49,5 +51,22 @@ object ApplicationUtils {
             return arrayListOf()
         }
         return ObjectUtils.parseListTOData(json)
+    }
+
+     fun getUniqueDeviceId():String {
+        val uniquePseudoID =
+            "35" + Build.BOARD.length % 10 + Build.BRAND.length % 10 + Build.DEVICE.length % 10 + Build.DISPLAY.length % 10 + Build.HOST.length % 10 + Build.ID.length % 10 + Build.MANUFACTURER.length % 10 + Build.MODEL.length % 10 + Build.PRODUCT.length % 10 + Build.TAGS.length % 10 + Build.TYPE.length % 10 + Build.USER.length % 10
+        val serial = Build.getRadioVersion()
+        val uuid: String =
+            UUID(uniquePseudoID.hashCode().toLong(), serial.hashCode().toLong()).toString()
+        val brand = Build.BRAND
+        val modelno = Build.MODEL
+        val version = Build.VERSION.RELEASE
+        val deviceId =
+            "Device Info: \nuuid is : $uuid \nbrand is: $brand \nmodel is: $modelno \nversion is: $version"
+        Log.d(
+            message = deviceId
+        )
+        return deviceId
     }
 }

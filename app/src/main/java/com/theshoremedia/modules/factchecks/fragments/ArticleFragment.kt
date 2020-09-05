@@ -39,7 +39,7 @@ class ArticleFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         binding.model = factCheckDataModel
-        binding.ivNewsIcon.loadImage(factCheckDataModel.icon)
+        binding.ivNewsIcon.loadImage(factCheckDataModel.image)
     }
 
     companion object {

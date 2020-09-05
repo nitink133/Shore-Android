@@ -44,4 +44,8 @@ interface FactCheckHistoryDio {
 
     @Update
     fun markedAsFav(tableFactChecksHistoryModel: FactCheckHistoryModel)
+
+
+    @Query("SELECT * FROM tableFactChecksHistory WHERE forwardMessage = (:forwardMessage)")
+    fun getNews(forwardMessage: String): FactCheckHistoryModel?
 }

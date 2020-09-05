@@ -60,7 +60,7 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
 
         setupNavigationController()
 
-        FactCheckHistoryDatabaseHelper.instance!!.addDummyData(this)
+//        FactCheckHistoryDatabaseHelper.instance!!.addDummyData(this)
 
 
     }

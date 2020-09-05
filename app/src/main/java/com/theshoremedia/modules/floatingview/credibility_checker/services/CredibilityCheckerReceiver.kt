@@ -15,7 +15,7 @@ class CredibilityCheckerReceiver : BroadcastReceiver() {
         //TODO: There is an issue, related to System dialog closing. Need to check this with backgronud service calling scenario.
         if (Intent.ACTION_CLOSE_SYSTEM_DIALOGS == action) {
             intent.getStringExtra("reason") ?: return
-            if (CredibilityCheckerService.isInitialized())
+            if (CredibilityCheckerService.isInitialized)
                 CredibilityCheckerService.getInstance().rootView.collapse()
 
             return
@@ -23,7 +23,7 @@ class CredibilityCheckerReceiver : BroadcastReceiver() {
 
         val requestCode = intent.getIntExtra(AppConstants.Key.REQUEST_CODE, 0)
         if (requestCode == 1001) {
-            if (CredibilityCheckerService.isInitialized())
+            if (CredibilityCheckerService.isInitialized)
                 CredibilityCheckerService.getInstance().removeBubbleView()
         }
     }
