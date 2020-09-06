@@ -47,16 +47,7 @@ class ContentView(context: Context) : LinearLayout(context) {
 
         recyclerView?.layoutManager = layoutManager
         recyclerView?.adapter = mAdapter
-        FactCheckHistoryDatabaseHelper.instance?.getUnreadNews {
-            mAdapter.addAll(items = it as ArrayList<FactCheckHistoryModel>)
-            CredibilityCheckerService.getInstance().rootView.bubbleView?.notifications = it.size
-            recyclerView?.validateNoDataView(
-                findViewById<FrameLayout>(R.id.layoutRecycler)?.findViewById(
-                    R.id.llNoData
-                )
-            )
-            findViewById<View>(R.id.llRecyclerView).changeBackgroundColor(if (mAdapter.itemCount > 0) android.R.color.transparent else R.color.colorPrimary)
-        }
+        updateAdapterWithUnreadNews()
 
 
         recyclerView?.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
@@ -97,5 +88,18 @@ class ContentView(context: Context) : LinearLayout(context) {
         anim.duration = 100
         anim.repeatMode = Animation.RELATIVE_TO_SELF
         startAnimation(anim)
+    }
+
+    fun updateAdapterWithUnreadNews() {
+        FactCheckHistoryDatabaseHelper.instance?.getUnreadNews {
+            mAdapter.addAll(items = it as ArrayList<FactCheckHistoryModel>)
+            CredibilityCheckerService.getInstance().rootView.bubbleView?.notifications = it.size
+            recyclerView?.validateNoDataView(
+                findViewById<FrameLayout>(R.id.layoutRecycler)?.findViewById(
+                    R.id.llNoData
+                )
+            )
+            findViewById<View>(R.id.llRecyclerView).changeBackgroundColor(if (mAdapter.itemCount > 0) android.R.color.transparent else R.color.colorPrimary)
+        }
     }
 }

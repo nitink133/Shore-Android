@@ -6,6 +6,7 @@ import androidx.lifecycle.LifecycleOwner
 import com.theshoremedia.database.AppDatabase
 import com.theshoremedia.database.entity.FactCheckHistoryModel
 import com.theshoremedia.utils.ApplicationUtils
+import com.theshoremedia.utils.Log
 
 /**
  * @author- Nitin Khanna
@@ -31,8 +32,8 @@ class FactCheckHistoryDatabaseHelper {
         callBack: ((items: List<FactCheckHistoryModel>) -> Unit)
     ) {
         handler?.post {
-            if (AppDatabase.appDatabase == null) return@post
-            AppDatabase.appDatabase!!.factChecksHistoryDao()!!.all.observe(
+
+            AppDatabase.appDatabase.factChecksHistoryDao()!!.all.observe(
                 owner,
                 androidx.lifecycle.Observer {
                     callBack.invoke(it ?: arrayListOf())
@@ -44,10 +45,10 @@ class FactCheckHistoryDatabaseHelper {
         callBack: ((items: List<FactCheckHistoryModel>) -> Unit)
     ) {
         handler?.post {
-            if (AppDatabase.appDatabase == null) return@post
+
 
             callBack.invoke(
-                AppDatabase.appDatabase!!.factChecksHistoryDao()!!.getUnreadNews() ?: arrayListOf()
+                AppDatabase.appDatabase.factChecksHistoryDao()!!.getUnreadNews() ?: arrayListOf()
             )
         }
     }
@@ -56,10 +57,10 @@ class FactCheckHistoryDatabaseHelper {
         callBack: ((items: List<FactCheckHistoryModel>) -> Unit)
     ) {
         handler?.post {
-            if (AppDatabase.appDatabase == null) return@post
+
 
             callBack.invoke(
-                AppDatabase.appDatabase!!.factChecksHistoryDao()!!.getFavouriteNews()
+                AppDatabase.appDatabase.factChecksHistoryDao()!!.getFavouriteNews()
                     ?: arrayListOf()
             )
         }
@@ -70,8 +71,7 @@ class FactCheckHistoryDatabaseHelper {
         callBack: ((items: List<FactCheckHistoryModel>) -> Unit)
     ) {
         handler?.post {
-            if (AppDatabase.appDatabase == null) return@post
-            AppDatabase.appDatabase!!.factChecksHistoryDao()!!.getUnreadNewsLive().observe(
+            AppDatabase.appDatabase.factChecksHistoryDao()!!.getUnreadNewsLive().observe(
                 owner,
                 androidx.lifecycle.Observer {
                     callBack.invoke(it ?: arrayListOf())
@@ -84,8 +84,8 @@ class FactCheckHistoryDatabaseHelper {
         callBack: ((items: List<FactCheckHistoryModel>) -> Unit)
     ) {
         handler?.post {
-            if (AppDatabase.appDatabase == null) return@post
-            AppDatabase.appDatabase!!.factChecksHistoryDao()!!.getFavouriteNewsLive().observe(
+
+            AppDatabase.appDatabase.factChecksHistoryDao()!!.getFavouriteNewsLive().observe(
                 owner,
                 androidx.lifecycle.Observer {
                     callBack.invoke(it ?: arrayListOf())
@@ -97,18 +97,18 @@ class FactCheckHistoryDatabaseHelper {
     fun addDummyData(context: Context) {
         val dummyData = ApplicationUtils.getDummyData(context)
         handler?.post {
-            if (AppDatabase.appDatabase == null) return@post
-            if (AppDatabase.appDatabase!!.factChecksHistoryDao()?.getAllItems?.size != 0) return@post
-            AppDatabase.appDatabase!!.factChecksHistoryDao()!!.deleteAll()
-            AppDatabase.appDatabase!!.factChecksHistoryDao()!!.insertAll(dummyData)
+
+            if (AppDatabase.appDatabase.factChecksHistoryDao()?.getAllItems?.size != 0) return@post
+            AppDatabase.appDatabase.factChecksHistoryDao()!!.deleteAll()
+            AppDatabase.appDatabase.factChecksHistoryDao()!!.insertAll(dummyData)
         }
 
     }
 
     fun markAsFav(item: FactCheckHistoryModel) {
         handler?.post {
-            if (AppDatabase.appDatabase == null) return@post
-            AppDatabase.appDatabase!!.factChecksHistoryDao()?.markedAsFav(item)
+
+            AppDatabase.appDatabase.factChecksHistoryDao()?.markedAsFav(item)
         }
     }
 
@@ -117,18 +117,18 @@ class FactCheckHistoryDatabaseHelper {
         callBack: ((item: FactCheckHistoryModel?) -> Unit)
     ) {
         handler?.post {
-            if (AppDatabase.appDatabase == null) return@post
+
 
             callBack.invoke(
-                AppDatabase.appDatabase!!.factChecksHistoryDao()!!.getNews(forwardMessage)
+                AppDatabase.appDatabase.factChecksHistoryDao()!!.getNews(forwardMessage)
             )
         }
     }
 
     fun insertNews(model: FactCheckHistoryModel) {
         handler?.post {
-            if (AppDatabase.appDatabase == null) return@post
-            AppDatabase.appDatabase!!.factChecksHistoryDao()!!.insertNew(model)
+            Log.d("Nitin", "insertNews called")
+            AppDatabase.appDatabase.factChecksHistoryDao()!!.insertNew(model)
         }
     }
 

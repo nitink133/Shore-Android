@@ -7,9 +7,65 @@
     android:theme="@android:style/Theme.Translucent.NoTitleBar"
     tools:context=".activity.ShoreChecksActivity">
 
-    <TextView
-        android:text="@string/large_dummy_text"
-        android:id="@+id/textView"
-        style="@style/textView" />
+    <!--    <TextView-->
+    <!--        android:text="@string/large_dummy_text"-->
+    <!--        android:id="@+id/textView"-->
+    <!--        style="@style/textView" />-->
+
+    <FrameLayout
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center_horizontal">
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/small_padding">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivShoreLogo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_circle"
+                android:backgroundTint="@color/colorPrimary"
+                android:src="@drawable/ic_logo"
+                android:tag="Click" />
+
+            <LinearLayout
+                android:id="@+id/llUnreadCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginStart="@dimen/tiny_small_margin"
+                android:layout_marginTop="@dimen/tiny_small_margin"
+                android:layout_marginEnd="@dimen/tiny_small_margin"
+                android:background="@drawable/bubble_notification"
+                android:paddingStart="@dimen/extra_small_margin"
+                android:paddingEnd="@dimen/extra_small_margin"
+                android:paddingBottom="@dimen/tiny_small_margin"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvUnreadCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/small_textsize"
+                    android:textStyle="bold">
+
+                </TextView>
+            </LinearLayout>
+        </FrameLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="false"
+            android:indeterminateDrawable="@drawable/bg_red_progessbar"
+            android:padding="@dimen/tiny_small_margin" />
+    </FrameLayout>
 
 </LinearLayout>

@@ -5,12 +5,9 @@ import com.theshoremedia.modules.floatingview.credibility_checker.model.Validate
 import com.theshoremedia.retrofit.model.GenericResponseModel
 import io.reactivex.Observable
 import retrofit2.http.Body
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
 interface ApiInterface {
-    @FormUrlEncoded
     @POST("/validateFact")
-    fun validateNews(@Field("query") query: String,@Field("deviceId")deviceId:String): Observable<GenericResponseModel<FactCheckHistoryModel?>?>
+    fun validateNews(@Body reqModel: ValidateNewsReqModel): Observable<GenericResponseModel<FactCheckHistoryModel?>?>
 }

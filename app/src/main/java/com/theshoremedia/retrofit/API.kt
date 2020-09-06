@@ -14,10 +14,7 @@ object API {
         BaseApiCaller.isLoading = false
         BaseApiCaller.execute(
             mContext,
-            ApiClient.apiService2!!.validateNews(
-                query = requestBody.query.toString(),
-                deviceId = requestBody.deviceId.toString()
-            ),
+            ApiClient.apiService2!!.validateNews(requestBody),
             listener
         )
     }

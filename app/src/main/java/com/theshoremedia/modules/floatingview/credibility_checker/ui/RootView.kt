@@ -546,7 +546,6 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
     }
 
 
-
     init {
         CredibilityCheckerService.getInstance().addView(motionTracker, motionTrackerParams)
         addView(contentView)
@@ -627,6 +626,10 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
         showArticleRunnable?.let {
             handler.postDelayed(it, 200)
         }
+    }
+
+    fun refreshData() {
+        contentView.updateAdapterWithUnreadNews()
     }
 
 }

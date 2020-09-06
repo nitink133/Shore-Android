@@ -52,7 +52,7 @@ data class FactCheckHistoryModel(
     @ColumnInfo(name = "isRead")
     var isRead: Boolean = false,
     @ColumnInfo(name = "date")
-    var date: String = ""
+    var date: String? = ""
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
@@ -68,8 +68,7 @@ data class FactCheckHistoryModel(
         parcel.readByte() != 0.toByte(),
         parcel.readByte() != 0.toByte(),
         parcel.readString() ?: ""
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(forwardMessage)

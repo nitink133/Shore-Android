@@ -8,7 +8,7 @@ import com.theshoremedia.utils.ApplicationUtils
  * @date -
  */
 data class ValidateNewsReqModel(
-    @SerializedName("query")
+    @SerializedName("forwardMessage")
     var query: String,
     @SerializedName("deviceId")
     var deviceId: String? = ApplicationUtils.getUniqueDeviceId(),

@@ -21,6 +21,9 @@ import com.theshoremedia.modules.floatingview.credibility_checker.ui.RootView
 import com.theshoremedia.retrofit.API
 import com.theshoremedia.retrofit.model.GenericResponseModel
 import com.theshoremedia.utils.AppConstants
+import com.theshoremedia.utils.Log
+import com.theshoremedia.utils.ObjectUtils
+import com.theshoremedia.utils.extensions.makeVisible
 import com.theshoremedia.utils.permissions.OnDrawPermissionsUtils
 import com.theshoremedia.utils.whatsapp.WhatsAppUtils
 import com.theshoremedia.views.BubbleCredibilityCheckerView
@@ -91,6 +94,8 @@ class CredibilityCheckerService : Service() {
 
             //Finally, starting foreground service
             startForeground(101, createNotification())
+
+            newDataListener.invoke()
         }
         return START_NOT_STICKY
     }
@@ -150,17 +155,13 @@ class CredibilityCheckerService : Service() {
             params
         )
 
-    override fun onCreate() {
-        super.onCreate()
-        newDataListener.invoke()
-    }
-
     var newDataListener: (() -> Unit) = {
         callValidateNews()
     }
 
 
     private fun callValidateNews() {
+        Log.d("Nitin", "callValidateNews()")
         //Will return if forwardMessageList is empty, or If API is already running
         if (WhatsAppUtils.getInstance() == null || WhatsAppUtils.getInstance()?.forwardedMessagesList.isNullOrEmpty()) return
         if (isAPIRunning) return
@@ -170,25 +171,34 @@ class CredibilityCheckerService : Service() {
             !it.isProcessed
         }
         //Will return if @var indexOfFirst is equals to -1, which state all messages are already validated
-        if (indexOfFirst == -1) return
+        if (indexOfFirst == -1) {
+            rootView.bubbleView?.progressBar?.makeVisible(isVisible = false)
+            return
+        }
 
         //Mark @val isAPIRunning as true, for further processing updates
         isAPIRunning = true
+        rootView.bubbleView?.progressBar?.makeVisible(isVisible = true)
+
         val reqModel: ValidateNewsReqModel =
-            WhatsAppUtils.getInstance()?.forwardedMessagesList?.get(indexOfFirst) ?: return
+            WhatsAppUtils.getInstance()?.forwardedMessagesList?.get(indexOfFirst)!!
 
         //First, We'll check if forwardedMessage stored in local database or not. If yes, then we'll return it from there. Else, will hit API
         FactCheckHistoryDatabaseHelper.instance?.getNews(reqModel.query) {
             //Here it == null states, that searched message is not stored in local database. Thus, we'll hit API for further verification.
             if (it == null) {
+                Log.d(
+                    "Nitin",
+                    "Did not find the search query in local database, thus we're hitting API for further verification"
+                )
                 callAPIAsDataNotInLocal(reqModel)
                 return@getNews
             }
-            isAPIRunning = false
-            reqModel.isProcessed = true
-            newDataListener.invoke()
-        }
 
+            Log.d("Nitin", "Searched query has been found in local database.")
+            reqModel.isProcessed = true
+            resetAPIStatus()
+        }
 
     }
 
@@ -196,18 +206,24 @@ class CredibilityCheckerService : Service() {
     private fun callAPIAsDataNotInLocal(reqModel: ValidateNewsReqModel) {
         reqModel.isProcessing = true
         API.callValidateNews(mContext = this, requestBody = reqModel) {
+            Log.d("Nitin", "validateNews API response ${ObjectUtils.toString(it)}")
             if (it !is GenericResponseModel<*>) {
-                isAPIRunning = false
                 reqModel.isProcessed = true
-                newDataListener.invoke()
+                resetAPIStatus()
                 return@callValidateNews
             }
             FactCheckHistoryDatabaseHelper.instance?.insertNews(it.data as FactCheckHistoryModel)
-            isAPIRunning = false
             reqModel.isProcessed = true
-            newDataListener.invoke()
-
+            resetAPIStatus()
         }
     }
+
+
+    private fun resetAPIStatus() {
+        isAPIRunning = false
+        newDataListener.invoke()
+        rootView.refreshData()
+    }
+
 }
 

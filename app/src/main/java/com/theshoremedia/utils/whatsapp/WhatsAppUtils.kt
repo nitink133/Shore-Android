@@ -3,7 +3,6 @@ package com.theshoremedia.utils.whatsapp
 import android.content.Context
 import android.view.accessibility.AccessibilityNodeInfo
 import com.theshoremedia.modules.floatingview.credibility_checker.model.ValidateNewsReqModel
-import com.theshoremedia.modules.floatingview.credibility_checker.services.CredibilityCheckerService
 import com.theshoremedia.utils.AppConstants
 import com.theshoremedia.utils.Log
 import com.theshoremedia.utils.StringUtils
@@ -52,6 +51,7 @@ class WhatsAppUtils {
         Log.d("Shore", "debugView")
         while (index < count) {
             val currentNode = rootNodeInfo.getChild(index) ?: continue
+            Log.d("Shore", "Current View: ${currentNode.className}\nIndex: $index")
             if (currentNode.childCount > 0) {
                 debugView(currentNode, parentView = currentNode)
             } else if (parentView?.className == "android.view.ViewGroup" && currentNode.className == "android.widget.TextView") {
