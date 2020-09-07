@@ -8,12 +8,12 @@ import com.theshoremedia.R
 import com.theshoremedia.modules.floatingview.credibility_checker.services.CredibilityCheckerService
 import com.theshoremedia.utils.AccessibilityUtils
 import com.theshoremedia.utils.Log
-import com.theshoremedia.utils.PreferenceUtils
-import com.theshoremedia.utils.WhatsAppUtils
+import com.theshoremedia.utils.whatsapp.WhatsAppUtils
 
 
 /**
- * Created by sotsys-014 on 4/10/16.
+ * @author Nitin Khanna
+ * @date 22/08/2020
  */
 class CustomAccessibilityService : AccessibilityService() {
     private var lastTriggeredTime: Long = 0L
@@ -42,9 +42,9 @@ class CustomAccessibilityService : AccessibilityService() {
 
     override fun onAccessibilityEvent(event: AccessibilityEvent) {
 
-        Log.d("Nitin", "onAccessibilityEvent")
+        Log.d("Shore", "onAccessibilityEvent")
         try {
-            if (event.eventType != AccessibilityEvent.TYPE_VIEW_SCROLLED) return
+//            if (event.eventType != AccessibilityEvent.TYPE_) return
             if (event.className.toString() != "android.widget.ListView") return
 
 //            if (PreferenceUtils.getPref<Boolean>(getString(R.string.key_auto_detect)) == false) return
@@ -63,15 +63,18 @@ class CustomAccessibilityService : AccessibilityService() {
             Log.d("Nitin", "eventCall Enter")
 
             val currentNode: AccessibilityNodeInfo = rootInActiveWindow ?: return
-            WhatsAppUtils.getInstance(this).debugView(rootNodeInfo = currentNode)
+            WhatsAppUtils.getInstance(this).processScreenCallbacks(rootNodeInfo = currentNode)
         } catch (e: Exception) {
-            CredibilityCheckerService.getInstance().removeBubbleView()
+            Log.d("Nitin", e.message)
+            e.printStackTrace()
+            if (CredibilityCheckerService.isInitialized)
+                CredibilityCheckerService.getInstance().removeBubbleView()
         }
     }
 
     override fun onInterrupt() {
         initialized = false
-        if (CredibilityCheckerService.isInitialized())
+        if (CredibilityCheckerService.isInitialized)
             CredibilityCheckerService.getInstance().removeBubbleView()
         Log.d("Nitin", "AccessibilityService- onDestroy()")
     }
@@ -80,7 +83,7 @@ class CustomAccessibilityService : AccessibilityService() {
         super.onDestroy()
         initialized = false
         Log.d("Nitin", "AccessibilityService- onDestroy()")
-        if (CredibilityCheckerService.isInitialized())
+        if (CredibilityCheckerService.isInitialized)
             CredibilityCheckerService.getInstance().removeBubbleView()
     }
 

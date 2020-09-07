@@ -20,7 +20,7 @@ abstract class AppDatabase : RoomDatabase() {
 
         // allow queries on the main thread.
         // Don't do this on a real app! See PersistenceBasicSample for an example.
-        val appDatabase: AppDatabase?
+        val appDatabase: AppDatabase
             get() {
                 if (databaseInstance == null) {
                     databaseInstance = Room.databaseBuilder(
@@ -33,7 +33,7 @@ abstract class AppDatabase : RoomDatabase() {
                         .fallbackToDestructiveMigration()
                         .build()
                 }
-                return databaseInstance
+                return databaseInstance!!
             }
     }
 }

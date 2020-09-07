@@ -67,8 +67,19 @@ object AppConstants {
     }
 
     object AccessibilityService{
-        const val TRIGGERED_TIME = 3000
+        const val TRIGGERED_TIME = 1500
         const val STOP_SERVICE = "stop_service"
         const val START_SERVICE = "start_service"
+    }
+
+    object ResponseCode{
+        const val SUCCESS = 200
+    }
+
+    object DummyData{
+        const val FORWARD_MESSAGE = "#BigBreaking: Nazma begum(43) sitting in #ShaheenBaghProtest was not feeling well. Doctors found her #coronavirus positive. She denied the treatment and again went to #ShaheenBagh\n" +
+                " What kind of moron are these people?\n" +
+                "#Coronavirus Reaches Delhi"
+        const val DEVICE_ID = "1"
     }
 }

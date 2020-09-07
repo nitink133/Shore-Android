@@ -54,9 +54,9 @@ class OverlayFactCheckAdapter(
                 callBacks.invoke(adapterPosition, model)
             }
 
-            binding.tvNewsSource.verticleText(model.source)
+            binding.tvNewsSource.verticleText(model.sourceName)
 
-            binding.ivNewsIcon.loadImage(model.icon)
+            binding.ivNewsIcon.loadImage(model.image)
         }
     }
 

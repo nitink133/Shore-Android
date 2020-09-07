@@ -67,7 +67,7 @@ class FactCheckAdapter(
             }
 
 
-            binding.ivNewsIcon.loadImage(model.icon)
+            binding.ivNewsIcon.loadImage(model.image)
         }
     }
 

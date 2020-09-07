@@ -39,9 +39,13 @@ interface FactCheckHistoryDio {
     @Query("DELETE FROM tableFactChecksHistory")
     fun deleteAll()
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertNew(tableFactChecksHistoryModel: FactCheckHistoryModel)
 
     @Update
     fun markedAsFav(tableFactChecksHistoryModel: FactCheckHistoryModel)
+
+
+    @Query("SELECT * FROM tableFactChecksHistory WHERE forwardMessage = (:forwardMessage)")
+    fun getNews(forwardMessage: String): FactCheckHistoryModel?
 }

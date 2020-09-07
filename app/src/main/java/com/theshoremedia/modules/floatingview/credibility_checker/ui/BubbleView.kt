@@ -5,8 +5,8 @@ import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import com.facebook.rebound.SimpleSpringListener
 import com.facebook.rebound.Spring
@@ -44,6 +44,7 @@ class BubbleView(var rootView: RootView) :
 
     private var tvUnreadCount: TextView
     var llUnreadCount: LinearLayout
+    var progressBar: ProgressBar
 
     var notifications = 0
         set(value) {
@@ -70,9 +71,9 @@ class BubbleView(var rootView: RootView) :
 
         val view = inflate(context, R.layout.bubble_shore_icon, this)
 
-        val ivShoreLogo: ImageView = view.findViewById(R.id.ivShoreLogo)
         tvUnreadCount = view.findViewById(R.id.tvUnreadCount)
         llUnreadCount = view.findViewById(R.id.llUnreadCount)
+        progressBar = view.findViewById(R.id.progressBar)
 
         springX.addListener(object : SimpleSpringListener() {
             override fun onSpringUpdate(spring: Spring) {

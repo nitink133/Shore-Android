@@ -66,11 +66,11 @@ class ArticleView(context: Context) : LinearLayout(context) {
         isVisible = true
         scaleSpring.endValue = 1.0
 
-        findViewById<AppCompatTextView>(R.id.tvTitle).text = item.title
-        findViewById<AppCompatTextView>(R.id.tvNewsSource).text = item.source
-        findViewById<AppCompatTextView>(R.id.tvNewsDescription).text = item.description
+        findViewById<AppCompatTextView>(R.id.tvTitle).text = item.articleTitle
+        findViewById<AppCompatTextView>(R.id.tvNewsSource).text = item.sourceName
+        findViewById<AppCompatTextView>(R.id.tvNewsDescription).text = item.article
         findViewById<AppCompatTextView>(R.id.tvNewsDate).text = item.date
-        findViewById<ImageView>(R.id.ivNewsIcon).loadImage(item.icon)
+        findViewById<ImageView>(R.id.ivNewsIcon).loadImage(item.image)
 
         val anim = AlphaAnimation(0.0f, 1.0f)
         anim.duration = 100
