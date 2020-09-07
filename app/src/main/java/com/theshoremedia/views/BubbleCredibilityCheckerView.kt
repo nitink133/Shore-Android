@@ -25,9 +25,11 @@ class BubbleCredibilityCheckerView(
         OnDrawPermissionsUtils.verifyPermission(WhatsAppUtils.mContext!!) { isEnabled ->
             if (!isEnabled) return@verifyPermission
             isShow = true
-            val serviceIntent =
-                Intent(mContext, CredibilityCheckerService::class.java)
-            ContextCompat.startForegroundService(WhatsAppUtils.mContext!!, serviceIntent)
+            Thread {
+                val serviceIntent =
+                    Intent(mContext, CredibilityCheckerService::class.java)
+                ContextCompat.startForegroundService(WhatsAppUtils.mContext!!, serviceIntent)
+            }.start()
         }
     }
 
@@ -52,7 +54,7 @@ class BubbleCredibilityCheckerView(
 
     fun init(isNewData: Boolean = false) {
 
-        if (CredibilityCheckerService.isInitialized ) {
+        if (CredibilityCheckerService.isInitialized) {
             if (isNewData)
                 CredibilityCheckerService.getInstance().newDataListener.invoke()
             return

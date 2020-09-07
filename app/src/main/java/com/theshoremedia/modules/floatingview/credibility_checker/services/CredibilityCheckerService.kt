@@ -1,16 +1,15 @@
 package com.theshoremedia.modules.floatingview.credibility_checker.services
 
-import android.app.*
+import android.app.Notification
+import android.app.PendingIntent
+import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.graphics.Color
-import android.os.Build
 import android.os.IBinder
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.theshoremedia.R
 import com.theshoremedia.activity.MainActivity
@@ -22,6 +21,7 @@ import com.theshoremedia.retrofit.API
 import com.theshoremedia.retrofit.model.GenericResponseModel
 import com.theshoremedia.utils.AppConstants
 import com.theshoremedia.utils.Log
+import com.theshoremedia.utils.NotificationsUtils
 import com.theshoremedia.utils.ObjectUtils
 import com.theshoremedia.utils.extensions.makeVisible
 import com.theshoremedia.utils.permissions.OnDrawPermissionsUtils
@@ -51,19 +51,6 @@ class CredibilityCheckerService : Service() {
 
     lateinit var rootView: RootView
 
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun createNotificationChannel(channelName: String): String {
-        val chan = NotificationChannel(
-            channelName,
-            channelName, NotificationManager.IMPORTANCE_NONE
-        )
-        chan.lightColor = Color.BLUE
-        chan.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
-        val service = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        service.createNotificationChannel(chan)
-        return channelName
-    }
 
     override fun onDestroy() {
         unregisterReceiver(innerReceiver)
@@ -104,12 +91,7 @@ class CredibilityCheckerService : Service() {
      * @method is used for creating notification for foreground service.
      */
     private fun createNotification(): Notification {
-        val channelId =
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                createNotificationChannel(getString(R.string.app_name))
-            } else {
-                ""
-            }
+        val channelId = NotificationsUtils.createNotificationChannel(this)
 
         val pendingIntent = PendingIntent.getActivity(
             this, 0,
@@ -145,15 +127,21 @@ class CredibilityCheckerService : Service() {
         rootView.onClose()
         BubbleCredibilityCheckerView.getInstance()?.close()
         windowManager.removeViewImmediate(rootView)
+        windowManager.removeViewImmediate(rootView.motionTracker)
         stopForeground(true)
     }
 
     fun addView(view: View, param: ViewGroup.LayoutParams) = windowManager.addView(view, param)
-    fun updateViewLayout(view: View, params: ViewGroup.LayoutParams) =
-        windowManager.updateViewLayout(
-            view,
-            params
-        )
+    fun updateViewLayout(view: View, params: ViewGroup.LayoutParams) {
+        try {
+            windowManager.updateViewLayout(
+                view,
+                params
+            )
+        } catch (e: IllegalArgumentException) {
+            e.printStackTrace()
+        }
+    }
 
     var newDataListener: (() -> Unit) = {
         callValidateNews()

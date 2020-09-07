@@ -51,7 +51,10 @@ class WhatsAppUtils {
         Log.d("Shore", "debugView")
         while (index < count) {
             val currentNode = rootNodeInfo.getChild(index) ?: continue
-            Log.d("Shore", "Current View: ${currentNode.className}\nIndex: $index")
+            Log.d(
+                "Shore",
+                "Current View: ${currentNode.className}\nIndex: $index\nChild View Count: ${currentNode.childCount}"
+            )
             if (currentNode.childCount > 0) {
                 debugView(currentNode, parentView = currentNode)
             } else if (parentView?.className == "android.view.ViewGroup" && currentNode.className == "android.widget.TextView") {

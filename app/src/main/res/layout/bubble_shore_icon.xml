@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="55dp"
-    android:layout_height="55dp"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
     android:layout_gravity="center_horizontal">
 
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/small_padding">
+        android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivShoreLogo"
@@ -49,8 +48,9 @@
         android:id="@+id/progressBar"
         style="@style/Widget.AppCompat.ProgressBar"
         android:layout_width="match_parent"
+        android:indeterminateDrawable="@drawable/bg_progress_bar"
+        android:scaleX="1.3"
         android:layout_height="match_parent"
         android:clickable="false"
-        android:indeterminateDrawable="@drawable/bg_red_progessbar"
-        android:padding="@dimen/tiny_small_margin" />
+        android:scaleY="1.3" />
 </FrameLayout>

@@ -92,8 +92,6 @@ class FavouriteArticlesListFragment : BaseFragment() {
                 )
             )
         }
-
-
     }
 
     companion object {

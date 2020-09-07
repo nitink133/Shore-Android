@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1027736000656",
+    "firebase_url": "https://the-shore-media.firebaseio.com",
+    "project_id": "the-shore-media",
+    "storage_bucket": "the-shore-media.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1027736000656:android:1776dfffe06f9942d22015",
+        "android_client_info": {
+          "package_name": "com.theshoremedia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1027736000656-oor22ti2n3f6ou665aqqsfka5v3ctqde.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqriVe_9_rO3K6W8h-HrFlRiDwJ5lBKuM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1027736000656-oor22ti2n3f6ou665aqqsfka5v3ctqde.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

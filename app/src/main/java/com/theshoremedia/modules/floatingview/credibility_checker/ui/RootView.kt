@@ -63,7 +63,7 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
     private var verticalSpringChain: SpringChain? = null
 
     private var velocityTracker: VelocityTracker? = null
-    private var motionTracker = LinearLayout(context)
+    var motionTracker = LinearLayout(context)
 
     var showContentRunnable: Runnable? = null
     var showArticleRunnable: Runnable? = null

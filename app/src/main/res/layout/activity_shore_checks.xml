@@ -64,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="false"
-            android:indeterminateDrawable="@drawable/bg_red_progessbar"
+            android:indeterminateDrawable="@drawable/bg_progress_bar"
             android:padding="@dimen/tiny_small_margin" />
     </FrameLayout>
 
