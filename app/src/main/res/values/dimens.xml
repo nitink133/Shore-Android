@@ -41,4 +41,5 @@
     <dimen name="divider_height">1dp</dimen>
 
     <dimen name="helper_min_height">100dp</dimen>
+    <dimen name="max_intro_width">250dp</dimen>
 </resources>

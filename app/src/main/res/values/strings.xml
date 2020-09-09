@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">The Shore Media</string>
+    <string name="app_name">Shore</string>
 
     <string name="a_layer_of_truth">A layer of truth on every forward.</string>
     <string name="intro_screen_1">You read, \'TheShore\' is ready to back you from fake news.</string>
@@ -100,5 +100,17 @@
     <string name="lbl_abt_source">About the source</string>
     <string name="lbl_more">More</string>
     <string name="lbl_less">Less</string>
+
+
+    <string name="lbl_intro_1">Tired of\n<b>fake forwards</b></string>
+    <string name="des_intro_1">Shore will allows you to discover the facts in real time with no-extra efforts.</string>
+    <string name="btn_get_started">Get Started</string>
+    <string name="skip">Skip</string>
+    <string name="lbl_intro_2">Read\n<b>Facts, Not Fakes </b></string>
+    <string name="des_intro_2">Shore will allows you to discover the facts in real time with no-extra efforts.</string>
+    <string name="lbl_intro_3">Share\n<b>Facts, Not Fakes </b></string>
+    <string name="des_intro_3">Shore will allows you to discover the facts in real time with no-extra efforts.</string>
+    <string name="lbl_intro_4">We respect\n<b>of your privacy</b></string>
+    <string name="des_intro_4">Shore will allows you to discover the facts in real time with no-extra efforts.</string>
 
 </resources>

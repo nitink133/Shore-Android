@@ -10,29 +10,38 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/llNoData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone">
+        android:orientation="vertical">
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center"
-            app:lottie_autoPlay="true"
-            app:lottie_fileName="lottie/no_data.json"
-            app:lottie_loop="true" />
+        <!--        <com.airbnb.lottie.LottieAnimationView-->
+        <!--            android:layout_width="150dp"-->
+        <!--            android:layout_height="150dp"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            app:lottie_autoPlay="true"-->
+        <!--            app:lottie_fileName="lottie/no_data.json"-->
+        <!--            app:lottie_loop="true" />-->
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="320dp"
+            app:layout_constraintBottom_toTopOf="@+id/tvConfused"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_no_data" />
+
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="bottom|center_horizontal"
             android:text="@string/txt_no_data"
             android:textSize="@dimen/large_textsize" />
-    </LinearLayout>
+    </FrameLayout>
 
 </FrameLayout>

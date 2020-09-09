@@ -43,6 +43,8 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
+
+
     <style name="defaultBtnSmallStyle" parent="defaultBtnStyle">
         <item name="android:textSize">@dimen/small_textsize</item>
         <item name="android:layout_height">@dimen/small_btn_height</item>
