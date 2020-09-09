@@ -96,4 +96,9 @@
     <string name="something_went_wrong">Something went wrong!</string>
     <string name="exception_message_no_connection">Internet connection error</string>
 
+    <string name="lbl_forwarded">Forwarded</string>
+    <string name="lbl_abt_source">About the source</string>
+    <string name="lbl_more">More</string>
+    <string name="lbl_less">Less</string>
+
 </resources>

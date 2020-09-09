@@ -14,7 +14,7 @@ android {
         minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -39,10 +39,17 @@ android {
     }
 
     sourceSets {
-        main {
-            java {
-                srcDirs += 'build/generated/source/navigation-args'
-            }
+//        main {
+//            java {
+//                srcDirs += 'build/generated/source/navigation-args'
+//            }
+//        }
+
+        debug {
+            java.srcDirs += 'build/generated/source/navigation-args/debug/'
+        }
+        release {
+            java.srcDirs += 'build/generated/source/navigation-args/release/'
         }
     }
 }
@@ -66,7 +73,7 @@ dependencies {
 
 
     implementation 'com.github.bumptech.glide:glide:4.11.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.google.android.material:material:1.2.0'
 

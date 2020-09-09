@@ -1,71 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/transparent"
-    android:theme="@android:style/Theme.Translucent.NoTitleBar"
-    tools:context=".activity.ShoreChecksActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!--    <TextView-->
-    <!--        android:text="@string/large_dummy_text"-->
-    <!--        android:id="@+id/textView"-->
-    <!--        style="@style/textView" />-->
+    <data>
 
-    <FrameLayout
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_gravity="center_horizontal">
+        <variable
+            name="model"
+            type="com.theshoremedia.database.entity.FactCheckHistoryModel" />
 
+    </data>
 
-        <FrameLayout
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/small_margin"
+        android:fillViewport="true">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/small_padding">
+            android:layout_height="0dp"
+            android:background="@drawable/bg_rounded"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/small_padding"
+            android:paddingEnd="@dimen/small_padding"
+            android:paddingBottom="@dimen/small_padding">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ivShoreLogo"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bg_circle"
-                android:backgroundTint="@color/colorPrimary"
-                android:src="@drawable/ic_logo"
-                android:tag="Click" />
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivBack"
+                    android:layout_width="@dimen/small_image"
+                    android:layout_height="@dimen/small_image"
+                    android:backgroundTint="@color/black"
+                    android:src="@drawable/ic_left_arrow"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivBookMark"
+                    android:layout_width="@dimen/small_image"
+                    android:layout_height="@dimen/small_image"
+                    android:layout_marginEnd="@dimen/small_margin"
+                    android:backgroundTint="@color/black"
+                    android:src="@drawable/ic_bookmark_blank"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/ivShare"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivShare"
+                    android:layout_width="@dimen/small_image"
+                    android:layout_height="@dimen/small_image"
+                    android:layout_marginEnd="@dimen/extra_large_margin"
+                    android:backgroundTint="@color/black"
+                    android:src="@drawable/ic_share"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTitle"
+                style="@style/textView"
+                android:text="@{model.articleTitle}"
+                android:textSize="@dimen/heading_textsize"
+                tools:text="@string/medium_dummy_text" />
 
             <LinearLayout
-                android:id="@+id/llUnreadCount"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginStart="@dimen/tiny_small_margin"
-                android:layout_marginTop="@dimen/tiny_small_margin"
-                android:layout_marginEnd="@dimen/tiny_small_margin"
-                android:background="@drawable/bubble_notification"
-                android:paddingStart="@dimen/extra_small_margin"
-                android:paddingEnd="@dimen/extra_small_margin"
-                android:paddingBottom="@dimen/tiny_small_margin"
-                android:visibility="gone">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tvUnreadCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/small_textsize"
-                    android:textStyle="bold">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvNewsSource"
+                    style="@style/withAlphaTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:maxLines="1"
+                    android:text="@{model.sourceName}"
+                    android:textColor="@color/btnBgColorRed"
+                    tools:text="@string/tiny_dummy_text" />
 
-                </TextView>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvNewsDate"
+                    style="@style/withAlphaTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:maxLines="1"
+                    android:text="@{model.date}"
+                    tools:text="@string/tiny_dummy_text" />
+
             </LinearLayout>
-        </FrameLayout>
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="@style/Widget.AppCompat.ProgressBar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="false"
-            android:indeterminateDrawable="@drawable/bg_progress_bar"
-            android:padding="@dimen/tiny_small_margin" />
-    </FrameLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivNewsIcon"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="@dimen/small_margin"
+                tools:background="@color/grey" />
 
-</LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:elevation="20dp"
+                android:minHeight="@dimen/helper_min_height"
+                android:orientation="vertical"
+                android:padding="@dimen/small_padding">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivForward"
+                        android:layout_width="@dimen/small_image"
+                        android:layout_height="@dimen/small_image"
+                        android:backgroundTint="@color/colorGreyDark"
+                        android:src="@drawable/ic_forward"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvForwarded"
+                        style="@style/withAlphaTextView"
+                        android:layout_marginStart="@dimen/small_margin"
+                        android:text="@string/lbl_forwarded"
+                        android:textColor="@color/colorGreyDark"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/ivForward"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/withAlphaTextView"
+                        android:layout_gravity="end"
+                        android:gravity="end"
+                        android:paddingStart="@dimen/default_padding"
+                        android:paddingEnd="@dimen/default_padding"
+                        android:text="@string/lbl_more"
+                        android:textColor="@color/bgColorGreen"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvForwardedMessage"
+                    style="@style/withAlphaTextView"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:ellipsize="end"
+                    android:maxLines="4"
+                    android:text="@{model.forwardMessage}"
+                    android:textAlignment="viewStart"
+                    android:textSize="@dimen/small_textsize"
+                    tools:text="@string/extra_large_dummy_text" />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvNewsDescription"
+                style="@style/withAlphaTextView"
+                android:layout_marginTop="@dimen/small_margin"
+                android:text="@{model.article}"
+                android:textAlignment="viewStart"
+                android:textSize="@dimen/large_textsize"
+                tools:text="@string/extra_large_dummy_text" />
+        </LinearLayout>
+    </ScrollView>
+</layout>
