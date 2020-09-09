@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.IBinder
+import android.util.DisplayMetrics
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -47,6 +48,7 @@ class CredibilityCheckerService : Service() {
     }
 
     private lateinit var windowManager: WindowManager
+    lateinit var displayMetrics: DisplayMetrics
     private lateinit var innerReceiver: CredibilityCheckerReceiver
 
     lateinit var rootView: RootView
@@ -70,6 +72,8 @@ class CredibilityCheckerService : Service() {
 
             //Here, we're initializing RootView
             windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+            displayMetrics = DisplayMetrics()
+            windowManager.defaultDisplay.getMetrics(displayMetrics)
             rootView = RootView(this)
             windowManager.addView(rootView, rootView.params)
             rootView.addShoreBubble()
@@ -212,6 +216,7 @@ class CredibilityCheckerService : Service() {
         newDataListener.invoke()
         rootView.refreshData()
     }
+
 
 }
 

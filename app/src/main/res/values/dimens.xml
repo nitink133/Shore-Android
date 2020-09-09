@@ -11,6 +11,7 @@
     <dimen name="default_margin">16dp</dimen>
     <dimen name="large_margin">24dp</dimen>
     <dimen name="extra_large_margin">32dp</dimen>
+    <dimen name="extreme_large_margin">50dp</dimen>
 
 
     <dimen name="small_textsize">12sp</dimen>
@@ -39,5 +40,5 @@
 
     <dimen name="divider_height">1dp</dimen>
 
-
+    <dimen name="helper_min_height">100dp</dimen>
 </resources>

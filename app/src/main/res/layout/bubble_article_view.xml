@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -9,10 +10,6 @@
             type="com.theshoremedia.database.entity.FactCheckHistoryModel" />
 
     </data>
-
-    <!--    <ScrollView-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent">-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,6 +20,7 @@
         android:paddingStart="@dimen/small_padding"
         android:paddingEnd="@dimen/small_padding"
         android:paddingBottom="@dimen/small_padding">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -43,7 +41,7 @@
                 android:id="@+id/ivBookMark"
                 android:layout_width="@dimen/small_image"
                 android:layout_height="@dimen/small_image"
-                android:layout_marginEnd="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/small_margin"
                 android:backgroundTint="@color/black"
                 android:src="@drawable/ic_bookmark_blank"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -54,6 +52,7 @@
                 android:id="@+id/ivShare"
                 android:layout_width="@dimen/small_image"
                 android:layout_height="@dimen/small_image"
+                android:layout_marginEnd="@dimen/extreme_large_margin"
                 android:backgroundTint="@color/black"
                 android:src="@drawable/ic_share"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -62,52 +61,197 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvTitle"
-            style="@style/textView"
-            android:text="@{model.articleTitle}"
-            android:textSize="@dimen/heading_textsize" />
+        <!--        <androidx.core.widget.NestedScrollView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:fillViewport="true">-->
 
         <LinearLayout
+            android:id="@+id/llRootNewsView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvNewsSource"
-                style="@style/withAlphaTextView"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:gravity="start"
-                android:maxLines="1"
-                android:text="@{model.sourceName}"
-                android:textColor="@color/btnBgColorRed" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvNewsDate"
-                style="@style/withAlphaTextView"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:maxLines="1"
-                android:text="@{model.date}" />
-
-        </LinearLayout>
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivNewsIcon"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="@dimen/small_margin" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvNewsDescription"
-            style="@style/textView"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/default_margin"
-            android:text="@{model.article}"
-            android:textAlignment="viewStart"
-            android:textSize="@dimen/large_textsize" />
+            android:background="@color/colorPrimary"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTitle"
+                style="@style/textView"
+                android:text="@{model.articleTitle}"
+                android:textSize="@dimen/heading_textsize"
+                tools:text="@string/medium_dummy_text" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvNewsSource"
+                    style="@style/withAlphaTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:maxLines="1"
+                    android:text="@{model.sourceName}"
+                    android:textColor="@color/btnBgColorRed"
+                    tools:text="@string/tiny_dummy_text" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvNewsDate"
+                    style="@style/withAlphaTextView"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:maxLines="1"
+                    android:text="@{model.date}"
+                    tools:text="@string/tiny_dummy_text" />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivNewsIcon"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="@dimen/small_margin"
+                tools:background="@color/grey" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:background="@drawable/bg_shadow"
+                android:minHeight="@dimen/helper_min_height"
+                android:orientation="vertical"
+                android:padding="@dimen/small_padding">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivForward"
+                        android:layout_width="@dimen/small_image"
+                        android:layout_height="@dimen/small_image"
+                        android:backgroundTint="@color/colorGreyDark"
+                        android:src="@drawable/ic_forward"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvForwarded"
+                        style="@style/withAlphaTextView"
+                        android:layout_marginStart="@dimen/extra_small_margin"
+                        android:text="@string/lbl_forwarded"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/ivForward"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/withAlphaTextView"
+                        android:layout_gravity="end"
+                        android:gravity="end"
+                        android:paddingStart="@dimen/default_padding"
+                        android:paddingEnd="@dimen/default_padding"
+                        android:text="@string/lbl_more"
+                        android:textColor="@color/bgColorGreen"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvForwardedMessage"
+                    style="@style/withAlphaTextView"
+                    android:layout_marginTop="@dimen/extra_small_margin"
+                    android:ellipsize="end"
+                    android:maxLines="4"
+                    android:text="@{model.forwardMessage}"
+                    android:textAlignment="viewStart"
+                    android:textSize="@dimen/small_textsize"
+                    tools:text="@string/extra_large_dummy_text" />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvNewsDescription"
+                style="@style/withAlphaTextView"
+                android:layout_marginTop="@dimen/small_margin"
+                android:text="@{model.article}"
+                android:textAlignment="viewStart"
+                android:textSize="@dimen/large_textsize"
+                tools:text="@string/extra_large_dummy_text" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:background="@drawable/bg_shadow"
+                android:minHeight="@dimen/helper_min_height"
+                android:orientation="vertical"
+                android:padding="@dimen/small_padding">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivInfo"
+                        android:layout_width="@dimen/small_image"
+                        android:layout_height="@dimen/small_image"
+                        android:backgroundTint="@color/colorGreyDark"
+                        android:src="@drawable/ic_info"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvInfo"
+                        style="@style/withAlphaTextView"
+                        android:layout_marginStart="@dimen/extra_small_margin"
+                        android:text="@string/lbl_abt_source"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/ivInfo"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/withAlphaTextView"
+                        android:layout_gravity="end"
+                        android:gravity="end"
+                        android:paddingStart="@dimen/default_padding"
+                        android:paddingEnd="@dimen/default_padding"
+                        android:text="@string/lbl_more"
+                        android:textColor="@color/bgColorGreen"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvAboutTheSource"
+                    style="@style/withAlphaTextView"
+                    android:layout_marginTop="@dimen/extra_small_margin"
+                    android:ellipsize="end"
+                    android:maxLines="4"
+                    android:text="@string/medium_dummy_text"
+                    android:textAlignment="viewStart"
+                    android:textSize="@dimen/small_textsize"
+                    tools:text="@string/extra_large_dummy_text" />
+
+            </LinearLayout>
+        </LinearLayout>
+        <!--        </androidx.core.widget.NestedScrollView>-->
+
     </LinearLayout>
-    <!--    </ScrollView>-->
+
 </layout>
