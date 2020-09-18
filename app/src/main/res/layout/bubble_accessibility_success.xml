@@ -19,7 +19,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/textColorMenuItem"
+                android:background="@color/app_black_background"
                 android:orientation="horizontal"
                 android:padding="@dimen/small_margin">
 
@@ -27,6 +27,7 @@
                     android:id="@+id/tvHeading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/textView"
                     android:layout_gravity="center"
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_marginEnd="@dimen/default_margin"

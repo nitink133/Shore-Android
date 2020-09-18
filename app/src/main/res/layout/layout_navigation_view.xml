@@ -47,13 +47,31 @@
     </FrameLayout>
 
     <include
+        android:id="@+id/includeRecycler"
         layout="@layout/layout_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/viewDividerBottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout2" />
+
+    <View
+        android:id="@+id/viewDividerBottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:layout_marginBottom="@dimen/extra_small_margin"
+        android:background="@color/dividerColor"
+        app:layout_constraintBottom_toTopOf="@+id/tvBuildVersion" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvBuildVersion"
+        style="@style/textView"
+        android:layout_marginBottom="@dimen/extra_small_margin"
+        android:text="@string/small_dummy_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

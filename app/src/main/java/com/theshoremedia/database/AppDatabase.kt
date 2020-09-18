@@ -5,15 +5,22 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.theshoremedia.AppController
-import com.theshoremedia.database.dao.FactCheckHistoryDio
+import com.theshoremedia.database.dao.CustomSourcesDao
+import com.theshoremedia.database.dao.FactCheckHistoryDao
 import com.theshoremedia.database.entity.FactCheckHistoryModel
+import com.theshoremedia.database.entity.NewsSourceModel
 
-@Database(entities = [FactCheckHistoryModel::class], version = 1, exportSchema = false)
+@Database(
+    entities = [FactCheckHistoryModel::class, NewsSourceModel::class],
+    version = 1,
+    exportSchema = false
+)
 @TypeConverters(
     RoomConverter::class
 )
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun factChecksHistoryDao(): FactCheckHistoryDio?
+    abstract fun factChecksHistoryDao(): FactCheckHistoryDao?
+    abstract fun customSourcesDao(): CustomSourcesDao?
 
     companion object {
         private var databaseInstance: AppDatabase? = null

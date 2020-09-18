@@ -83,7 +83,7 @@
                 android:layout_marginStart="@dimen/extreme_large_margin"
                 android:layout_marginEnd="@dimen/extreme_large_margin"
                 android:background="@drawable/bg_rounded"
-                android:backgroundTint="@color/colorGreyDark"
+                android:backgroundTint="@color/app_black"
                 android:text="@string/btn_get_started"
                 android:textColor="@color/white"
                 android:visibility="gone" />
@@ -95,7 +95,7 @@
                 android:layout_gravity="start|center_vertical"
                 android:layout_marginEnd="@dimen/default_margin"
                 android:background="@drawable/bg_large_rounded"
-                android:backgroundTint="@color/colorGreyDark"
+                android:backgroundTint="@color/app_black"
                 android:padding="@dimen/small_padding"
                 android:src="@drawable/ic_left_arrow"
                 android:tint="@color/white"
@@ -107,7 +107,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="end|center_vertical"
                 android:background="@drawable/bg_large_rounded"
-                android:backgroundTint="@color/colorGreyDark"
+                android:backgroundTint="@color/app_black"
                 android:padding="@dimen/small_padding"
                 android:src="@drawable/ic_right_arrow"
                 android:tint="@color/white" />

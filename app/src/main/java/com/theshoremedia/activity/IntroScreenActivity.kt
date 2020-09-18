@@ -12,14 +12,13 @@ import androidx.viewpager.widget.ViewPager
 import com.theshoremedia.R
 import com.theshoremedia.R.*
 import com.theshoremedia.databinding.ActivityIntroScreenBinding
-import com.theshoremedia.modules.base.adapter.DynamicViewPagerAdapter
+import com.theshoremedia.modules.base.adapter.IntroViewPagerAdapter
 import com.theshoremedia.utils.AppConstants
 import com.theshoremedia.utils.PreferenceUtils
 import com.theshoremedia.utils.extensions.animateFromBottom
 import com.theshoremedia.utils.extensions.animateFromBottomCentered
 import com.theshoremedia.utils.extensions.loadImage
 import com.theshoremedia.utils.extensions.makeVisibleWithAnimation
-
 
 class IntroScreenActivity : AppCompatActivity() {
     private var mWelcomePage1: ViewGroup? = null
@@ -31,7 +30,7 @@ class IntroScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, layout.activity_intro_screen)
-        val pagerAdapter = DynamicViewPagerAdapter()
+        val pagerAdapter = IntroViewPagerAdapter()
         addPagerViews(pagerAdapter)
         binding.ivLeft.setOnClickListener {
             if (binding.viewPager.currentItem - 1 >= 0) binding.viewPager.setCurrentItem(
@@ -41,11 +40,10 @@ class IntroScreenActivity : AppCompatActivity() {
         }
 
         binding.btnGetStarted.setOnClickListener {
-
             moveToMain()
         }
 
-        binding.tvSkip.setOnClickListener{
+        binding.tvSkip.setOnClickListener {
             moveToMain()
         }
         binding.ivRight.setOnClickListener {
@@ -91,7 +89,7 @@ class IntroScreenActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun addPagerViews(pagerAdapter: DynamicViewPagerAdapter) {
+    private fun addPagerViews(pagerAdapter: IntroViewPagerAdapter) {
         run {
             mWelcomePage1 =
                 layoutInflater.inflate(layout.layout_info_screen, null, false) as ViewGroup

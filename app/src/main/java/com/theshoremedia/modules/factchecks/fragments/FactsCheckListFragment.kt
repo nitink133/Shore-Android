@@ -19,9 +19,6 @@ import com.theshoremedia.modules.factchecks.adapter.FactCheckAdapter
 import com.theshoremedia.utils.extensions.setFullAnimation
 import com.theshoremedia.utils.extensions.setZeroAnimation
 import com.theshoremedia.utils.extensions.validateNoDataView
-import com.theshoremedia.utils.permissions.AccessibilityPermissionsUtils
-import com.theshoremedia.utils.permissions.OnDrawPermissionsUtils
-import com.theshoremedia.views.BubbleCredibilityCheckerView
 
 
 class FactsCheckListFragment : BaseFragment() {
@@ -48,7 +45,6 @@ class FactsCheckListFragment : BaseFragment() {
         val recyclerView =
             binding.llRecyclerView.findViewById<RecyclerView>(R.id.recyclerView)
         val layoutManager = LinearLayoutManager(context)
-        layoutManager.stackFromEnd = true
         mAdapter =
             FactCheckAdapter {
                 when (it.id) {

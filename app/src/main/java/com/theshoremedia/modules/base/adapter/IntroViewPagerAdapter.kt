@@ -4,10 +4,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
-import java.util.*
-import kotlin.collections.ArrayList
 
-class DynamicViewPagerAdapter : PagerAdapter() {
+class IntroViewPagerAdapter : PagerAdapter() {
     // This holds all the currently displayable views, in order from left to right.
     private val views: ArrayList<View> =
         ArrayList()

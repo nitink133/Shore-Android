@@ -10,7 +10,7 @@ import com.theshoremedia.database.entity.FactCheckHistoryModel
  */
 
 @Dao
-interface FactCheckHistoryDio {
+interface FactCheckHistoryDao {
     @get:Query("SELECT * FROM tableFactChecksHistory")
     val all: LiveData<List<FactCheckHistoryModel>?>
 

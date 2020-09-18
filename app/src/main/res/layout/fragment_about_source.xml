@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.theshoremedia.database.entity.NewsSourceModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/app_background">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/small_margin"
+            android:paddingBottom="@dimen/default_padding"
+            tools:context=".modules.home.fragment.AboutSourceFragment">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/appCompatTextView"
+                style="@style/textView"
+                android:text="@string/website"
+                android:textSize="@dimen/large_textsize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvWebsite"
+                style="@style/textView"
+                android:layout_marginTop="@dimen/extra_small_margin"
+                android:text="@{model.website}"
+                android:textColor="@color/blue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivNewsIcon"
+                android:layout_width="@dimen/extra_large_image"
+                android:layout_height="@dimen/extra_large_image"
+                android:layout_marginEnd="@dimen/small_margin"
+                app:layout_constraintBottom_toBottomOf="@+id/tvWebsite"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lblAbout"
+                style="@style/textView"
+                android:layout_marginTop="@dimen/default_margin"
+                android:text="@string/about"
+                android:textSize="@dimen/large_textsize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvWebsite" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvAbout"
+                style="@style/withAlphaTextView"
+                android:layout_marginTop="@dimen/extra_small_margin"
+                android:text="@{model.about}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblAbout" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lblIFCN"
+                style="@style/textView"
+                android:layout_marginTop="@dimen/default_margin"
+                android:text="@string/ifcn_signatory"
+                android:textSize="@dimen/large_textsize"
+                android:visibility="@{model.ifcnSignatory.empty?View.GONE:View.VISIBLE}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvAbout" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvIFCNSignatory"
+                style="@style/withAlphaTextView"
+                android:layout_marginTop="@dimen/extra_small_margin"
+                android:text="@{model.ifcnSignatory}"
+                android:visibility="@{model.ifcnSignatory.empty?View.GONE:View.VISIBLE}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblIFCN" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivIFCNBadge"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="@dimen/default_margin"
+                android:visibility="@{model.ifcnSignatory.empty?View.GONE:View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvIFCNSignatory" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

@@ -4,6 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
@@ -40,11 +41,6 @@ data class FactCheckHistoryModel(
     @SerializedName("sourceName")
     var sourceName: String = "",
 
-    @SerializedName("uniqueDevices")
-    var uniqueDevices: List<String>?,
-    @SerializedName("uniqueRequestCount")
-    var uniqueRequestCount: Int?,
-
 
     //Local database based
     @ColumnInfo(name = "isFavourite")
@@ -54,6 +50,15 @@ data class FactCheckHistoryModel(
     @ColumnInfo(name = "date")
     var date: String? = ""
 ) : Parcelable {
+    @Ignore
+    @SerializedName("uniqueDevices")
+    var uniqueDevices: List<String>? = arrayListOf()
+
+    @Ignore
+    @SerializedName("uniqueRequestCount")
+    var uniqueRequestCount: Int? = 0
+
+
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
@@ -63,8 +68,6 @@ data class FactCheckHistoryModel(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
-        parcel.createStringArrayList(),
-        parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readByte() != 0.toByte(),
         parcel.readByte() != 0.toByte(),
         parcel.readString() ?: ""
@@ -79,8 +82,6 @@ data class FactCheckHistoryModel(
         parcel.writeString(article_html)
         parcel.writeString(article)
         parcel.writeString(sourceName)
-        parcel.writeStringList(uniqueDevices)
-        parcel.writeValue(uniqueRequestCount)
         parcel.writeByte(if (isFavourite) 1 else 0)
         parcel.writeByte(if (isRead) 1 else 0)
         parcel.writeString(date)

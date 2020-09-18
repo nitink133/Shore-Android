@@ -54,6 +54,7 @@ class FactCheckAdapter(
             binding.model = model
             binding.root.tag = model
             binding.ivBookMark.tag = model
+            binding.tvForwardedMessage.isSelected = true
             binding.root.setOnClickListener {
                 callBacks.invoke(it)
             }

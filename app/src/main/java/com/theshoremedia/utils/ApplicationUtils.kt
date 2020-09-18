@@ -50,7 +50,7 @@ object ApplicationUtils {
             ex.printStackTrace()
             return arrayListOf()
         }
-        return ObjectUtils.parseListTOData(json)
+        return ObjectUtils.parseListTOData(json, FactCheckHistoryModel::class.java)
     }
 
      fun getUniqueDeviceId():String {

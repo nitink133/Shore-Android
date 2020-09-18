@@ -16,7 +16,7 @@
     <style name="textView" parent="Widget.AppCompat.TextView">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/app_black</item>
         <item name="android:fontFamily">@font/sanchez_regular</item>
         <item name="android:padding">@dimen/tiny_small_margin</item>
         <item name="android:textSize">@dimen/default_textsize</item>
@@ -24,6 +24,30 @@
 
     <style name="withAlphaTextView" parent="@style/textView">
         <item name="android:alpha">0.7</item>
+    </style>
+
+    <style name="editText" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textColor">@color/app_black</item>
+        <item name="android:textColorHint">@color/app_black_alpha_50</item>
+        <item name="android:fontFamily">@font/sanchez_regular</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:padding">@dimen/tiny_small_margin</item>
+        <item name="android:textSize">@dimen/default_textsize</item>
+    </style>
+
+    <style name="spinner" parent="Widget.AppCompat.Spinner.DropDown">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textColor">@color/app_black_alpha_70</item>
+        <item name="tabSelectedTextColor">@color/app_black</item>
+        <item name="android:fontFamily">@font/sanchez_regular</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:padding">@dimen/tiny_small_margin</item>
+        <item name="android:textSize">@dimen/default_textsize</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar" />

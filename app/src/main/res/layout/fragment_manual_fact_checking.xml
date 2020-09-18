@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/app_background">
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/small_margin"
+                android:layout_marginEnd="@dimen/small_margin"
+                tools:context=".modules.home.fragment.ManualFactCheckingFragment">
+
+
+                <TextView
+                    android:id="@+id/textView2"
+                    style="@style/textView"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:text="@string/lbl_investigate_a_claim"
+                    android:textSize="@dimen/heading_textsize"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="300dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:layout_marginBottom="@dimen/large_margin"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2"
+                    app:srcCompat="@drawable/ic_investigate" />
+
+                <TextView
+                    android:id="@+id/tvDescription"
+                    style="@style/textView"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:text="@string/des_manual_investigation"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:background="@color/bg_edit_text_grey"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDescription">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etClaim"
+                        style="@style/editText"
+                        android:layout_height="100dp"
+                        android:background="@android:color/transparent"
+                        android:gravity="top"
+                        android:hint="@string/hint_enter_your_claim"
+                        android:padding="@dimen/small_padding"
+                        android:scrollbars="vertical" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/textView"
+                        android:layout_gravity="bottom|end"
+                        android:layout_marginEnd="@dimen/default_margin"
+                        android:layout_marginBottom="@dimen/small_margin"
+                        android:text="@string/investigate"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold" />
+                </FrameLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/llServiceStatus"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_gravity="bottom"
+            android:background="@drawable/bg_service_status"
+            android:padding="@dimen/small_padding">
+
+
+            <TextView
+                style="@style/textView"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/error_whatsapp_real_time_fake_news_detection_is_not_activated_now"
+                android:textAlignment="viewStart"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnCancel"
+                style="@style/defaultBtnSmallStyle"
+                android:layout_height="@dimen/ultra_btn_height"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/small_margin"
+                android:background="@drawable/bg_btn_activate"
+                android:text="@string/btn_activate" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+</layout>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.theshoremedia.database.entity.NewsSourceModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/extra_small_margin"
+        android:background="@drawable/bg_rounded"
+        android:backgroundTint="@color/bg_card_grey"
+        android:padding="@dimen/small_padding">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivSourceIcon"
+            android:layout_width="@dimen/extra_large_image"
+            android:layout_height="@dimen/extra_large_image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
+            style="@style/textView"
+            android:layout_marginStart="@dimen/small_margin"
+            android:text="@{model.name}"
+            android:textColor="@color/app_black"
+            app:layout_constraintStart_toEndOf="@+id/ivSourceIcon"
+            app:layout_constraintTop_toTopOf="@+id/ivSourceIcon"
+            tools:text="@string/small_dummy_text" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/textView"
+            android:layout_marginStart="@dimen/small_margin"
+            android:text="@{model.website}"
+            android:textSize="@dimen/small_textsize"
+            app:layout_constraintStart_toEndOf="@+id/ivSourceIcon"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            tools:text="@string/dummy_email" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivLaunch"
+            android:layout_width="@dimen/small_image"
+            android:layout_height="@dimen/small_image"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:backgroundTint="@color/app_black_background"
+            android:src="@drawable/ic_launch"
+            app:layout_constraintBottom_toBottomOf="@+id/ivSourceIcon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivSourceIcon" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
