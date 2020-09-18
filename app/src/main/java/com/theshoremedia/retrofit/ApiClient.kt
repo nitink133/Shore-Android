@@ -42,7 +42,9 @@ class ApiClient {
 
         private fun initRetrofit() {
             val loggingInterceptor = HttpLoggingInterceptor()
-            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+            loggingInterceptor.apply {
+                loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+            }
             val client = OkHttpClient.Builder()
                 .connectTimeout(
                     HTTP_CONNECT_TIMEOUT,

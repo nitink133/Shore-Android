@@ -20,7 +20,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/label"
-            style="@style/withAlphaTextView"
+            style="@style/textView"
             android:text="@{model.label}"
             android:textStyle="bold"
             android:textSize="@dimen/heading_textsize"

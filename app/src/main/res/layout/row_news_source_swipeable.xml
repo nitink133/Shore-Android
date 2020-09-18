@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.theshoremedia.database.entity.NewsSourceModel" />
+
+    </data>
+
+    <com.chauthai.swipereveallayout.SwipeRevealLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/extra_small_margin"
+        app:dragEdge="right"
+        app:mode="same_level">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true">
+
+            <FrameLayout
+                android:id="@+id/relativeLayout"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:alpha=".5"
+                android:background="@color/bg_error_reg_lite"
+                android:minWidth="70dp"
+                android:minHeight="65dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/small_image"
+                android:layout_height="@dimen/small_image"
+                android:src="@drawable/ic_delete_24px"
+                app:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/llContentView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rounded"
+            android:backgroundTint="@color/bg_card_grey"
+            android:padding="@dimen/small_padding">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivSourceIcon"
+                android:layout_width="@dimen/extra_large_image"
+                android:layout_height="@dimen/extra_large_image"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTitle"
+                style="@style/textView"
+                android:layout_marginStart="@dimen/small_margin"
+                android:text="@{model.name}"
+                android:textColor="@color/app_black"
+                app:layout_constraintStart_toEndOf="@+id/ivSourceIcon"
+                app:layout_constraintTop_toTopOf="@+id/ivSourceIcon"
+                tools:text="@string/small_dummy_text" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/textView"
+                android:layout_marginStart="@dimen/small_margin"
+                android:text="@{model.website}"
+                android:textSize="@dimen/small_textsize"
+                app:layout_constraintStart_toEndOf="@+id/ivSourceIcon"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                tools:text="@string/dummy_email" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivLaunch"
+                android:layout_width="@dimen/small_image"
+                android:layout_height="@dimen/small_image"
+                android:layout_marginEnd="@dimen/small_margin"
+                android:backgroundTint="@color/app_black_background"
+                android:src="@drawable/ic_launch"
+                app:layout_constraintBottom_toBottomOf="@+id/ivSourceIcon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ivSourceIcon" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.chauthai.swipereveallayout.SwipeRevealLayout>
+</layout>

@@ -18,7 +18,7 @@ class SplashActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
         setContentView(R.layout.activity_splash)
-        val timeInMil = 2000L
+        val timeInMil = 1500L
         val handler = Handler()
         handler.postDelayed({
             val intent = Intent(

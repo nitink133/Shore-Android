@@ -18,7 +18,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
+            android:background="@color/app_background"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -40,7 +40,7 @@
                 android:layout_marginStart="@dimen/small_margin"
                 android:layout_marginEnd="@dimen/small_margin"
                 android:layout_weight="1"
-                android:background="@color/colorPrimary"
+                android:background="@color/app_background"
                 android:paddingBottom="@dimen/small_padding">
 
                 <androidx.appcompat.widget.AppCompatTextView

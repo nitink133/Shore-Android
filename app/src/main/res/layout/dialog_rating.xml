@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/small_margin"
+    android:layout_marginEnd="@dimen/small_margin"
+    android:background="@drawable/bg_rounded"
+    android:backgroundTint="@color/app_background"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/small_margin"
+    android:paddingBottom="@dimen/small_margin">
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/extra_small_radius"
+        android:numStars="5"
+        android:rating="5" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/textView"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/rate_the_app"
+        android:textSize="@dimen/extra_large_textsize"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/withAlphaTextView"
+        android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/extra_small_margin"
+        android:layout_marginTop="@dimen/extra_small_margin"
+        android:layout_marginEnd="@dimen/extra_small_margin"
+        android:text="@string/extra_large_dummy_text"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        style="@style/defaultBtnStyle"
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:backgroundTint="@color/colorAccent"
+        android:text="@string/i_love_it"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/textView"
+        android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/extra_small_margin"
+        android:gravity="center_horizontal"
+        android:text="@string/dont_like_the_app"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold" />
+</LinearLayout>

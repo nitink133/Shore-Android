@@ -6,8 +6,10 @@ import android.content.Context
 import android.view.ContextThemeWrapper
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatSpinner
 import com.theshoremedia.R
 import com.theshoremedia.utils.extensions.makeVisible
+import com.theshoremedia.utils.extensions.setAdapter
 import com.theshoremedia.utils.extensions.showCustomDialog
 import kotlinx.android.synthetic.main.dialog_lottie.view.*
 
@@ -144,6 +146,64 @@ object DialogUtils {
         }
     }
 
+    fun <T> showSelectionDialog(
+        context: Context?,
+        title: String,
+        items: List<T>,
+        okayButtonText: Int = R.string.ok,
+        cancelButtonText: Int = R.string.cancel,
+        hideCancelButton: Boolean = false,
+        isCancelable: Boolean = false,
+        responseListener: ((selectedItem: T) -> Unit)? = null
+    ) {
+        (context as? Activity)?.let {
+            val dialogView = it.layoutInflater.inflate(R.layout.dialog_spinner, null)
+            val tvTitle = dialogView.findViewById(R.id.tvTitle) as TextView
+            val spnSource = dialogView.findViewById(R.id.spnSource) as AppCompatSpinner
+            val btnOkay = dialogView.findViewById(R.id.btnOkay) as Button
+            val btnCancel = dialogView.findViewById(R.id.btnCancel) as Button
+            tvTitle.text = title
+            btnOkay.text = context.getString(okayButtonText)
+            btnCancel.text = context.getString(cancelButtonText)
+            btnCancel.makeVisible(isVisible = !hideCancelButton)
+            val customDialog = showCustomDialog(it, dialogView) {
+                cancelable = isCancelable
+            }
+
+            spnSource.setAdapter(items)
+            btnOkay.setOnClickListener {
+                if (spnSource.selectedItem != null)
+                    responseListener?.invoke(spnSource.selectedItem as T)
+                customDialog.dismiss()
+            }
+            btnCancel.setOnClickListener {
+                if (spnSource.selectedItem != null)
+                    responseListener?.invoke(spnSource.selectedItem as T)
+                customDialog.dismiss()
+            }
+            customDialog.show()
+        }
+    }
+
+    fun showRatingDialog(
+        context: Context?
+    ) {
+        (context as? Activity)?.let {
+            val dialogView = it.layoutInflater.inflate(R.layout.dialog_rating, null)
+            val customDialog = showCustomDialog(it, dialogView) {
+                cancelable = true
+            }
+//            btnOkay.setOnClickListener {
+//                responseListener?.invoke(okayButtonText)
+//                customDialog.dismiss()
+//            }
+//            btnCancel.setOnClickListener {
+//                responseListener?.invoke(cancelButtonText)
+//                customDialog.dismiss()
+//            }
+            customDialog.show()
+        }
+    }
 
 }
 

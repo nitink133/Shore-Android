@@ -13,9 +13,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_margin="@dimen/extra_small_margin"
         android:layout_height="wrap_content"
-
-        android:background="@color/colorPrimary"
+        android:background="@drawable/bg_rounded"
+        android:backgroundTint="@color/bg_card_grey"
         android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,27 +30,58 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvNewsHeading"
                 style="@style/textView"
+                android:layout_width="0dp"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:padding="@dimen/small_padding"
+                android:padding="@dimen/extra_small_margin"
                 android:text="@{model.articleTitle}"
                 android:textAlignment="gravity"
                 android:textSize="@dimen/large_textsize"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/ivBookMark"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="@string/medium_dummy_text" />
 
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/ivBookMark"
+                android:layout_width="@dimen/large_image"
+                android:layout_height="@dimen/large_image"
+                android:layout_gravity="center"
+                app:layout_constraintBottom_toBottomOf="@+id/tvNewsHeading"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_fileName="lottie/favourite.json" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvForwardedMessage"
+                style="@style/textView"
+                android:layout_width="0dp"
+                android:ellipsize="marquee"
+                android:padding="@dimen/tiny_small_margin"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="@{`Claim- ` + model.articleTitle}"
+                android:textAlignment="gravity"
+                android:textSize="@dimen/small_textsize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvNewsHeading"
+                tools:text="@string/medium_dummy_text" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivNewsIcon"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="@dimen/extra_small_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="100dp"
+                android:maxHeight="100dp"
+                android:minWidth="100dp"
+                android:minHeight="80dp"
                 android:src="@drawable/ic_logo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvNewsHeading" />
+                app:layout_constraintTop_toBottomOf="@+id/tvForwardedMessage" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvNewsDescription"
@@ -57,61 +89,19 @@
                 android:layout_width="0dp"
                 android:layout_marginStart="@dimen/extra_small_margin"
                 android:ellipsize="end"
-                android:maxLines="2"
+                android:maxLines="4"
+                android:textSize="@dimen/small_textsize"
                 android:text="@{model.article}"
                 android:textAlignment="gravity"
+                app:layout_constraintBottom_toBottomOf="@+id/ivNewsIcon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ivNewsIcon"
                 app:layout_constraintTop_toTopOf="@+id/ivNewsIcon"
-                tools:text="@string/large_dummy_text" />
-
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvNewsSource"
-                style="@style/textView"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/extra_small_margin"
-                android:gravity="center"
-                android:text="@{model.sourceName}"
-                android:textColor="@color/btnBgColorRed"
-                app:layout_constraintBottom_toBottomOf="@+id/tvNewsDate"
-                app:layout_constraintStart_toEndOf="@+id/ivNewsIcon"
-                app:layout_constraintTop_toTopOf="@id/tvNewsDate"
-                tools:text="@string/tiny_dummy_text" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvNewsDate"
-                style="@style/withAlphaTextView"
-                android:layout_marginEnd="@dimen/small_margin"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:text="@{model.date}"
-                android:textAlignment="gravity"
-                app:layout_constraintBottom_toBottomOf="@+id/ivBookMark"
-                app:layout_constraintEnd_toStartOf="@+id/ivBookMark"
-                app:layout_constraintTop_toTopOf="@id/ivBookMark"
-                tools:text="@string/small_dummy_text" />
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/ivBookMark"
-                android:layout_width="@dimen/large_image"
-                android:layout_height="@dimen/large_image"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/small_margin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvNewsDescription"
-                app:lottie_fileName="lottie/favourite.json" />
+                tools:text="@string/extra_large_dummy_text" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/divider_height"
-            android:layout_marginTop="@dimen/small_margin"
-            android:layout_marginBottom="@dimen/small_margin"
-            android:background="@color/grey" />
 
     </LinearLayout>
 

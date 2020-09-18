@@ -2,48 +2,115 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
+        android:background="@color/app_background"
         android:fitsSystemWindows="false"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/llLogoView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/extra_small_margin">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_notext_logo" />
+
+                <TextView
+                    style="@style/withAlphaTextView"
+                    android:layout_marginStart="@dimen/tiny_small_margin"
+                    android:layout_marginBottom="@dimen/extra_small_margin"
+                    android:text="@string/app_name"
+                    android:textSize="@dimen/large_textsize"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSkip"
+                style="@style/withAlphaTextView"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="@string/skip"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true" />
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:fitsSystemWindows="true"
+            app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 
         <FrameLayout
+            android:id="@+id/frameLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:paddingLeft="@dimen/default_padding"
             android:paddingTop="@dimen/large_padding"
             android:paddingRight="@dimen/default_padding"
-            android:paddingBottom="@dimen/large_padding">
+            android:paddingBottom="@dimen/large_padding"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnGetStarted"
+                style="@style/defaultBtnStyle"
+                android:layout_width="match_parent"
+                android:layout_marginStart="@dimen/extreme_large_margin"
+                android:layout_marginEnd="@dimen/extreme_large_margin"
+                android:background="@drawable/bg_rounded"
+                android:backgroundTint="@color/app_black"
+                android:text="@string/btn_get_started"
+                android:textColor="@color/white"
+                android:visibility="gone" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivLeft"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="start|center_vertical"
-                android:layout_margin="@dimen/small_margin"
-                android:visibility="gone"
-                app:srcCompat="@drawable/ic_left_arrow" />
-
+                android:layout_marginEnd="@dimen/default_margin"
+                android:background="@drawable/bg_large_rounded"
+                android:backgroundTint="@color/app_black"
+                android:padding="@dimen/small_padding"
+                android:src="@drawable/ic_left_arrow"
+                android:tint="@color/white"
+                android:visibility="gone" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivRight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="end|center_vertical"
-                android:layout_margin="@dimen/small_margin"
-                app:srcCompat="@drawable/ic_right_arrow" />
-
-
+                android:background="@drawable/bg_large_rounded"
+                android:backgroundTint="@color/app_black"
+                android:padding="@dimen/small_padding"
+                android:src="@drawable/ic_right_arrow"
+                android:tint="@color/white" />
         </FrameLayout>
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

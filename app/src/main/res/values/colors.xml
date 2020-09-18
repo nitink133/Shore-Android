@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#fbecec</color>
+    <color name="colorPrimary">#FFF</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#373e43</color>
+    <color name="colorAccent">#FF725E</color>
+
 
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
@@ -10,23 +11,23 @@
     <color name="blue">#3F51B5</color>
     <color name="shadow">#80000000</color>
 
-    <color name="textColorDarkGrey">#373e43</color>
-    <color name="colorGreyDark">#4B4B4B</color>
-    <color name="textColorMenuItem">#4C5156</color>
 
-    <color name="bgColorGrey">#f3f3f3</color>
-    <color name="bgColorGreen">#00C279</color>
+    <color name="app_background">@color/white</color>
+    <color name="app_black">#373e43</color>
+    <color name="app_black_alpha_70">#B3373E43</color>
+    <color name="app_black_alpha_50">#80373E43</color>
+    <color name="app_black_background">#4B4B4B</color>
+
+
+    <color name="bg_edit_text_grey">#F6F6F6</color>
+    <color name="bg_error_red">#FF9494</color>
+    <color name="bg_card_grey">#FAFAFA</color>
     <color name="dividerColor">#E7EDF1</color>
-    <color name="roundedRectOutlineColor">#D9DEE4</color>
+    <color name="bg_error_reg_lite">#D44333</color>
+
     <color name="btnBgColorRed">#ED1C24</color>
     <color name="btnBgColorGrey">#4c5156</color>
     <color name="errorBgColor">#FFE2E3</color>
     <color name="successBgColor">#883BBC7C</color>
-    <color name="borderColorGray">#D5D4D4</color>
-    <color name="grayOrColor">#B8BCC0</color>
-    <color name="colorGrayTitle">#9598A2</color>
-    <color name="authHeaderColor">#D4D8D9</color>
-    <color name="colorDivider">#C4C5C7</color>
-    <color name="colorGrey">#7C7C7C</color>
 
 </resources>

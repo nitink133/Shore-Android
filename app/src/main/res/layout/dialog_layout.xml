@@ -2,20 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/bg_rounded"
+    android:backgroundTint="@color/app_background"
     android:orientation="vertical">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/textColorMenuItem"
+        android:background="@color/app_black_background"
         android:orientation="horizontal"
         android:padding="@dimen/small_margin">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvHeading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/textView"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginEnd="@dimen/default_margin"

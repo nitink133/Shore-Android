@@ -12,11 +12,13 @@ import androidx.viewpager.widget.ViewPager
 import com.theshoremedia.R
 import com.theshoremedia.R.*
 import com.theshoremedia.databinding.ActivityIntroScreenBinding
-import com.theshoremedia.modules.base.adapter.DynamicViewPagerAdapter
+import com.theshoremedia.modules.base.adapter.IntroViewPagerAdapter
 import com.theshoremedia.utils.AppConstants
 import com.theshoremedia.utils.PreferenceUtils
-import com.theshoremedia.utils.extensions.*
-
+import com.theshoremedia.utils.extensions.animateFromBottom
+import com.theshoremedia.utils.extensions.animateFromBottomCentered
+import com.theshoremedia.utils.extensions.loadImage
+import com.theshoremedia.utils.extensions.makeVisibleWithAnimation
 
 class IntroScreenActivity : AppCompatActivity() {
     private var mWelcomePage1: ViewGroup? = null
@@ -28,7 +30,7 @@ class IntroScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, layout.activity_intro_screen)
-        val pagerAdapter = DynamicViewPagerAdapter()
+        val pagerAdapter = IntroViewPagerAdapter()
         addPagerViews(pagerAdapter)
         binding.ivLeft.setOnClickListener {
             if (binding.viewPager.currentItem - 1 >= 0) binding.viewPager.setCurrentItem(
@@ -36,11 +38,18 @@ class IntroScreenActivity : AppCompatActivity() {
                 true
             )
         }
+
+        binding.btnGetStarted.setOnClickListener {
+            moveToMain()
+        }
+
+        binding.tvSkip.setOnClickListener {
+            moveToMain()
+        }
         binding.ivRight.setOnClickListener {
             if (binding.viewPager.currentItem + 1 < pagerAdapter.count) binding.viewPager.currentItem =
                 binding.viewPager.currentItem + 1 else { // end presentation
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
+                moveToMain()
             }
         }
         binding.viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -49,8 +58,19 @@ class IntroScreenActivity : AppCompatActivity() {
                 positionOffset: Float,
                 positionOffsetPixels: Int
             ) {
+                if (position + 1 == pagerAdapter.count) {
+                    binding.ivLeft.makeVisibleWithAnimation(isVisible = false)
+                    binding.ivRight.makeVisibleWithAnimation(isVisible = false)
+                    binding.btnGetStarted.makeVisibleWithAnimation(isVisible = position + 1 == pagerAdapter.count)
+                    binding.tvSkip.makeVisibleWithAnimation(isVisible = false)
+                    return
+                }
+
                 binding.ivRight.makeVisibleWithAnimation(isVisible = position + 1 != pagerAdapter.count)
                 binding.ivLeft.makeVisibleWithAnimation(isVisible = position != 0)
+                binding.btnGetStarted.makeVisibleWithAnimation(isVisible = false)
+                binding.tvSkip.makeVisibleWithAnimation(isVisible = true)
+
             }
 
             override fun onPageSelected(position: Int) {
@@ -62,60 +82,63 @@ class IntroScreenActivity : AppCompatActivity() {
         binding.viewPager.adapter = pagerAdapter
     }
 
-    private fun addPagerViews(pagerAdapter: DynamicViewPagerAdapter) {
+    private fun moveToMain() {
+        PreferenceUtils.savePref(AppConstants.Preference.IS_FIRST_TIME_USER, false)
+        val intent = Intent(this@IntroScreenActivity, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+    }
+
+    private fun addPagerViews(pagerAdapter: IntroViewPagerAdapter) {
         run {
             mWelcomePage1 =
-                layoutInflater.inflate(layout.layout_intro_screen, null, false) as ViewGroup
+                layoutInflater.inflate(layout.layout_info_screen, null, false) as ViewGroup
             mWelcomePage1?.findViewById<AppCompatImageView>(id.imageView)
-                ?.loadImage(drawable.demo_whatsapp_chat)
-            mWelcomePage1?.findViewById<TextView>(id.tvFooter)?.text =
-                getString(R.string.intro_screen_1)
+                ?.loadImage(drawable.ic_info_confused)
+            mWelcomePage1?.findViewById<TextView>(id.tvHeader)?.text =
+                getText(R.string.lbl_intro_1)
+            mWelcomePage1?.findViewById<TextView>(id.tvDescription)?.text =
+                getText(R.string.des_intro_1)
             pagerAdapter.addView(mWelcomePage1)
         }
         run {
             mWelcomePage2 =
-                layoutInflater.inflate(layout.layout_intro_screen, null, false) as ViewGroup
+                layoutInflater.inflate(layout.layout_info_screen, null, false) as ViewGroup
             mWelcomePage2?.findViewById<AppCompatImageView>(id.imageView)
-                ?.loadImage(drawable.demo_checkout_cred)
+                ?.loadImage(drawable.ic_info_read)
 
-            mWelcomePage2?.findViewById<TextView>(id.tvFooter)?.text =
-                getString(R.string.intro_screen_2)
+            mWelcomePage2?.findViewById<TextView>(id.tvHeader)?.text =
+                getText(R.string.lbl_intro_2)
+            mWelcomePage2?.findViewById<TextView>(id.tvDescription)?.text =
+                getText(R.string.des_intro_2)
             pagerAdapter.addView(mWelcomePage2)
         }
         run {
             mWelcomePage3 =
-                layoutInflater.inflate(layout.layout_intro_screen, null, false) as ViewGroup
+                layoutInflater.inflate(layout.layout_info_screen, null, false) as ViewGroup
             mWelcomePage3?.findViewById<AppCompatImageView>(id.imageView)
-                ?.loadImage(drawable.demo_article)
+                ?.loadImage(drawable.ic_info_peace)
 
-            mWelcomePage3?.findViewById<TextView>(id.tvFooter)?.text =
-                getString(R.string.intro_screen_3)
+            mWelcomePage3?.findViewById<TextView>(id.tvHeader)?.text =
+                getText(R.string.lbl_intro_3)
+            mWelcomePage3?.findViewById<TextView>(id.tvDescription)?.text =
+                getText(R.string.des_intro_3)
             pagerAdapter.addView(mWelcomePage3)
         }
         run {
             mWelcomePage4 =
                 layoutInflater.inflate(
-                    layout.layout_intro_screen,
+                    layout.layout_info_screen,
                     null,
                     false
                 ) as ViewGroup
             mWelcomePage4?.findViewById<AppCompatImageView>(id.imageView)
-                ?.loadImage(drawable.demo_accessibility)
-            mWelcomePage4?.findViewById<TextView>(id.tvDescription)?.makeVisible(isVisible = true)
+                ?.loadImage(drawable.ic_info_privacy)
+
+            mWelcomePage4?.findViewById<TextView>(id.tvHeader)?.text =
+                getText(R.string.lbl_intro_4)
             mWelcomePage4?.findViewById<TextView>(id.tvDescription)?.text =
-                getString(string.enable_accessibility)
-
-            mWelcomePage4?.findViewById<TextView>(id.tvFooter)?.text =
-                getString(R.string.intro_screen_4)
-
-            mWelcomePage4?.findViewById<TextView>(id.tvFooter)?.makeLinks(
-                Pair(getString(R.string.txt_activate_not), View.OnClickListener {
-                    PreferenceUtils.savePref(AppConstants.Preference.IS_FIRST_TIME_USER, false)
-                    val intent = Intent(this@IntroScreenActivity, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
-                })
-            )
+                getText(R.string.des_intro_4)
             pagerAdapter.addView(mWelcomePage4)
         }
 

@@ -49,11 +49,14 @@ object AppConstants {
 
     object NavigationItem {
         const val HOME = 0
-        const val BOOKMARK = 1
-        const val SETTINGS = 2
-        const val HELP_SUPPORT = 3
-        const val ABOUT_US = 4
+        const val PAST_CHECKS = 1
+        const val FAVOURITE = 2
+        const val SETTINGS = 3
+        const val HELP_SUPPORT = 4
         const val PRIVACY_POLICY = 5
+        const val SHARE_APP = 6
+        const val RATE_US = 7
+        const val ABOUT_US = 8
 
     }
 

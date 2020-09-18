@@ -1,5 +1,6 @@
 package com.theshoremedia.activity
 
+import android.animation.AnimatorInflater
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -18,6 +19,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.theshoremedia.R
+import com.theshoremedia.database.helper.CustomSourcesDatabaseHelper
+import com.theshoremedia.database.helper.FactCheckHistoryDatabaseHelper
 import com.theshoremedia.databinding.ActivityMainBinding
 import com.theshoremedia.modules.base.BaseActivity
 import com.theshoremedia.modules.base.BaseFragment
@@ -54,6 +57,8 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
             }
         }
 
+        FactCheckHistoryDatabaseHelper.instance?.addDummyData(this)
+        CustomSourcesDatabaseHelper.instance?.storeCustomSourcesInDB(this)
         // initializing navigation menu
         setUpNavigationView()
         setupNavigationController()
@@ -69,8 +74,10 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.nav_bookmark -> setTitle(getString(R.string.bookmark))
+                R.id.nav_past_checks -> setTitle(getString(R.string.past_checks))
+                R.id.nav_favorite -> setTitle(getString(R.string.favourites))
                 R.id.nav_settings -> setTitle(getString(R.string.settings))
+                R.id.nav_home -> setTitle(isElevation = false)
                 else -> setTitle()
             }
         }
@@ -78,7 +85,7 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
 
         //fragments load from here but how ?
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.nav_home, R.id.nav_favorite),
+            setOf(R.id.nav_past_checks, R.id.nav_favorite, R.id.nav_home),
             binding.drawerLayout
         )
 
@@ -113,7 +120,10 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
             AppConstants.NavigationItem.HOME -> {
                 navController.navigate(R.id.nav_home)
             }
-            AppConstants.NavigationItem.BOOKMARK -> {
+            AppConstants.NavigationItem.PAST_CHECKS -> {
+                navController.navigate(R.id.nav_past_checks)
+            }
+            AppConstants.NavigationItem.FAVOURITE -> {
                 navController.navigate(R.id.nav_favorite)
             }
 
@@ -174,7 +184,11 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
         Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
     }
 
-    fun setTitle(title: String? = null) {
+    fun setTitle(title: String? = null, isElevation: Boolean = true) {
+        appbarLayout?.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            applicationContext,
+            if (isElevation) R.animator.anim_elevation else R.animator.anim_no_elevation
+        )
         binding.layoutAppBarMain.findViewById<ImageView>(R.id.ivShoreIcon)
             .makeVisible(isVisible = title.isNullOrEmpty())
         binding.layoutAppBarMain.findViewById<AppCompatTextView>(R.id.tvToolbarTitle)

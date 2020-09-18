@@ -97,7 +97,6 @@ class FactCheckHistoryDatabaseHelper {
     fun addDummyData(context: Context) {
         val dummyData = ApplicationUtils.getDummyData(context)
         handler?.post {
-
             if (AppDatabase.appDatabase.factChecksHistoryDao()?.getAllItems?.size != 0) return@post
             AppDatabase.appDatabase.factChecksHistoryDao()!!.deleteAll()
             AppDatabase.appDatabase.factChecksHistoryDao()!!.insertAll(dummyData)

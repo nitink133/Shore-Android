@@ -6,6 +6,15 @@
     app:startDestination="@id/nav_home">
     <fragment
         android:id="@+id/nav_home"
+        android:name="com.theshoremedia.modules.home.fragment.HomeFragment"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_to_about_source"
+            app:destination="@id/nav_about_source" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_past_checks"
         android:name="com.theshoremedia.modules.factchecks.fragments.FactsCheckListFragment"
         tools:layout="@layout/fragment_facts_check_list">
         <action
@@ -45,6 +54,16 @@
     <fragment
         android:id="@+id/nav_settings"
         android:name="com.theshoremedia.modules.factchecks.fragments.SettingsFragment">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_about_source"
+        android:name="com.theshoremedia.modules.home.fragment.AboutSourceFragment"
+        tools:layout="@layout/fragment_about_source">
+        <argument
+            android:name="newsSourceModel"
+            app:argType="com.theshoremedia.database.entity.NewsSourceModel" />
 
     </fragment>
 
