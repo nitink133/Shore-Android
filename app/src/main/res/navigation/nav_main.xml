@@ -12,11 +12,21 @@
         <action
             android:id="@+id/action_to_about_source"
             app:destination="@id/nav_about_source" />
+
+
+        <action
+            android:id="@+id/action_to_search_result"
+            app:destination="@id/nav_search_fragment" />
+
+
+        <action
+            android:id="@+id/action_to_fav_article"
+            app:destination="@id/nav_article" />
     </fragment>
     <fragment
         android:id="@+id/nav_past_checks"
-        android:name="com.theshoremedia.modules.factchecks.fragments.FactsCheckListFragment"
-        tools:layout="@layout/fragment_facts_check_list">
+        android:name="com.theshoremedia.modules.factchecks.fragments.PastCheckListFragment"
+        tools:layout="@layout/fragment_past_facts_check_list">
         <action
             android:id="@+id/action_to_article"
             app:destination="@id/nav_article" />
@@ -25,7 +35,7 @@
         android:id="@+id/nav_favorite"
         android:name="com.theshoremedia.modules.factchecks.fragments.FavouriteArticlesListFragment"
         android:label="@string/bookmark"
-        tools:layout="@layout/fragment_facts_check_list">
+        tools:layout="@layout/fragment_past_facts_check_list">
         <action
             android:id="@+id/action_to_fav_article"
             app:destination="@id/nav_article" />
@@ -64,6 +74,16 @@
         <argument
             android:name="newsSourceModel"
             app:argType="com.theshoremedia.database.entity.NewsSourceModel" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_search_fragment"
+        android:name="com.theshoremedia.modules.home.fragment.SearchResultFragment"
+        tools:layout="@layout/fragment_search_result">
+        <argument
+            android:name="claim"
+            app:argType="string" />
 
     </fragment>
 

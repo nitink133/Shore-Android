@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.theshoremedia.R
 import com.theshoremedia.activity.MainActivity
 import com.theshoremedia.databinding.FragmentManualFactCheckingBinding
 import com.theshoremedia.modules.base.BaseFragment
 import com.theshoremedia.utils.KeyBoardManager
+import com.theshoremedia.utils.ToastUtils
 import com.theshoremedia.utils.extensions.makeVisible
 
 /**
@@ -42,9 +44,20 @@ class ManualFactCheckingFragment : BaseFragment() {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun initListeners() {
+        binding.tvInvestigate.setOnClickListener {
+            if (binding.etClaim.text.toString().isEmpty()) {
+                ToastUtils.makeToast(mContext, getString(R.string.err_empty_claim))
+                return@setOnClickListener
+            }
+            val direction =
+                HomeFragmentDirections.actionToSearchResult(binding.etClaim.text.toString())
+            val mainNavView = requireActivity().findViewById<View>(R.id.frame)
+            Navigation.findNavController(mainNavView).navigate(direction)
+        }
+
+
         KeyBoardManager.keyboardVisibilityListener(mContext as MainActivity, this) {
             binding.llServiceStatus.makeVisible(isVisible = !it)
-            //scroll to last view
 
             //scroll to last view
             val lastChild: View =
@@ -57,4 +70,6 @@ class ManualFactCheckingFragment : BaseFragment() {
             binding.scrollView.smoothScrollBy(0, delta)
         }
     }
+
+
 }

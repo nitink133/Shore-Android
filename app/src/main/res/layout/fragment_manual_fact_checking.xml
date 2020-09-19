@@ -74,6 +74,7 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         style="@style/textView"
                         android:layout_gravity="bottom|end"
+                        android:id="@+id/tvInvestigate"
                         android:layout_marginEnd="@dimen/default_margin"
                         android:layout_marginBottom="@dimen/small_margin"
                         android:text="@string/investigate"

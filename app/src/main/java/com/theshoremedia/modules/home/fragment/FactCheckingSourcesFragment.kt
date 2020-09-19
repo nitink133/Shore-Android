@@ -130,7 +130,8 @@ class FactCheckingSourcesFragment : BaseFragment() {
             }
 
             "delete" -> {
-                CustomSourcesDatabaseHelper.instance?.deleteNews(model)
+                it.isSelected = false
+                CustomSourcesDatabaseHelper.instance?.update(model)
             }
             else -> {
                 val direction =

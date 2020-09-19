@@ -155,4 +155,8 @@
     <string name="key_view_name">view_name</string>
     <string name="msg_source_successfully_added_as_verification_source">%1$s successfully added as source of verification.</string>
 
+    <string name="err_empty_claim">Please enter claim to investigate</string>
+    <string name="err_oops_we_didnt_find_any_ifcn_signatory_story">Oops… We did not find any story published from our credible sources. You can read these stories as these are published from custom sources.</string>
+    <string name="search_result">Search result</string>
+
 </resources>

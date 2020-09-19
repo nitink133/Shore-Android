@@ -8,21 +8,18 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.airbnb.lottie.LottieAnimationView
 import com.theshoremedia.R
 import com.theshoremedia.activity.MainActivity
 import com.theshoremedia.database.entity.FactCheckHistoryModel
 import com.theshoremedia.database.helper.FactCheckHistoryDatabaseHelper
-import com.theshoremedia.databinding.FragmentFactsCheckListBinding
+import com.theshoremedia.databinding.FragmentPastFactsCheckListBinding
 import com.theshoremedia.modules.base.BaseFragment
 import com.theshoremedia.modules.factchecks.adapter.FactCheckAdapter
-import com.theshoremedia.utils.extensions.setFullAnimation
-import com.theshoremedia.utils.extensions.setZeroAnimation
 import com.theshoremedia.utils.extensions.validateNoDataView
 
 
-class FactsCheckListFragment : BaseFragment() {
-    private lateinit var binding: FragmentFactsCheckListBinding
+class PastCheckListFragment : BaseFragment() {
+    private lateinit var binding: FragmentPastFactsCheckListBinding
     private var mAdapter: FactCheckAdapter? = null
     private var isBookMarkStatusChanged: Boolean = false
 
@@ -31,7 +28,12 @@ class FactsCheckListFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_facts_check_list, container, false)
+            DataBindingUtil.inflate(
+                inflater,
+                R.layout.fragment_past_facts_check_list,
+                container,
+                false
+            )
         return binding.root
     }
 
@@ -51,10 +53,6 @@ class FactsCheckListFragment : BaseFragment() {
                     R.id.ivBookMark -> {
                         isBookMarkStatusChanged = true
                         val model = it.tag as FactCheckHistoryModel
-                        if (model.isFavourite) {
-                            (it as LottieAnimationView).setFullAnimation()
-                        } else (it as LottieAnimationView).setZeroAnimation()
-
                         model.isFavourite = !model.isFavourite
 
                         FactCheckHistoryDatabaseHelper.instance!!.markAsFav(model)
@@ -62,7 +60,7 @@ class FactsCheckListFragment : BaseFragment() {
                     }
                     else -> {
                         val direction =
-                            FactsCheckListFragmentDirections.actionToArticle(it.tag as FactCheckHistoryModel)
+                            PastCheckListFragmentDirections.actionToArticle(it.tag as FactCheckHistoryModel)
                         val mainNavView = requireActivity().findViewById<View>(R.id.frame)
                         Navigation.findNavController(mainNavView).navigate(direction)
                     }
@@ -89,7 +87,7 @@ class FactsCheckListFragment : BaseFragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            FactsCheckListFragment()
+            PastCheckListFragment()
     }
 
     override fun onPageRefreshListener(data: Bundle?) {

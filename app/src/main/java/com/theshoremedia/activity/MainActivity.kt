@@ -78,6 +78,7 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
                 R.id.nav_favorite -> setTitle(getString(R.string.favourites))
                 R.id.nav_settings -> setTitle(getString(R.string.settings))
                 R.id.nav_home -> setTitle(isElevation = false)
+                R.id.nav_search_fragment -> setTitle(getString(R.string.search_result))
                 else -> setTitle()
             }
         }
@@ -95,14 +96,14 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
 
     private fun setUpNavigationView() {
         ivCloseDrawer?.setOnClickListener {
-            binding.drawerLayout.closeDrawers()
+            Handler().postDelayed({
+                binding.drawerLayout.closeDrawers()
+            }, 300)
         }
 
         val navigationItems = getNavigationItems()
         val adapter = NavigationDrawerAdapter(items = navigationItems) { position, title ->
-            Handler().postDelayed({
-                onNavigationItemClick(position, title)
-            }, 300)
+            onNavigationItemClick(position, title)
 
         }
         recyclerView?.setHasFixedSize(true)
@@ -113,7 +114,9 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
 
     private fun onNavigationItemClick(position: Int, title: String? = null) {
         val navController: NavController = findNavController(R.id.frame)
-        binding.drawerLayout.closeDrawers()
+        Handler().postDelayed({
+            binding.drawerLayout.closeDrawers()
+        }, 300)
         KeyBoardManager.hideKeyboard(this)
 
         when (position) {
@@ -159,7 +162,9 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
 
     override fun onBackPressed() {
         if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            binding.drawerLayout.closeDrawers()
+            Handler().postDelayed({
+                binding.drawerLayout.closeDrawers()
+            }, 300)
             return
         }
         when (navHostFragment.navController.graph.startDestination) {
@@ -218,7 +223,9 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             if (appBarConfiguration.topLevelDestinations.contains(navHostFragment.navController.currentDestination?.id)) {
-                binding.drawerLayout.openDrawer(GravityCompat.START)
+                Handler().postDelayed({
+                    binding.drawerLayout.openDrawer(GravityCompat.START)
+                }, 300)
             } else {
                 super.onBackPressed()
             }
