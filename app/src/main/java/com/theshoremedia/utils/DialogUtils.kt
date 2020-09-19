@@ -177,8 +177,6 @@ object DialogUtils {
                 customDialog.dismiss()
             }
             btnCancel.setOnClickListener {
-                if (spnSource.selectedItem != null)
-                    responseListener?.invoke(spnSource.selectedItem as T)
                 customDialog.dismiss()
             }
             customDialog.show()

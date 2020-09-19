@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import com.theshoremedia.R
 import com.theshoremedia.activity.MainActivity
 import com.theshoremedia.databinding.FragmentManualFactCheckingBinding
@@ -51,8 +50,7 @@ class ManualFactCheckingFragment : BaseFragment() {
             }
             val direction =
                 HomeFragmentDirections.actionToSearchResult(binding.etClaim.text.toString())
-            val mainNavView = requireActivity().findViewById<View>(R.id.frame)
-            Navigation.findNavController(mainNavView).navigate(direction)
+            getNavController().navigate(direction)
         }
 
 

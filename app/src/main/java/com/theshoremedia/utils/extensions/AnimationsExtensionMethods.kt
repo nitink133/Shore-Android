@@ -29,6 +29,10 @@ fun View.animateEnterFromRight() {
     this.animation = AnimationUtils.loadAnimation(this.context, R.anim.enter_from_right)
 }
 
+fun View.animateTopToBottom() {
+    this.animation = AnimationUtils.loadAnimation(this.context, R.anim.enter_from_top)
+}
+
 fun View.showWithAnimation() {
     if (this.isVisible) return
     this.makeVisible(true)

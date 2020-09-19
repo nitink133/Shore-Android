@@ -70,8 +70,7 @@ class FavouriteArticlesListFragment : BaseFragment() {
                     else -> {
                         val direction =
                             FavouriteArticlesListFragmentDirections.actionToFavArticle(it.tag as FactCheckHistoryModel)
-                        val mainNavView = requireActivity().findViewById<View>(R.id.frame)
-                        Navigation.findNavController(mainNavView).navigate(direction)
+                        getNavController().navigate(direction)
                     }
                 }
             }

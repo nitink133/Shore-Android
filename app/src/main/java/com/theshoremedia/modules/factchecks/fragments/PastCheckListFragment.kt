@@ -61,8 +61,7 @@ class PastCheckListFragment : BaseFragment() {
                     else -> {
                         val direction =
                             PastCheckListFragmentDirections.actionToArticle(it.tag as FactCheckHistoryModel)
-                        val mainNavView = requireActivity().findViewById<View>(R.id.frame)
-                        Navigation.findNavController(mainNavView).navigate(direction)
+                        getNavController().navigate(direction)
                     }
                 }
             }

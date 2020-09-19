@@ -45,7 +45,7 @@ class ArticleView(context: Context) : LinearLayout(context) {
         }
 
         findViewById<ImageView>(R.id.ivShare).setOnClickListener {
-            ShareUtils.takeScreenshotAndShare(llRootNewsView)
+            ShareUtils.takeScreenshotAndShare(view = llRootNewsView)
         }
 
         doOnLayout {

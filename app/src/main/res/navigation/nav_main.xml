@@ -32,7 +32,7 @@
             app:destination="@id/nav_article" />
     </fragment>
     <fragment
-        android:id="@+id/nav_favorite"
+        android:id="@+id/nav_favourite"
         android:name="com.theshoremedia.modules.factchecks.fragments.FavouriteArticlesListFragment"
         android:label="@string/bookmark"
         tools:layout="@layout/fragment_past_facts_check_list">

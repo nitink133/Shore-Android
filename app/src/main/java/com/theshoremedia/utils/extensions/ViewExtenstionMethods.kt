@@ -1,7 +1,10 @@
 package com.theshoremedia.utils.extensions
 
 import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.drawable.Drawable
 import android.view.View
+import android.widget.ScrollView
 import androidx.recyclerview.widget.RecyclerView
 
 /**
@@ -42,8 +45,23 @@ fun View.changeBackgroundColor(colorCode: Int) {
 
 fun View.getScreenShot(): Bitmap? {
     this.isDrawingCacheEnabled = true
+    if (this.drawingCache == null) return null
     val bitmap = Bitmap.createBitmap(this.drawingCache)
     this.isDrawingCacheEnabled = false
+    return bitmap
+
+}
+
+fun ScrollView.getScrollViewScreenShot(): Bitmap? {
+    val bitmap = Bitmap.createBitmap(
+        this.getChildAt(0).width,
+        this.getChildAt(0).height,
+        Bitmap.Config.ARGB_8888
+    )
+    val canvas = Canvas(bitmap)
+    val bgDrawable: Drawable = this.background
+    bgDrawable.draw(canvas)
+    this.draw(canvas)
     return bitmap
 
 }

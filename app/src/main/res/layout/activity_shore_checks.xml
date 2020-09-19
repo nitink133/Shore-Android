@@ -133,7 +133,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvForwarded"
+                        android:id="@+id/lblForwarded"
                         style="@style/withAlphaTextView"
                         android:layout_marginStart="@dimen/small_margin"
                         android:text="@string/lbl_forwarded"

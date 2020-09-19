@@ -131,4 +131,11 @@ class FactCheckHistoryDatabaseHelper {
         }
     }
 
+    fun delete(model: FactCheckHistoryModel) {
+        handler?.post {
+            Log.d("Nitin", "insertNews called")
+            AppDatabase.appDatabase.factChecksHistoryDao()!!.delete(arrayListOf(model))
+        }
+    }
+
 }

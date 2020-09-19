@@ -136,8 +136,7 @@ class FactCheckingSourcesFragment : BaseFragment() {
             else -> {
                 val direction =
                     HomeFragmentDirections.actionToAboutSource(model)
-                val mainNavView = requireActivity().findViewById<View>(R.id.frame)
-                Navigation.findNavController(mainNavView).navigate(direction)
+                getNavController().navigate(direction)
             }
         }
     }

@@ -7,7 +7,7 @@
             android:icon="@drawable/ic_clear_24px"
             android:title="@string/home" />
         <item
-            android:id="@+id/nav_bookmark"
+            android:id="@+id/nav_favourite"
             android:icon="@drawable/ic_right_arrow"
             android:title="@string/bookmark" />
     </group>

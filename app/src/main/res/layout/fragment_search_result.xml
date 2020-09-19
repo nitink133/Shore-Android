@@ -16,7 +16,7 @@
                 android:id="@+id/llContentView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="visible"
+                android:visibility="invisible"
                 tools:context=".modules.home.fragment.SearchResultFragment">
 
 
@@ -70,11 +70,11 @@
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/lvSearching"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/small_margin"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:lottie_autoPlay="true"
                 app:lottie_fileName="lottie/searching.json"
                 app:lottie_loop="true" />

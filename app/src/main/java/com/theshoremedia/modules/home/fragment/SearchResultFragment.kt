@@ -84,10 +84,9 @@ class SearchResultFragment : BaseFragment() {
     ) {
         val direction =
             HomeFragmentDirections.actionToFavArticle(factCheckHistoryModel)
-        val mainNavView = requireActivity().findViewById<View>(R.id.frame)
-        Navigation.findNavController(mainNavView).navigate(direction)
+        getNavController().navigate(direction)
         if (isPopCurrent)
-            Navigation.findNavController(mainNavView).popBackStack()
+            getNavController().popBackStack()
     }
 
     override fun onPageRefreshListener(data: Bundle?) {

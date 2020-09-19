@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/nav_share"
+        android:id="@+id/menu_share"
         android:icon="@drawable/ic_share"
         android:title="@string/share"
         app:showAsAction="always" />
     <item
-        android:id="@+id/nav_favorite"
+        android:id="@+id/menu_favorite"
         android:title="@string/mark_as_favourite" />
 
     <item
-        android:id="@+id/nav_delete"
+        android:id="@+id/menu_delete"
         android:title="@string/delete" />
 
 

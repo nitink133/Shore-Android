@@ -35,6 +35,7 @@ import com.theshoremedia.utils.extensions.validateNoDataView
 import com.theshoremedia.utils.permissions.AccessibilityPermissionsUtils
 import com.theshoremedia.utils.permissions.BatteryOptimizationPermissionsUtils
 import com.theshoremedia.utils.permissions.OnDrawPermissionsUtils
+import com.theshoremedia.utils.permissions.StoragePermissionsUtils
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.layout_navigation_view.*
 import kotlinx.android.synthetic.main.layout_recycler_view.*
@@ -75,7 +76,7 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.nav_past_checks -> setTitle(getString(R.string.past_checks))
-                R.id.nav_favorite -> setTitle(getString(R.string.favourites))
+                R.id.nav_favourite -> setTitle(getString(R.string.favourites))
                 R.id.nav_settings -> setTitle(getString(R.string.settings))
                 R.id.nav_home -> setTitle(isElevation = false)
                 R.id.nav_search_fragment -> setTitle(getString(R.string.search_result))
@@ -86,7 +87,7 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
 
         //fragments load from here but how ?
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.nav_past_checks, R.id.nav_favorite, R.id.nav_home),
+            setOf(R.id.nav_past_checks, R.id.nav_favourite, R.id.nav_home),
             binding.drawerLayout
         )
 
@@ -127,7 +128,7 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
                 navController.navigate(R.id.nav_past_checks)
             }
             AppConstants.NavigationItem.FAVOURITE -> {
-                navController.navigate(R.id.nav_favorite)
+                navController.navigate(R.id.nav_favourite)
             }
 
             AppConstants.NavigationItem.SETTINGS -> {
@@ -157,7 +158,6 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
             )
         }
         return items
-
     }
 
     override fun onBackPressed() {
@@ -217,6 +217,20 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
             AppConstants.PermissionsCode.ACTION_BATTERY_SAVER -> BatteryOptimizationPermissionsUtils.onActivityResult(
                 mContext = this
             )
+
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            AppConstants.PermissionsCode.ACTION_STORAGE -> StoragePermissionsUtils.onActivityResult(
+                mContext = this
+            )
         }
     }
 
@@ -227,7 +241,7 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
                     binding.drawerLayout.openDrawer(GravityCompat.START)
                 }, 300)
             } else {
-                super.onBackPressed()
+                navHostFragment.navController.navigateUp()
             }
         }
         return item.onNavDestinationSelected(findNavController(R.id.frame))
