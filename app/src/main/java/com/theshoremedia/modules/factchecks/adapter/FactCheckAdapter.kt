@@ -64,6 +64,9 @@ class FactCheckAdapter(
 
 
             binding.ivBookMark.setOnClickListener {
+                if (model.isFavourite)
+                    binding.ivBookMark.setZero()
+                else binding.ivBookMark.setFull()
                 callBacks.invoke(it)
             }
 

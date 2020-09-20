@@ -12,6 +12,7 @@ import com.theshoremedia.services.CustomAccessibilityService
 import com.theshoremedia.utils.AccessibilityUtils
 import com.theshoremedia.utils.AppConstants
 import com.theshoremedia.utils.DialogUtils
+import com.theshoremedia.utils.PreferenceUtils
 import com.theshoremedia.views.BubbleAccessibilityGrantedDemoView
 import com.theshoremedia.views.BubbleAccessibilityPermissionsHelpView
 
@@ -57,7 +58,10 @@ class AccessibilityPermissionsUtils {
 
                         BubbleAccessibilityPermissionsHelpView.getInstance(mContext).init()
                         val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
-                        (mContext as Activity).startActivityForResult(intent,AppConstants.PermissionsCode.ACTION_ACCESSIBILITY)
+                        (mContext as Activity).startActivityForResult(
+                            intent,
+                            AppConstants.PermissionsCode.ACTION_ACCESSIBILITY
+                        )
 
                     } else {
                         listener.invoke(false)
@@ -94,7 +98,7 @@ class AccessibilityPermissionsUtils {
             listener?.invoke(true)
         }
 
-         fun verifyPermission(
+        fun verifyPermission(
             mContext: Context,
             listener: ((isEnabled: Boolean) -> Unit)
         ) {
@@ -112,6 +116,7 @@ class AccessibilityPermissionsUtils {
         ) {
             if (mContext == null) return
             verifyPermission(mContext) { isEnabled ->
+                PreferenceUtils.savePref(mContext.getString(R.string.key_auto_detect), isEnabled)
                 listener?.invoke(isEnabled)
             }
 

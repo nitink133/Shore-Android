@@ -13,30 +13,26 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
-            android:background="?attr/colorPrimary">
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?android:attr/actionBarSize">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="?android:attr/actionBarSize">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvToolbarTitle"
-                    style="@style/textView"
-                    android:text="@string/app_name"
-                    android:textSize="@dimen/heading_textsize"
-                    android:visibility="gone" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvToolbarTitle"
+                style="@style/textView"
+                android:text="@string/app_name"
+                android:textSize="@dimen/extra_large_textsize"
+                android:visibility="gone" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivShoreIcon"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="@dimen/default_padding"
-                    android:src="@drawable/logo_text"
-                    android:visibility="visible" />
-            </FrameLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivShoreIcon"
+                android:layout_width="150dp"
+                android:layout_height="?android:attr/actionBarSize"
+                android:layout_gravity="center"
+                android:padding="@dimen/default_padding"
+                android:src="@drawable/logo_text"
+                android:visibility="visible" />
 
         </androidx.appcompat.widget.Toolbar>
 

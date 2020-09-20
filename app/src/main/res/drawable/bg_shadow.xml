@@ -12,7 +12,13 @@
         android:left="0dp"
         android:right="0dp"
         android:top="0dp">
+
         <shape android:shape="rectangle">
+            <padding
+                android:bottom="@dimen/extra_small_margin"
+                android:left="@dimen/small_padding"
+                android:right="@dimen/small_padding"
+                android:top="@dimen/extra_small_margin" />
             <solid android:color="@color/colorPrimary" />
             <corners android:radius="2dp" />
         </shape>

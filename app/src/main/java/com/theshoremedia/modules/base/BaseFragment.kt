@@ -2,7 +2,11 @@ package com.theshoremedia.modules.base
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import com.theshoremedia.R
 
 /**
  * @author- Nitin Khanna
@@ -24,5 +28,10 @@ open class BaseFragment : Fragment() {
 
     open fun onPageRefreshListener(data: Bundle? = null) {
 
+    }
+
+    fun getNavController(): NavController {
+        val mainNavView = requireActivity().findViewById<View>(R.id.frame)
+        return Navigation.findNavController(mainNavView)
     }
 }

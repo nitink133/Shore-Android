@@ -94,7 +94,7 @@
                     tools:text="@string/small_dummy_text" />
 
                 <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/ivBookMark"
+                    android:id="@+id/ivArrowDown"
                     android:layout_width="@dimen/large_image"
                     android:layout_height="@dimen/large_image"
                     android:layout_gravity="center"

@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/app_background"
-        tools:context=".modules.factchecks.fragments.FactsCheckListFragment">
+        tools:context=".modules.factchecks.fragments.PastCheckListFragment">
 
         <include
             android:id="@+id/llRecyclerView"

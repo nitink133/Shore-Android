@@ -1,10 +1,12 @@
 package com.theshoremedia.utils
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import com.theshoremedia.BuildConfig
+import com.theshoremedia.R
 import com.theshoremedia.database.entity.FactCheckHistoryModel
 import java.io.IOException
 import java.io.InputStream
@@ -53,7 +55,7 @@ object ApplicationUtils {
         return ObjectUtils.parseListTOData(json, FactCheckHistoryModel::class.java)
     }
 
-     fun getUniqueDeviceId():String {
+    fun getUniqueDeviceId(): String {
         val uniquePseudoID =
             "35" + Build.BOARD.length % 10 + Build.BRAND.length % 10 + Build.DEVICE.length % 10 + Build.DISPLAY.length % 10 + Build.HOST.length % 10 + Build.ID.length % 10 + Build.MANUFACTURER.length % 10 + Build.MODEL.length % 10 + Build.PRODUCT.length % 10 + Build.TAGS.length % 10 + Build.TYPE.length % 10 + Build.USER.length % 10
         val serial = Build.getRadioVersion()
@@ -68,5 +70,51 @@ object ApplicationUtils {
             message = deviceId
         )
         return deviceId
+    }
+
+
+    fun openAppOnPlayStore(mContext: Context?) {
+        if (mContext == null) return
+        val uri: Uri = Uri.parse("market://details?id=${BuildConfig.APPLICATION_ID}")
+        val goToMarket = Intent(Intent.ACTION_VIEW, uri)
+        // To count with Play market backstack, After pressing back button,
+        // to taken back to our application, we need to add following flags to intent.
+        goToMarket.addFlags(
+            Intent.FLAG_ACTIVITY_NO_HISTORY or
+                    Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
+                    Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+        )
+        try {
+            mContext.startActivity(goToMarket)
+        } catch (e: ActivityNotFoundException) {
+            mContext.startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("http://play.google.com/store/apps/details?id=${BuildConfig.APPLICATION_ID}")
+                )
+            )
+        }
+    }
+
+    fun mailToSupport(mContext: Context?) {
+        if (mContext == null) return
+        val intent = Intent(Intent.ACTION_SENDTO) // it's not ACTION_SEND
+        intent.putExtra(Intent.EXTRA_SUBJECT, mContext.getString(R.string.support_mail_subject))
+        intent.putExtra(Intent.EXTRA_TEXT, mContext.getString(R.string.support_mail_text))
+        intent.data =
+            Uri.parse("mailto:${mContext.getString(R.string.support_email)}") // or just "mailto:" for blank
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) // this will make such that when user returns to your app, your app is displayed, instead of the email app.
+        mContext.startActivity(intent)
+    }
+
+    fun shareApp(context: Context) {
+        val sendIntent = Intent()
+        sendIntent.action = Intent.ACTION_SEND
+        sendIntent.putExtra(
+            Intent.EXTRA_TEXT,
+            "Download Shore app to get rid of fake news on WhatsApp: https://bit.ly/35UfDCz"
+        )
+        sendIntent.type = "text/plain"
+        context.startActivity(sendIntent)
     }
 }

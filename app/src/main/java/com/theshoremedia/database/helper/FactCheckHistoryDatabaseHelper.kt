@@ -41,6 +41,16 @@ class FactCheckHistoryDatabaseHelper {
         }
     }
 
+    fun getAllNews(
+        callBack: ((items: List<FactCheckHistoryModel>) -> Unit)
+    ) {
+        handler?.post {
+
+
+                callBack.invoke( AppDatabase.appDatabase.factChecksHistoryDao()!!.getAllItems ?: arrayListOf())
+        }
+    }
+
     fun getUnreadNews(
         callBack: ((items: List<FactCheckHistoryModel>) -> Unit)
     ) {
@@ -128,6 +138,13 @@ class FactCheckHistoryDatabaseHelper {
         handler?.post {
             Log.d("Nitin", "insertNews called")
             AppDatabase.appDatabase.factChecksHistoryDao()!!.insertNew(model)
+        }
+    }
+
+    fun delete(model: FactCheckHistoryModel) {
+        handler?.post {
+            Log.d("Nitin", "insertNews called")
+            AppDatabase.appDatabase.factChecksHistoryDao()!!.delete(arrayListOf(model))
         }
     }
 

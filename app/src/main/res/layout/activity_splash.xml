@@ -30,7 +30,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/withAlphaTextView"
         style="@style/textView"
         android:text="@string/a_layer_of_truth"
         android:layout_marginTop="@dimen/default_margin"

@@ -72,6 +72,7 @@
                         android:scrollbars="vertical" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvInvestigate"
                         style="@style/textView"
                         android:layout_gravity="bottom|end"
                         android:layout_marginEnd="@dimen/default_margin"
@@ -92,19 +93,19 @@
             android:background="@drawable/bg_service_status"
             android:padding="@dimen/small_padding">
 
-
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 style="@style/textView"
                 android:layout_width="0dp"
+                android:id="@+id/tvAccServiceStatus"
                 android:layout_weight="1"
                 android:text="@string/error_whatsapp_real_time_fake_news_detection_is_not_activated_now"
-                android:textAlignment="viewStart"
+                android:textAlignment="textStart"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnCancel"
+                android:id="@+id/btnActivate"
                 style="@style/defaultBtnSmallStyle"
                 android:layout_height="@dimen/ultra_btn_height"
                 android:layout_gravity="center"

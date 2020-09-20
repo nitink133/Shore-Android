@@ -2,33 +2,32 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_main"
     app:startDestination="@id/nav_home">
     <fragment
         android:id="@+id/nav_home"
         android:name="com.theshoremedia.modules.home.fragment.HomeFragment"
         tools:layout="@layout/fragment_home">
 
-        <action
-            android:id="@+id/action_to_about_source"
-            app:destination="@id/nav_about_source" />
+        <action app:destination="@id/nav_about_source" />
+
+
+        <action app:destination="@id/nav_search_fragment" />
+
+
+        <action app:destination="@id/nav_article" />
     </fragment>
     <fragment
         android:id="@+id/nav_past_checks"
-        android:name="com.theshoremedia.modules.factchecks.fragments.FactsCheckListFragment"
-        tools:layout="@layout/fragment_facts_check_list">
-        <action
-            android:id="@+id/action_to_article"
-            app:destination="@id/nav_article" />
+        android:name="com.theshoremedia.modules.factchecks.fragments.PastCheckListFragment"
+        tools:layout="@layout/fragment_past_facts_check_list">
+        <action app:destination="@id/nav_article" />
     </fragment>
     <fragment
-        android:id="@+id/nav_favorite"
+        android:id="@+id/nav_favourite"
         android:name="com.theshoremedia.modules.factchecks.fragments.FavouriteArticlesListFragment"
         android:label="@string/bookmark"
-        tools:layout="@layout/fragment_facts_check_list">
-        <action
-            android:id="@+id/action_to_fav_article"
-            app:destination="@id/nav_article" />
+        tools:layout="@layout/fragment_past_facts_check_list">
+        <action app:destination="@id/nav_article" />
     </fragment>
 
     <fragment
@@ -64,6 +63,16 @@
         <argument
             android:name="newsSourceModel"
             app:argType="com.theshoremedia.database.entity.NewsSourceModel" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_search_fragment"
+        android:name="com.theshoremedia.modules.home.fragment.SearchResultFragment"
+        tools:layout="@layout/fragment_search_result">
+        <argument
+            android:name="claim"
+            app:argType="string" />
 
     </fragment>
 

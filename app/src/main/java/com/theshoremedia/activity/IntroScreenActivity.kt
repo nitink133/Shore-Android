@@ -62,14 +62,16 @@ class IntroScreenActivity : AppCompatActivity() {
                     binding.ivLeft.makeVisibleWithAnimation(isVisible = false)
                     binding.ivRight.makeVisibleWithAnimation(isVisible = false)
                     binding.btnGetStarted.makeVisibleWithAnimation(isVisible = position + 1 == pagerAdapter.count)
-                    binding.tvSkip.makeVisibleWithAnimation(isVisible = false)
+                    binding.lllogoHeaderSkip.makeVisibleWithAnimation(isVisible = false)
+                    binding.llLogoView.makeVisibleWithAnimation(isVisible = true)
                     return
                 }
 
                 binding.ivRight.makeVisibleWithAnimation(isVisible = position + 1 != pagerAdapter.count)
                 binding.ivLeft.makeVisibleWithAnimation(isVisible = position != 0)
                 binding.btnGetStarted.makeVisibleWithAnimation(isVisible = false)
-                binding.tvSkip.makeVisibleWithAnimation(isVisible = true)
+                binding.lllogoHeaderSkip.makeVisibleWithAnimation(isVisible = true)
+                binding.llLogoView.makeVisibleWithAnimation(isVisible = false)
 
             }
 
@@ -77,7 +79,9 @@ class IntroScreenActivity : AppCompatActivity() {
                 //
             }
 
-            override fun onPageScrollStateChanged(state: Int) {}
+            override fun onPageScrollStateChanged(state: Int) {
+               //no use
+            }
         })
         binding.viewPager.adapter = pagerAdapter
     }

@@ -22,6 +22,7 @@ object AppConstants {
         const val ACTION_MANAGE_OVERLAY = 1001
         const val ACTION_ACCESSIBILITY = 1002
         const val ACTION_BATTERY_SAVER = 1003
+        const val ACTION_STORAGE = 1004
     }
 
     object FloatingViewType {

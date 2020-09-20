@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.theshoremedia.R
+import com.theshoremedia.activity.MainActivity
 import com.theshoremedia.database.entity.NewsSourceModel
 import com.theshoremedia.databinding.FragmentAboutSourceBinding
 import com.theshoremedia.modules.base.BaseFragment
@@ -28,9 +29,12 @@ class AboutSourceFragment : BaseFragment() {
         // Inflate the layout for this fragment
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_about_source, container, false)
+
+        //set source name as toolbar title
+        (mContext as MainActivity).setTitle(newsSourceModel.name)
+
         return binding.root
     }
-
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -45,6 +49,10 @@ class AboutSourceFragment : BaseFragment() {
         binding.tvWebsite.setOnClickListener {
             ChromeTabUtils.openLinkInChromeTab(newsSourceModel.website, mContext)
         }
+    }
 
+    override fun onPageRefreshListener(data: Bundle?) {
+        super.onPageRefreshListener(data)
+        (mContext as MainActivity).setTitle(newsSourceModel.name)
     }
 }

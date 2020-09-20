@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.theshoremedia.R
 import com.theshoremedia.database.entity.NewsSourceModel
@@ -130,13 +129,13 @@ class FactCheckingSourcesFragment : BaseFragment() {
             }
 
             "delete" -> {
-                CustomSourcesDatabaseHelper.instance?.deleteNews(model)
+                model.isSelected = false
+                CustomSourcesDatabaseHelper.instance?.update(model)
             }
             else -> {
                 val direction =
                     HomeFragmentDirections.actionToAboutSource(model)
-                val mainNavView = requireActivity().findViewById<View>(R.id.frame)
-                Navigation.findNavController(mainNavView).navigate(direction)
+                getNavController().navigate(direction)
             }
         }
     }

@@ -26,15 +26,13 @@ import com.theshoremedia.modules.base.BaseActivity
 import com.theshoremedia.modules.base.BaseFragment
 import com.theshoremedia.modules.navigation.adapter.NavigationDrawerAdapter
 import com.theshoremedia.modules.navigation.model.NavigationDataModel
-import com.theshoremedia.utils.AppConstants
-import com.theshoremedia.utils.KeyBoardManager
-import com.theshoremedia.utils.PreferenceUtils
-import com.theshoremedia.utils.ToastUtils
+import com.theshoremedia.utils.*
 import com.theshoremedia.utils.extensions.makeVisible
 import com.theshoremedia.utils.extensions.validateNoDataView
 import com.theshoremedia.utils.permissions.AccessibilityPermissionsUtils
 import com.theshoremedia.utils.permissions.BatteryOptimizationPermissionsUtils
 import com.theshoremedia.utils.permissions.OnDrawPermissionsUtils
+import com.theshoremedia.utils.permissions.StoragePermissionsUtils
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.layout_navigation_view.*
 import kotlinx.android.synthetic.main.layout_recycler_view.*
@@ -50,6 +48,7 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         OnDrawPermissionsUtils.checkPermission(mContext = this) {
             AccessibilityPermissionsUtils.verifyPermission(mContext = this) {
@@ -75,9 +74,10 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.nav_past_checks -> setTitle(getString(R.string.past_checks))
-                R.id.nav_favorite -> setTitle(getString(R.string.favourites))
+                R.id.nav_favourite -> setTitle(getString(R.string.favourites))
                 R.id.nav_settings -> setTitle(getString(R.string.settings))
                 R.id.nav_home -> setTitle(isElevation = false)
+                R.id.nav_search_fragment -> setTitle(getString(R.string.search_result))
                 else -> setTitle()
             }
         }
@@ -85,7 +85,7 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
 
         //fragments load from here but how ?
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.nav_past_checks, R.id.nav_favorite, R.id.nav_home),
+            setOf(R.id.nav_past_checks, R.id.nav_favourite, R.id.nav_home),
             binding.drawerLayout
         )
 
@@ -95,14 +95,14 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
 
     private fun setUpNavigationView() {
         ivCloseDrawer?.setOnClickListener {
-            binding.drawerLayout.closeDrawers()
+            Handler().postDelayed({
+                binding.drawerLayout.closeDrawers()
+            }, 250)
         }
 
         val navigationItems = getNavigationItems()
         val adapter = NavigationDrawerAdapter(items = navigationItems) { position, title ->
-            Handler().postDelayed({
-                onNavigationItemClick(position, title)
-            }, 300)
+            onNavigationItemClick(position, title)
 
         }
         recyclerView?.setHasFixedSize(true)
@@ -113,7 +113,9 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
 
     private fun onNavigationItemClick(position: Int, title: String? = null) {
         val navController: NavController = findNavController(R.id.frame)
-        binding.drawerLayout.closeDrawers()
+        Handler().postDelayed({
+            binding.drawerLayout.closeDrawers()
+        }, 250)
         KeyBoardManager.hideKeyboard(this)
 
         when (position) {
@@ -124,13 +126,19 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
                 navController.navigate(R.id.nav_past_checks)
             }
             AppConstants.NavigationItem.FAVOURITE -> {
-                navController.navigate(R.id.nav_favorite)
+                navController.navigate(R.id.nav_favourite)
             }
 
             AppConstants.NavigationItem.SETTINGS -> {
                 navController.navigate(R.id.nav_settings)
             }
+            AppConstants.NavigationItem.RATE_US -> {
+                DialogUtils.showRatingDialog(this)
+            }
 
+            AppConstants.NavigationItem.SHARE_APP -> {
+                ApplicationUtils.shareApp(this)
+            }
             AppConstants.NavigationItem.ABOUT_US,
             AppConstants.NavigationItem.PRIVACY_POLICY,
             AppConstants.NavigationItem.HELP_SUPPORT -> {
@@ -154,12 +162,13 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
             )
         }
         return items
-
     }
 
     override fun onBackPressed() {
         if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            binding.drawerLayout.closeDrawers()
+            Handler().postDelayed({
+                binding.drawerLayout.closeDrawers()
+            }, 250)
             return
         }
         when (navHostFragment.navController.graph.startDestination) {
@@ -196,6 +205,7 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
         binding.layoutAppBarMain.findViewById<AppCompatTextView>(R.id.tvToolbarTitle)
             .text = title
 
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -212,15 +222,33 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
             AppConstants.PermissionsCode.ACTION_BATTERY_SAVER -> BatteryOptimizationPermissionsUtils.onActivityResult(
                 mContext = this
             )
+
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            AppConstants.PermissionsCode.ACTION_STORAGE -> StoragePermissionsUtils.onActivityResult(
+                mContext = this
+            )
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             if (appBarConfiguration.topLevelDestinations.contains(navHostFragment.navController.currentDestination?.id)) {
-                binding.drawerLayout.openDrawer(GravityCompat.START)
+                Handler().postDelayed({
+                    binding.drawerLayout.openDrawer(GravityCompat.START)
+                }, 250)
+                return true
             } else {
-                super.onBackPressed()
+                navHostFragment.navController.navigateUp()
+                return true
             }
         }
         return item.onNavDestinationSelected(findNavController(R.id.frame))
