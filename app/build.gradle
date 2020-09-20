@@ -58,6 +58,7 @@ repositories {
     google()
     jcenter()
     maven { url "https://jitpack.io" }
+    mavenCentral()
 }
 
 dependencies {
@@ -116,5 +117,7 @@ dependencies {
     implementation "androidx.browser:browser:1.2.0"
 
     implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
+    implementation("io.coil-kt:coil:0.11.0")
+    implementation("io.coil-kt:coil-svg:0.11.0")
 
 }

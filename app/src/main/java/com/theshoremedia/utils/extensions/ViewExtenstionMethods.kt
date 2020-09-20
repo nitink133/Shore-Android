@@ -23,12 +23,12 @@ fun View.makeVisibleWithAnimation(
     top: Boolean = false,
     bottom: Boolean = true
 ) {
-    makeVisible(isVisible)
+//    makeVisible(isVisible)
     //TODO: Fix animation related issue
 
-//    if (isVisible) {
-//        this.showWithAnimation()
-//    } else this.hideWithAnimation()
+    if (isVisible) {
+        this.showWithAnimation()
+    } else this.hideWithAnimation()
 }
 
 fun RecyclerView.validateNoDataView(llNoData: View?) {

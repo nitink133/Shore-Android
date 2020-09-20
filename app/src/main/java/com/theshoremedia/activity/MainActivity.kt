@@ -51,6 +51,7 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         OnDrawPermissionsUtils.checkPermission(mContext = this) {
             AccessibilityPermissionsUtils.verifyPermission(mContext = this) {
@@ -99,7 +100,7 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
         ivCloseDrawer?.setOnClickListener {
             Handler().postDelayed({
                 binding.drawerLayout.closeDrawers()
-            }, 300)
+            }, 250)
         }
 
         val navigationItems = getNavigationItems()
@@ -117,7 +118,7 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
         val navController: NavController = findNavController(R.id.frame)
         Handler().postDelayed({
             binding.drawerLayout.closeDrawers()
-        }, 300)
+        }, 250)
         KeyBoardManager.hideKeyboard(this)
 
         when (position) {
@@ -164,7 +165,7 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
         if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             Handler().postDelayed({
                 binding.drawerLayout.closeDrawers()
-            }, 300)
+            }, 250)
             return
         }
         when (navHostFragment.navController.graph.startDestination) {
@@ -200,6 +201,7 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
             .makeVisible(isVisible = !title.isNullOrEmpty())
         binding.layoutAppBarMain.findViewById<AppCompatTextView>(R.id.tvToolbarTitle)
             .text = title
+
 
     }
 
@@ -239,9 +241,11 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
             if (appBarConfiguration.topLevelDestinations.contains(navHostFragment.navController.currentDestination?.id)) {
                 Handler().postDelayed({
                     binding.drawerLayout.openDrawer(GravityCompat.START)
-                }, 300)
+                }, 250)
+                return true
             } else {
                 navHostFragment.navController.navigateUp()
+                return true
             }
         }
         return item.onNavDestinationSelected(findNavController(R.id.frame))

@@ -11,6 +11,7 @@ import com.theshoremedia.databinding.FragmentArticleViewBinding
 import com.theshoremedia.modules.base.BaseFragment
 import com.theshoremedia.modules.factchecks.fragments.ArticleFragmentArgs.fromBundle
 import com.theshoremedia.utils.ShareUtils
+import com.theshoremedia.utils.ToastUtils
 import com.theshoremedia.utils.extensions.loadImage
 
 
@@ -94,8 +95,9 @@ class ArticleFragment : BaseFragment() {
             android.R.id.home -> requireActivity().onBackPressed()
             R.id.menu_delete -> {
                 // Not implemented here
-                getNavController().popBackStack()
+                ToastUtils.makeToast(mContext, getString(R.string.article_delete_successfully))
                 FactCheckHistoryDatabaseHelper.instance?.delete(factCheckDataModel)
+                requireActivity().onBackPressed()
                 return true
             }
             R.id.menu_share -> {
@@ -113,6 +115,11 @@ class ArticleFragment : BaseFragment() {
             R.id.menu_favorite -> {
                 factCheckDataModel.isFavourite = !factCheckDataModel.isFavourite
                 FactCheckHistoryDatabaseHelper.instance?.markAsFav(factCheckDataModel)
+                ToastUtils.makeToast(
+                    mContext, getString(
+                        if (factCheckDataModel.isFavourite) R.string.article_marked_as_favourite_successfully else R.string.article_removed_from_favourite_successfully
+                    )
+                )
                 requireActivity().invalidateOptionsMenu()
             }
         }

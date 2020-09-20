@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.theshoremedia.R
@@ -22,7 +21,6 @@ import com.theshoremedia.utils.permissions.OnDrawPermissionsUtils
 class FavouriteArticlesListFragment : BaseFragment() {
     private lateinit var binding: FragmentPastFactsCheckListBinding
     private var mAdapter: FactCheckAdapter? = null
-    private var isBookMarkStatusChanged: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,7 +58,6 @@ class FavouriteArticlesListFragment : BaseFragment() {
             FactCheckAdapter {
                 when (it.id) {
                     R.id.ivBookMark -> {
-                        isBookMarkStatusChanged = true
                         val model = it.tag as FactCheckHistoryModel
                         model.isFavourite = !model.isFavourite
 
@@ -77,30 +74,26 @@ class FavouriteArticlesListFragment : BaseFragment() {
         recyclerView?.layoutManager = layoutManager
         recyclerView?.adapter = mAdapter
 
-        FactCheckHistoryDatabaseHelper.instance?.getFavouriteNews(this) {
-            if (isBookMarkStatusChanged) {
-                isBookMarkStatusChanged = false
-                return@getFavouriteNews
-            }
-            mAdapter?.addAll(items = it as ArrayList<FactCheckHistoryModel>)
-            recyclerView?.validateNoDataView(
-                binding.llRecyclerView.findViewById(
-                    R.id.llNoData
-                )
-            )
-        }
+        initRecyclerViewData()
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(isFavouriteListRequest: Boolean = false) =
-            FavouriteArticlesListFragment()
+    private fun initRecyclerViewData() {
+        FactCheckHistoryDatabaseHelper.instance?.getFavouriteNews {
+            mAdapter?.addAll(items = it as ArrayList<FactCheckHistoryModel>)
+            binding.llRecyclerView.findViewById<RecyclerView>(R.id.recyclerView)
+                ?.validateNoDataView(
+                    binding.llRecyclerView.findViewById(
+                        R.id.llNoData
+                    )
+                )
+        }
     }
 
 
     override fun onPageRefreshListener(data: Bundle?) {
         super.onPageRefreshListener(data)
-        (mContext as MainActivity).setTitle(getString(R.string.bookmark))
+        (mContext as MainActivity).setTitle(getString(R.string.favourites))
+        initRecyclerViewData()
     }
 
 }

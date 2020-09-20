@@ -18,8 +18,9 @@
     <dimen name="small_textsize">12sp</dimen>
     <dimen name="default_textsize">14sp</dimen>
     <dimen name="large_textsize">16sp</dimen>
+    <dimen name="extra_large_textsize">18sp</dimen>
     <dimen name="heading_textsize">20sp</dimen>
-    <dimen name="extra_large_textsize">24sp</dimen>
+    <dimen name="extreme_large_textsize">24sp</dimen>
     <dimen name="btn_text_size">14sp</dimen>
 
     <dimen name="icon_width">35dp</dimen>

@@ -22,7 +22,7 @@
         style="@style/textView"
         android:layout_gravity="center_horizontal"
         android:text="@string/rate_the_app"
-        android:textSize="@dimen/extra_large_textsize"
+        android:textSize="@dimen/extreme_large_textsize"
         android:textStyle="bold" />
 
     <androidx.appcompat.widget.AppCompatTextView

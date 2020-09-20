@@ -165,4 +165,8 @@
     <string name="err_oops_we_didnt_find_any_ifcn_signatory_story">Oops… We did not find any story published from our credible sources. You can read these stories as these are published from custom sources.</string>
     <string name="search_result">Search result</string>
 
+    <string name="article_delete_successfully">Article deleted successfully</string>
+    <string name="article_marked_as_favourite_successfully">Article marked as favourite successfully</string>
+    <string name="article_removed_from_favourite_successfully">Article removed from favourite successfully</string>
+
 </resources>

@@ -9,22 +9,62 @@
         android:fitsSystemWindows="false"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <FrameLayout
+            android:id="@+id/llHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
-            android:gravity="center"
-            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:gravity="center"
+            android:layout_margin="@dimen/default_margin"
             app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lllogoHeaderSkip"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/extra_small_margin">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_notext_logo" />
+
+                    <TextView
+                        style="@style/withAlphaTextView"
+                        android:layout_marginStart="@dimen/tiny_small_margin"
+                        android:layout_marginBottom="@dimen/extra_small_margin"
+                        android:text="@string/app_name"
+                        android:textSize="@dimen/large_textsize"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvSkip"
+                    style="@style/withAlphaTextView"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="@string/skip"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/llLogoView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 android:padding="@dimen/extra_small_margin">
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -42,17 +82,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
             </LinearLayout>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvSkip"
-                style="@style/withAlphaTextView"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:text="@string/skip"
-                android:textStyle="bold" />
-
-        </LinearLayout>
+        </FrameLayout>
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
@@ -61,7 +91,7 @@
             android:layout_gravity="center"
             android:fitsSystemWindows="true"
             app:layout_constraintBottom_toTopOf="@+id/frameLayout"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/llHeader" />
 
 
         <FrameLayout
