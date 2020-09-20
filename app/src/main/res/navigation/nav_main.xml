@@ -2,43 +2,32 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_main"
     app:startDestination="@id/nav_home">
     <fragment
         android:id="@+id/nav_home"
         android:name="com.theshoremedia.modules.home.fragment.HomeFragment"
         tools:layout="@layout/fragment_home">
 
-        <action
-            android:id="@+id/action_to_about_source"
-            app:destination="@id/nav_about_source" />
+        <action app:destination="@id/nav_about_source" />
 
 
-        <action
-            android:id="@+id/action_to_search_result"
-            app:destination="@id/nav_search_fragment" />
+        <action app:destination="@id/nav_search_fragment" />
 
 
-        <action
-            android:id="@+id/action_to_fav_article"
-            app:destination="@id/nav_article" />
+        <action app:destination="@id/nav_article" />
     </fragment>
     <fragment
         android:id="@+id/nav_past_checks"
         android:name="com.theshoremedia.modules.factchecks.fragments.PastCheckListFragment"
         tools:layout="@layout/fragment_past_facts_check_list">
-        <action
-            android:id="@+id/action_to_article"
-            app:destination="@id/nav_article" />
+        <action app:destination="@id/nav_article" />
     </fragment>
     <fragment
         android:id="@+id/nav_favourite"
         android:name="com.theshoremedia.modules.factchecks.fragments.FavouriteArticlesListFragment"
         android:label="@string/bookmark"
         tools:layout="@layout/fragment_past_facts_check_list">
-        <action
-            android:id="@+id/action_to_fav_article"
-            app:destination="@id/nav_article" />
+        <action app:destination="@id/nav_article" />
     </fragment>
 
     <fragment

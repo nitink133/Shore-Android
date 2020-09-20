@@ -26,10 +26,7 @@ import com.theshoremedia.modules.base.BaseActivity
 import com.theshoremedia.modules.base.BaseFragment
 import com.theshoremedia.modules.navigation.adapter.NavigationDrawerAdapter
 import com.theshoremedia.modules.navigation.model.NavigationDataModel
-import com.theshoremedia.utils.AppConstants
-import com.theshoremedia.utils.KeyBoardManager
-import com.theshoremedia.utils.PreferenceUtils
-import com.theshoremedia.utils.ToastUtils
+import com.theshoremedia.utils.*
 import com.theshoremedia.utils.extensions.makeVisible
 import com.theshoremedia.utils.extensions.validateNoDataView
 import com.theshoremedia.utils.permissions.AccessibilityPermissionsUtils
@@ -135,7 +132,13 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
             AppConstants.NavigationItem.SETTINGS -> {
                 navController.navigate(R.id.nav_settings)
             }
+            AppConstants.NavigationItem.RATE_US -> {
+                DialogUtils.showRatingDialog(this)
+            }
 
+            AppConstants.NavigationItem.SHARE_APP -> {
+                ApplicationUtils.shareApp(this)
+            }
             AppConstants.NavigationItem.ABOUT_US,
             AppConstants.NavigationItem.PRIVACY_POLICY,
             AppConstants.NavigationItem.HELP_SUPPORT -> {

@@ -6,7 +6,9 @@ import android.content.Context
 import android.view.ContextThemeWrapper
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatSpinner
+import androidx.appcompat.widget.AppCompatTextView
 import com.theshoremedia.R
 import com.theshoremedia.utils.extensions.makeVisible
 import com.theshoremedia.utils.extensions.setAdapter
@@ -184,21 +186,21 @@ object DialogUtils {
     }
 
     fun showRatingDialog(
-        context: Context?
+        mContext: Context?
     ) {
-        (context as? Activity)?.let {
+        (mContext as? Activity)?.let {
             val dialogView = it.layoutInflater.inflate(R.layout.dialog_rating, null)
             val customDialog = showCustomDialog(it, dialogView) {
                 cancelable = true
             }
-//            btnOkay.setOnClickListener {
-//                responseListener?.invoke(okayButtonText)
-//                customDialog.dismiss()
-//            }
-//            btnCancel.setOnClickListener {
-//                responseListener?.invoke(cancelButtonText)
-//                customDialog.dismiss()
-//            }
+            dialogView.findViewById<AppCompatTextView>(R.id.btnDontLikeApp).setOnClickListener {
+                ApplicationUtils.mailToSupport(mContext)
+                customDialog.dismiss()
+            }
+            dialogView.findViewById<AppCompatButton>(R.id.btnLovingIt).setOnClickListener {
+                ApplicationUtils.openAppOnPlayStore(mContext)
+                customDialog.dismiss()
+            }
             customDialog.show()
         }
     }

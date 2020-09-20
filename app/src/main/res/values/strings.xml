@@ -2,12 +2,6 @@
     <string name="app_name">Shore</string>
 
     <string name="a_layer_of_truth">A layer of truth on every forward.</string>
-    <string name="intro_screen_1">You read, \'TheShore\' is ready to back you from fake news.</string>
-    <string name="intro_screen_2">Your time is important. So, Why waste it in reading fake news.</string>
-    <string name="intro_screen_3">Whole story behind the fake news is just one click ahead.</string>
-    <string name="intro_screen_4">Cool, I got this!\nActivate Now</string>
-    <string name="txt_activate_not">Activate Now</string>
-    <string name="enable_accessibility">Enable accessibility on the next screen for TheShore to function smoothly</string>
 
     <string name="extra_large_dummy_text">What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry. \n\nWhat is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry. \nWhat is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry. \n\nWhat is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry.</string>
     <string name="large_dummy_text">What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry.</string>
@@ -43,11 +37,6 @@
         <item>@string/about_us</item>
     </string-array>
 
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="openDrawer">open_drawer</string>
-    <string name="closeDrawer">close_drawer</string>
 
     <!--    Nav items-->
     <string name="home">Home</string>
@@ -85,9 +74,6 @@
     <string name="permission_message_accessibility">We need accessibility permission to protect you from fake-news in real time.</string>
     <string name="permission_accessibility_description">Switch \'ON\' in the top right corner to save time as The Shore unlocks these cool features for you:\n- Real time Fake news detections on WhatsApp forwards\n- Share real story instead of fake forward\n\nNote:\nYou may receive a standard warning after this screen. Don\'t worry about it, The Shore will never collect your personal information. Contact info@nitinsworld.com for any concerns.</string>
 
-    <string name="permission_title_battery_optimization">Allow Shore Media to run in Battery saving mode?</string>
-    <string name="permission_message_battery_optimization">We need battery optimization permission to run in saving mode.</string>
-
     <string name="help_look_for_shore_in_the_list_and_click">Look for \'TheShore\' is the list and click</string>
     <string name="help_see_how_shore_works_on_whatsapp">See how \'TheShore\' works on WhatsApp.</string>
 
@@ -97,11 +83,9 @@
 
     <string name="share">Share</string>
     <string name="mark_as_favourite">Mark as Favourite</string>
-    <string name="remove_from_favorite">Remove from favourite</string>
     <string name="delete">Delete</string>
 
     <string name="news_stories">News stories</string>
-    <string name="hide">Hide</string>
 
     <string name="auto_detect_fake_news_on_whatsapp">Auto detect fake news on WhatsApp</string>
     <string name="run_in_battery_optimization_mode">Run in Battery optimization mode</string>
@@ -111,7 +95,6 @@
     <string name="check_it_with_shore">Check it with Shore</string>
 
 
-    <string name="something_went_wrong">Something went wrong!</string>
     <string name="exception_message_no_connection">Internet connection error</string>
 
     <string name="lbl_forwarded">Forwarded</string>
@@ -132,19 +115,15 @@
     <string name="des_intro_4">Shore will allows you to discover the facts in real time with no-extra efforts.</string>
 
 
-    <string name="btn_view_demo">View Demo</string>
-
     <string name="fact_checks">Fact checks</string>
     <string name="sources">Sources</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="lbl_investigate_a_claim">Investigate a claim</string>
     <string name="des_manual_investigation">To investigate a claim, either type and paste your chosen claim into the box below and click Investigate.\n\nThis can be entered in any language.</string>
     <string name="hint_enter_your_claim">Enter your claim</string>
     <string name="investigate">Investigate</string>
     <string name="error_whatsapp_real_time_fake_news_detection_is_not_activated_now">WhatsApp real time fake news detection is not activated now.</string>
+    <string name="success_whatsapp_real_time_fake_news_detection_is_activated_now">You are protected from fake news, As Shore WhatsApp real time fake news detection is activated.</string>
     <string name="btn_activate">Activate</string>
 
     <string name="add_custom_source">Add custom source</string>
@@ -169,4 +148,8 @@
     <string name="article_marked_as_favourite_successfully">Article marked as favourite successfully</string>
     <string name="article_removed_from_favourite_successfully">Article removed from favourite successfully</string>
 
+    <string name="msg_rate_us">Your opinion is very important to us and can help us improve our services. Please take a moment and let us know how satisfied you are with our services.</string>
+
+    <string name="support_mail_subject">Shore suggestions from User</string>
+    <string name="support_mail_text">Thanks for using Shore, We are working on expanding this project and would appreciate your input as a valued user of the items being worked on.\nPlease specify what you did not like about Shore:\n</string>
 </resources>

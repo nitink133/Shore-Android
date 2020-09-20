@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="small_padding">8dp</dimen>
-    <dimen name="medium_padding">12dp</dimen>
     <dimen name="default_padding">16dp</dimen>
     <dimen name="large_padding">24dp</dimen>
 
@@ -23,8 +22,6 @@
     <dimen name="extreme_large_textsize">24sp</dimen>
     <dimen name="btn_text_size">14sp</dimen>
 
-    <dimen name="icon_width">35dp</dimen>
-    <dimen name="icon_Height">35dp</dimen>
     <dimen name="small_image">24dp</dimen>
     <dimen name="extra_small_image">20dp</dimen>
     <dimen name="large_image">36dp</dimen>
@@ -34,7 +31,6 @@
 
 
     <dimen name="btn_height">40dp</dimen>
-    <dimen name="add_btn_width">60dp</dimen>
     <dimen name="small_btn_height">32dp</dimen>
     <dimen name="ultra_btn_height">28dp</dimen>
 
@@ -42,7 +38,6 @@
     <dimen name="large_radius">20dp</dimen>
     <dimen name="small_radius">8dp</dimen>
     <dimen name="extra_small_radius">4dp</dimen>
-    <dimen name="btn_round_radius">6dp</dimen>
 
     <dimen name="divider_height">1dp</dimen>
 

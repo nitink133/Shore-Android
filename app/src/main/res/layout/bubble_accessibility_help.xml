@@ -10,7 +10,6 @@
         android:padding="@dimen/extra_small_margin">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivClose"
             android:layout_width="@dimen/extra_small_image"
             android:layout_height="@dimen/extra_small_image"
             android:layout_gravity="start|center_vertical"

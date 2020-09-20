@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.theshoremedia.R
@@ -14,6 +15,7 @@ import com.theshoremedia.modules.base.BaseFragment
 import com.theshoremedia.utils.KeyBoardManager
 import com.theshoremedia.utils.ToastUtils
 import com.theshoremedia.utils.extensions.makeVisible
+import com.theshoremedia.utils.permissions.AccessibilityPermissionsUtils
 
 /**
  * A simple [Fragment] subclass.
@@ -37,8 +39,31 @@ class ManualFactCheckingFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         initListeners()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        AccessibilityPermissionsUtils.verifyPermission(mContext!!) { isEnabled ->
+            updateShieldStatus(isEnabled)
+        }
+    }
+
+    private fun updateShieldStatus(isEnabled: Boolean) {
+        binding.llServiceStatus.backgroundTintList =
+            ContextCompat.getColorStateList(
+                mContext!!,
+                if (isEnabled) R.color.bg_success_green else R.color.bg_error_red
+            )
+        binding.tvAccServiceStatus.text =
+            getString(
+                if (isEnabled) R.string.success_whatsapp_real_time_fake_news_detection_is_activated_now
+                else R.string.error_whatsapp_real_time_fake_news_detection_is_not_activated_now
+            )
+        binding.tvAccServiceStatus.textAlignment =
+            if (isEnabled) View.TEXT_ALIGNMENT_CENTER else View.TEXT_ALIGNMENT_TEXT_START
+        binding.btnActivate.makeVisible(isVisible = !isEnabled)
+
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -51,6 +76,12 @@ class ManualFactCheckingFragment : BaseFragment() {
             val direction =
                 HomeFragmentDirections.actionToSearchResult(binding.etClaim.text.toString())
             getNavController().navigate(direction)
+        }
+
+        binding.btnActivate.setOnClickListener {
+            AccessibilityPermissionsUtils.checkPermission(mContext = this.requireContext()) { isEnabled ->
+                updateShieldStatus(isEnabled)
+            }
         }
 
 
