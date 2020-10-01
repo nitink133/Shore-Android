@@ -83,7 +83,7 @@ class SearchResultFragment : BaseFragment() {
         factCheckHistoryModel: FactCheckHistoryModel
     ) {
         val direction =
-            HomeFragmentDirections.actionToFavArticle(factCheckHistoryModel)
+            HomeFragmentDirections.actionToArticle(factCheckHistoryModel)
         getNavController().navigate(direction)
         if (isPopCurrent)
             getNavController().popBackStack()

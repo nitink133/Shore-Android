@@ -48,7 +48,7 @@ class BubbleAccessibilityGrantedDemoView {
                                     mContext?.getString(R.string.err_work_is_under_process)
                                 )
                             R.id.ivTakeToApp ->
-                                ApplicationUtils.startApp(mContext)
+                                ApplicationUtils.restartApplication(mContext)
                         }
                     }
 
