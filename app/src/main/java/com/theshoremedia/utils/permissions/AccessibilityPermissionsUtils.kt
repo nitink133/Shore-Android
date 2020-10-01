@@ -78,6 +78,7 @@ class AccessibilityPermissionsUtils {
                 override fun onChange(selfChange: Boolean) {
                     super.onChange(selfChange)
                     verifyPermission(mContext) { isEnabled ->
+                        PreferenceUtils.savePref(mContext.getString(R.string.key_auto_detect), isEnabled)
                         if (isEnabled) {
                             mContext.contentResolver.unregisterContentObserver(this)
                             BubbleAccessibilityGrantedDemoView.getInstance(mContext).init()
@@ -116,7 +117,6 @@ class AccessibilityPermissionsUtils {
         ) {
             if (mContext == null) return
             verifyPermission(mContext) { isEnabled ->
-                PreferenceUtils.savePref(mContext.getString(R.string.key_auto_detect), isEnabled)
                 listener?.invoke(isEnabled)
             }
 

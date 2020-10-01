@@ -73,13 +73,14 @@ class ManualFactCheckingFragment : BaseFragment() {
                 ToastUtils.makeToast(mContext, getString(R.string.err_empty_claim))
                 return@setOnClickListener
             }
+            KeyBoardManager.hideKeyboard(requireActivity())
             val direction =
-                HomeFragmentDirections.actionToSearchResult(binding.etClaim.text.toString())
+                HomeFragmentDirections.actionToSearch(binding.etClaim.text.toString())
             getNavController().navigate(direction)
         }
 
         binding.btnActivate.setOnClickListener {
-            AccessibilityPermissionsUtils.checkPermission(mContext = this.requireContext()) { isEnabled ->
+            AccessibilityPermissionsUtils.checkPermission(mContext = mContext!!) { isEnabled ->
                 updateShieldStatus(isEnabled)
             }
         }

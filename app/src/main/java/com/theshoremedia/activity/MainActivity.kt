@@ -52,7 +52,7 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
 
         OnDrawPermissionsUtils.checkPermission(mContext = this) {
             AccessibilityPermissionsUtils.verifyPermission(mContext = this) {
-                PreferenceUtils.savePref(getString(R.string.key_auto_detect), it)
+                //Auto-detect permission callbacks
             }
         }
 
