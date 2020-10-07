@@ -49,6 +49,7 @@ data class FactCheckHistoryModel(
     var isRead: Boolean = false,
     @ColumnInfo(name = "date")
     var date: String? = ""
+
 ) : Parcelable {
     @Ignore
     @SerializedName("uniqueDevices")
@@ -58,6 +59,9 @@ data class FactCheckHistoryModel(
     @SerializedName("uniqueRequestCount")
     var uniqueRequestCount: Int? = 0
 
+    @Ignore
+    @SerializedName("aboutSource")
+    var aboutSource: NewsSourceModel? = null
 
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",

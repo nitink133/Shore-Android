@@ -7,6 +7,7 @@ import com.theshoremedia.R
 import com.theshoremedia.activity.MainActivity
 import com.theshoremedia.database.entity.FactCheckHistoryModel
 import com.theshoremedia.database.helper.FactCheckHistoryDatabaseHelper
+import com.theshoremedia.database.helper.SourcesDatabaseHelper
 import com.theshoremedia.databinding.FragmentArticleViewBinding
 import com.theshoremedia.modules.base.BaseFragment
 import com.theshoremedia.modules.factchecks.fragments.ArticleFragmentArgs.fromBundle
@@ -40,8 +41,12 @@ class ArticleFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        binding.model = factCheckDataModel
         binding.ivNewsIcon.loadImage(factCheckDataModel.image)
+        SourcesDatabaseHelper.instance?.getSourceInfo(factCheckDataModel.sourceName) {
+            factCheckDataModel.aboutSource = it
+            binding.model = factCheckDataModel
+        }
+
 
         initListener()
     }

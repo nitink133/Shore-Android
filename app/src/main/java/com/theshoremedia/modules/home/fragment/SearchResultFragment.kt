@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.Navigation
 import com.theshoremedia.R
 import com.theshoremedia.activity.MainActivity
 import com.theshoremedia.database.entity.FactCheckHistoryModel
@@ -36,6 +35,11 @@ class SearchResultFragment : BaseFragment() {
         return binding.root
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        callValidateNews(claim)
+    }
+
 
     private fun callValidateNews(claim: String) {
 
@@ -59,7 +63,7 @@ class SearchResultFragment : BaseFragment() {
             Log.d("Nitin", "Searched query has been found in local database.")
             reqModel.isProcessed = true
 
-            moveToArticle(isPopCurrent = true, factCheckHistoryModel = it)
+            moveToArticle(factCheckHistoryModel = it)
         }
 
     }
@@ -79,14 +83,11 @@ class SearchResultFragment : BaseFragment() {
 
 
     private fun moveToArticle(
-        isPopCurrent: Boolean = false,
         factCheckHistoryModel: FactCheckHistoryModel
     ) {
         val direction =
-            HomeFragmentDirections.actionToFavArticle(factCheckHistoryModel)
-        getNavController().navigate(direction)
-        if (isPopCurrent)
-            getNavController().popBackStack()
+            SearchResultFragmentDirections.actionToArticle(factCheckHistoryModel)
+        navigate(direction)
     }
 
     override fun onPageRefreshListener(data: Bundle?) {

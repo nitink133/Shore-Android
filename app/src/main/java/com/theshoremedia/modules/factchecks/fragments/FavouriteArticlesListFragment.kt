@@ -66,7 +66,7 @@ class FavouriteArticlesListFragment : BaseFragment() {
                     }
                     else -> {
                         val direction =
-                            FavouriteArticlesListFragmentDirections.actionToFavArticle(it.tag as FactCheckHistoryModel)
+                            FavouriteArticlesListFragmentDirections.actionToArticle(it.tag as FactCheckHistoryModel)
                         getNavController().navigate(direction)
                     }
                 }

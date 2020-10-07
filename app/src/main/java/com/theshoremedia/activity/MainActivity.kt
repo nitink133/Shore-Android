@@ -19,8 +19,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.theshoremedia.R
-import com.theshoremedia.database.helper.CustomSourcesDatabaseHelper
-import com.theshoremedia.database.helper.FactCheckHistoryDatabaseHelper
+import com.theshoremedia.database.helper.SourcesDatabaseHelper
 import com.theshoremedia.databinding.ActivityMainBinding
 import com.theshoremedia.modules.base.BaseActivity
 import com.theshoremedia.modules.base.BaseFragment
@@ -56,8 +55,8 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
             }
         }
 
-        FactCheckHistoryDatabaseHelper.instance?.addDummyData(this)
-        CustomSourcesDatabaseHelper.instance?.storeCustomSourcesInDB(this)
+//        FactCheckHistoryDatabaseHelper.instance?.addDummyData(this)
+        SourcesDatabaseHelper.instance?.storeCustomSourcesInDB(this)
         // initializing navigation menu
         setUpNavigationView()
         setupNavigationController()

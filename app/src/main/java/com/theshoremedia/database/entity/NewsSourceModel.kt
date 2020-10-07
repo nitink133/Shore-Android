@@ -29,7 +29,9 @@ data class NewsSourceModel(
     @ColumnInfo(name = "_ifcnLogo")
     var ifcnLogo: String? = null,
     @ColumnInfo(name = "_isSelected")
-    var isSelected: Boolean = false
+    var isSelected: Boolean = false,
+    @ColumnInfo(name = "_isShoreSource")
+    var isShoreSource: Boolean = false
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
@@ -39,6 +41,7 @@ data class NewsSourceModel(
         parcel.readString() ?: "",
         parcel.readString(),
         parcel.readString(),
+        parcel.readByte() != 0.toByte(),
         parcel.readByte() != 0.toByte()
     )
 
@@ -51,6 +54,7 @@ data class NewsSourceModel(
         parcel.writeString(ifcnSignatory)
         parcel.writeString(ifcnLogo)
         parcel.writeByte(if (isSelected) 1 else 0)
+        parcel.writeByte(if (isShoreSource) 1 else 0)
     }
 
     override fun describeContents(): Int {

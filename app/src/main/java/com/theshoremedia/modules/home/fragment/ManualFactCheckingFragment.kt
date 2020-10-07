@@ -74,7 +74,7 @@ class ManualFactCheckingFragment : BaseFragment() {
                 return@setOnClickListener
             }
             val direction =
-                HomeFragmentDirections.actionToSearchResult(binding.etClaim.text.toString())
+                HomeFragmentDirections.actionToSearch(binding.etClaim.text.toString())
             getNavController().navigate(direction)
         }
 

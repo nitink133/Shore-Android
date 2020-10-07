@@ -9,13 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.theshoremedia.R
 import com.theshoremedia.database.entity.NewsSourceModel
-import com.theshoremedia.database.helper.CustomSourcesDatabaseHelper
+import com.theshoremedia.database.helper.SourcesDatabaseHelper
 import com.theshoremedia.databinding.FragmentFactCheckingSourcesBinding
 import com.theshoremedia.modules.base.BaseFragment
 import com.theshoremedia.modules.home.adapter.NewsSourceAdapter
 import com.theshoremedia.utils.ChromeTabUtils
 import com.theshoremedia.utils.DialogUtils
-import com.theshoremedia.utils.ObjectUtils
 import com.theshoremedia.utils.ToastUtils
 import com.theshoremedia.utils.extensions.makeVisible
 
@@ -63,7 +62,7 @@ class FactCheckingSourcesFragment : BaseFragment() {
                 items = unAddedCustomSourcesList
             ) {
                 it.isSelected = true
-                CustomSourcesDatabaseHelper.instance?.update(it)
+                SourcesDatabaseHelper.instance?.update(it)
                 ToastUtils.makeToast(
                     mContext,
                     getString(
@@ -87,7 +86,7 @@ class FactCheckingSourcesFragment : BaseFragment() {
         binding.rvCustomSources.adapter = mCustomSourceAdapter
         binding.rvCustomSources.isNestedScrollingEnabled = false
 
-        CustomSourcesDatabaseHelper.instance?.getAllSources(this) {
+        SourcesDatabaseHelper.instance?.getCustomSourcesLive(this) {
             unAddedCustomSourcesList = it.filter { !it.isSelected }
             val customSourcesList = it.filter { it.isSelected }
             binding.tvCustomSource.makeVisible(isVisible = customSourcesList.isNotEmpty())
@@ -99,21 +98,19 @@ class FactCheckingSourcesFragment : BaseFragment() {
     }
 
     private fun initShoreSources() {
-        val shoreSourcesList =
-            ObjectUtils.readFromAssets(
-                mContext!!,
-                "shore_sources.json",
-                NewsSourceModel::class.java
-            )
         val lmShoreSources = LinearLayoutManager(context)
         mShoreSourceAdapter =
             NewsSourceAdapter(
-                items = shoreSourcesList as ArrayList<NewsSourceModel>,
+                items = arrayListOf(),
                 callBacks = mAdapterCallbacks
             )
         binding.rvShoreSources.layoutManager = lmShoreSources
         binding.rvShoreSources.adapter = mShoreSourceAdapter
         binding.rvShoreSources.isNestedScrollingEnabled = false
+
+        SourcesDatabaseHelper.instance?.getShoreSourcesLive(this) {
+            mShoreSourceAdapter.addAll(it as ArrayList<NewsSourceModel>)
+        }
     }
 
 
@@ -130,7 +127,7 @@ class FactCheckingSourcesFragment : BaseFragment() {
 
             "delete" -> {
                 model.isSelected = false
-                CustomSourcesDatabaseHelper.instance?.update(model)
+                SourcesDatabaseHelper.instance?.update(model)
             }
             else -> {
                 val direction =

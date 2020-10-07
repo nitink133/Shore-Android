@@ -11,14 +11,14 @@ import com.theshoremedia.utils.ObjectUtils
  * @author- Nitin Khanna
  * @date -
  */
-class CustomSourcesDatabaseHelper {
+class SourcesDatabaseHelper {
     companion object {
-        private var databaseManager: CustomSourcesDatabaseHelper? = null
+        private var databaseManager: SourcesDatabaseHelper? = null
         private var handler: Handler? = null
-        val instance: CustomSourcesDatabaseHelper?
+        val instance: SourcesDatabaseHelper?
             get() {
                 if (databaseManager == null) {
-                    databaseManager = CustomSourcesDatabaseHelper()
+                    databaseManager = SourcesDatabaseHelper()
                     handler = Handler()
                 }
                 return databaseManager
@@ -40,6 +40,33 @@ class CustomSourcesDatabaseHelper {
         }
     }
 
+    fun getCustomSourcesLive(
+        owner: LifecycleOwner,
+        callBack: ((items: List<NewsSourceModel>) -> Unit)
+    ) {
+        handler?.post {
+
+            AppDatabase.appDatabase.customSourcesDao()!!.getCustomSourcesLive().observe(
+                owner,
+                androidx.lifecycle.Observer {
+                    callBack.invoke(it ?: arrayListOf())
+                })
+        }
+    }
+
+    fun getShoreSourcesLive(
+        owner: LifecycleOwner,
+        callBack: ((items: List<NewsSourceModel>) -> Unit)
+    ) {
+        handler?.post {
+
+            AppDatabase.appDatabase.customSourcesDao()!!.getShoreSourcesLive().observe(
+                owner,
+                androidx.lifecycle.Observer {
+                    callBack.invoke(it ?: arrayListOf())
+                })
+        }
+    }
 
     fun insertNews(model: NewsSourceModel) {
         handler?.post {
@@ -63,11 +90,18 @@ class CustomSourcesDatabaseHelper {
 
     fun storeCustomSourcesInDB(context: Context) {
         val dummyData =
-            ObjectUtils.readFromAssets(context, "custom_sources.json", NewsSourceModel::class.java)
+            ObjectUtils.readFromAssets(context, "sources.json", NewsSourceModel::class.java)
         handler?.post {
             if (AppDatabase.appDatabase.customSourcesDao()?.getAllItems?.size != 0) return@post
             AppDatabase.appDatabase.customSourcesDao()!!.deleteAll()
             AppDatabase.appDatabase.customSourcesDao()!!.insertAll(dummyData)
+        }
+
+    }
+
+    fun getSourceInfo(sourceLink: String, listener: ((sourceInfo: NewsSourceModel?) -> Unit)) {
+        handler?.post {
+            listener.invoke(AppDatabase.appDatabase.customSourcesDao()!!.getSourceInfo(sourceLink))
         }
 
     }
