@@ -101,6 +101,7 @@ class SourcesDatabaseHelper {
 
     fun getSourceInfo(sourceLink: String, listener: ((sourceInfo: NewsSourceModel?) -> Unit)) {
         handler?.post {
+//            var link = "%${sourceLink}%"
             listener.invoke(AppDatabase.appDatabase.customSourcesDao()!!.getSourceInfo(sourceLink))
         }
 

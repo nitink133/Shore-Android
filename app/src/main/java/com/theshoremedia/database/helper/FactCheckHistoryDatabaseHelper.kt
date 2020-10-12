@@ -121,6 +121,21 @@ class FactCheckHistoryDatabaseHelper {
         }
     }
 
+    fun markAllAsRead() {
+        handler?.post {
+
+            AppDatabase.appDatabase.factChecksHistoryDao()?.markAllAsRead()
+        }
+    }
+
+    fun updateReadStatus(isRead: Boolean, forwardMessage: String) {
+        handler?.post {
+
+            AppDatabase.appDatabase.factChecksHistoryDao()
+                ?.updateReadStatus(isRead = isRead, forwardMessage = forwardMessage)
+        }
+    }
+
     fun getNews(
         forwardMessage: String,
         callBack: ((item: FactCheckHistoryModel?) -> Unit)

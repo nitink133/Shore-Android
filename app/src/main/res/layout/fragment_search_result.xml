@@ -43,7 +43,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
                 <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/ivArrowDown"
+                    android:id="@+id/ivMarkFav"
                     android:layout_width="@dimen/large_image"
                     android:layout_height="@dimen/large_image"
                     android:layout_gravity="center"
@@ -64,7 +64,7 @@
                     android:layout_marginEnd="@dimen/small_margin"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ivArrowDown" />
+                    app:layout_constraintTop_toBottomOf="@+id/ivMarkFav" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

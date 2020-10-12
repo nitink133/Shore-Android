@@ -61,6 +61,7 @@
                     android:layout_height="100dp"
                     android:layout_marginTop="@dimen/extra_small_margin"
                     android:src="@drawable/ic_logo"
+                    android:scaleType="fitXY"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvNewsHeading" />
@@ -71,7 +72,7 @@
                     android:layout_width="0dp"
                     android:layout_marginStart="@dimen/extra_small_margin"
                     android:ellipsize="end"
-                    android:maxLines="2"
+                    android:maxLines="3"
                     android:text="@{model.article}"
                     android:textAlignment="gravity"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +95,7 @@
                     tools:text="@string/small_dummy_text" />
 
                 <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/ivArrowDown"
+                    android:id="@+id/ivMarkFav"
                     android:layout_width="@dimen/large_image"
                     android:layout_height="@dimen/large_image"
                     android:layout_gravity="center"

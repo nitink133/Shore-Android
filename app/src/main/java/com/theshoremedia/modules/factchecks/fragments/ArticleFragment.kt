@@ -14,6 +14,7 @@ import com.theshoremedia.modules.factchecks.fragments.ArticleFragmentArgs.fromBu
 import com.theshoremedia.utils.ShareUtils
 import com.theshoremedia.utils.ToastUtils
 import com.theshoremedia.utils.extensions.loadImage
+import com.theshoremedia.utils.extensions.setFirstCharCapitalText
 
 
 class ArticleFragment : BaseFragment() {
@@ -47,6 +48,8 @@ class ArticleFragment : BaseFragment() {
             binding.model = factCheckDataModel
         }
 
+        binding.tvNewsSource.setFirstCharCapitalText(factCheckDataModel.sourceName)
+
 
         initListener()
     }
@@ -69,10 +72,10 @@ class ArticleFragment : BaseFragment() {
             binding.tvAboutSourceMore.tag = !isExpended
             if (!isExpended) {
                 binding.tvAboutSourceMore.text = getString(R.string.lbl_less)
-                binding.tvAboutSourceMore.maxLines = Integer.MAX_VALUE
+                binding.tvAboutTheSource.maxLines = Integer.MAX_VALUE
             } else {
                 binding.tvAboutSourceMore.text = getString(R.string.lbl_more)
-                binding.tvAboutSourceMore.maxLines = 4
+                binding.tvAboutTheSource.maxLines = 4
             }
         }
 
@@ -113,7 +116,11 @@ class ArticleFragment : BaseFragment() {
                 val isAboutSourceMsgExpended = binding.tvAboutSourceMore.tag as? Boolean ?: false
                 if (!isAboutSourceMsgExpended) binding.tvAboutSourceMore.performClick()
 
-                ShareUtils.takeScreenshotAndShare(mContext, binding.llRoot)
+                binding.tvNewsDescription.maxLines = 20
+                binding.llRoot.setTag(R.string.key_model, factCheckDataModel)
+                ShareUtils.takeScreenshotAndShare(binding.llRoot) {
+                    binding.tvNewsDescription.maxLines = Integer.MAX_VALUE
+                }
                 return true
             }
 

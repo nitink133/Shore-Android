@@ -20,7 +20,7 @@ import com.theshoremedia.utils.permissions.AccessibilityPermissionsUtils
 /**
  * A simple [Fragment] subclass.
  */
-class ManualFactCheckingFragment : BaseFragment() {
+class InvestigateFragment : BaseFragment() {
     private lateinit var binding: FragmentManualFactCheckingBinding
 
     override fun onCreateView(
@@ -73,6 +73,8 @@ class ManualFactCheckingFragment : BaseFragment() {
                 ToastUtils.makeToast(mContext, getString(R.string.err_empty_claim))
                 return@setOnClickListener
             }
+
+            KeyBoardManager.hideKeyboard(requireActivity())
             val direction =
                 HomeFragmentDirections.actionToSearch(binding.etClaim.text.toString())
             getNavController().navigate(direction)

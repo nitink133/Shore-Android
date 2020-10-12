@@ -8,12 +8,14 @@ import android.widget.LinearLayout
 import com.facebook.rebound.Spring
 import com.facebook.rebound.SpringChain
 import com.theshoremedia.database.entity.FactCheckHistoryModel
+import com.theshoremedia.database.helper.FactCheckHistoryDatabaseHelper
 import com.theshoremedia.modules.floatingview.credibility_checker.services.CredibilityCheckerService
 import com.theshoremedia.utils.AppConstants
 import com.theshoremedia.utils.FloatingViewsLayoutParamsUtils
 import com.theshoremedia.utils.configs.SpringConfigs
 import com.theshoremedia.utils.extensions.dpToPx
 import com.theshoremedia.utils.extensions.getScreenSize
+import com.theshoremedia.utils.whatsapp.WhatsAppUtils
 import com.theshoremedia.views.layouts.Line
 import com.theshoremedia.views.layouts.Rectangle
 import kotlin.math.max
@@ -539,6 +541,7 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
 
         CredibilityCheckerService.getInstance().updateViewLayout(this, params)
+
     }
 
     fun makeContentViewEnable() {
@@ -598,6 +601,10 @@ class RootView(context: Context) : View.OnTouchListener, FrameLayout(context) {
         bubbleView = null
         closeCaptured = false
         movingOutOfClose = false
+
+
+        FactCheckHistoryDatabaseHelper.instance?.markAllAsRead()
+        WhatsAppUtils.getInstance()?.forwardedMessagesList?.clear()
     }
 
     fun showContentView() {

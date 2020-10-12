@@ -20,10 +20,7 @@ import com.theshoremedia.modules.floatingview.credibility_checker.model.Validate
 import com.theshoremedia.modules.floatingview.credibility_checker.ui.RootView
 import com.theshoremedia.retrofit.API
 import com.theshoremedia.retrofit.model.GenericResponseModel
-import com.theshoremedia.utils.AppConstants
-import com.theshoremedia.utils.Log
-import com.theshoremedia.utils.NotificationsUtils
-import com.theshoremedia.utils.ObjectUtils
+import com.theshoremedia.utils.*
 import com.theshoremedia.utils.extensions.makeVisible
 import com.theshoremedia.utils.permissions.OnDrawPermissionsUtils
 import com.theshoremedia.utils.whatsapp.WhatsAppUtils
@@ -189,6 +186,10 @@ class CredibilityCheckerService : Service() {
 
             Log.d("Nitin", "Searched query has been found in local database.")
             reqModel.isProcessed = true
+            FactCheckHistoryDatabaseHelper.instance?.updateReadStatus(
+                isRead = false,
+                forwardMessage = reqModel.query
+            )
             resetAPIStatus()
         }
 
@@ -204,7 +205,9 @@ class CredibilityCheckerService : Service() {
                 resetAPIStatus()
                 return@callValidateNews
             }
-            FactCheckHistoryDatabaseHelper.instance?.insertNews(it.data as FactCheckHistoryModel)
+            val item = it.data as FactCheckHistoryModel
+            item.date = StringUtils.getTodayDate()
+            FactCheckHistoryDatabaseHelper.instance?.insertNews(item)
             reqModel.isProcessed = true
             resetAPIStatus()
         }

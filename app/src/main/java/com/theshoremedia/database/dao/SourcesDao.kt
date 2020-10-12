@@ -37,7 +37,7 @@ interface SourcesDao {
     @Query("DELETE FROM customNewsSources")
     fun deleteAll()
 
-    @Query("Select * From customNewsSources Where _website LIKE '%' + (:sourceLink) + '%'")
+    @Query("Select * From customNewsSources Where _website LIKE '%' || :sourceLink || '%' ")
     fun getSourceInfo(sourceLink: String): NewsSourceModel?
 
 

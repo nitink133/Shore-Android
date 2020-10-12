@@ -42,7 +42,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivArrowDown"
+                    android:id="@+id/ivMarkFav"
                     android:layout_width="@dimen/small_image"
                     android:layout_height="@dimen/small_image"
                     android:layout_marginEnd="@dimen/small_margin"

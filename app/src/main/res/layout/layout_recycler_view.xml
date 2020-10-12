@@ -43,6 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
+            android:paddingBottom="@dimen/small_margin"
             android:text="@string/txt_no_data"
             android:textSize="@dimen/large_textsize" />
     </FrameLayout>

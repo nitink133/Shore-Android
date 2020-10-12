@@ -7,7 +7,6 @@ import com.theshoremedia.modules.floatingview.general.CallBack
 import com.theshoremedia.modules.floatingview.general.FloatingLayout
 import com.theshoremedia.utils.AppConstants
 import com.theshoremedia.utils.ApplicationUtils
-import com.theshoremedia.utils.ToastUtils
 
 /**
  * @author- Nitin Khanna
@@ -41,15 +40,16 @@ class BubbleAccessibilityGrantedDemoView {
                     CallBack {
                     override fun onClickListener(resourceId: Int) {
                         floatingLayout?.close()
-                        when (resourceId) {
-                            R.id.btnStart ->
-                                ToastUtils.makeToast(
-                                    mContext,
-                                    mContext?.getString(R.string.err_work_is_under_process)
-                                )
-                            R.id.ivTakeToApp ->
-                                ApplicationUtils.startApp(mContext)
-                        }
+                        //TODO: add demo video here, in next release
+//                        when (resourceId) {
+//                            R.id.btnStart ->
+//                                ToastUtils.makeToast(
+//                                    mContext,
+//                                    mContext?.getString(R.string.err_work_is_under_process)
+//                                )
+//                            R.id.ivTakeToApp ->
+                        ApplicationUtils.startApp(mContext)
+//                        }
                     }
 
                     override fun onCreateListener(view: View?) {}

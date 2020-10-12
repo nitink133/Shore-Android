@@ -19,7 +19,7 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="@dimen/small_margin"
                 android:layout_marginEnd="@dimen/small_margin"
-                tools:context=".modules.home.fragment.ManualFactCheckingFragment">
+                tools:context=".modules.home.fragment.InvestigateFragment">
 
 
                 <TextView
