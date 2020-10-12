@@ -20,7 +20,7 @@ import com.theshoremedia.utils.permissions.AccessibilityPermissionsUtils
 /**
  * A simple [Fragment] subclass.
  */
-class ManualFactCheckingFragment : BaseFragment() {
+class InvestigateFragment : BaseFragment() {
     private lateinit var binding: FragmentManualFactCheckingBinding
 
     override fun onCreateView(

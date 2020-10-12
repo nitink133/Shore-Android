@@ -48,5 +48,4 @@ fun ImageView.loadImage(image: String?) {
         Glide.with(this.context).load(image).apply(options).into(this)
     }
 
-
 }

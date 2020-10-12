@@ -32,9 +32,19 @@ class ContentView(context: Context) : LinearLayout(context) {
     private var mAdapter =
         OverlayFactCheckAdapter(
             arrayListOf()
-        ) { _, item ->
-            if (!isDisable)
-                CredibilityCheckerService.getInstance().rootView.showArticleView(item)
+        ) { view ->
+            val item = view.getTag(R.string.key_model) as FactCheckHistoryModel
+            val key = view.getTag(R.string.key_view_name) as String
+            if (!isDisable) {
+                when (key) {
+                    "ivMarkFav" -> {
+                        item.isFavourite = !item.isFavourite
+                        FactCheckHistoryDatabaseHelper.instance!!.markAsFav(item)
+                    }
+                    else -> CredibilityCheckerService.getInstance().rootView.showArticleView(item)
+                }
+
+            }
         }
     var layoutManager = LinearLayoutManager(context)
 
@@ -48,11 +58,6 @@ class ContentView(context: Context) : LinearLayout(context) {
         recyclerView?.layoutManager = layoutManager
         recyclerView?.adapter = mAdapter
         updateAdapterWithUnreadNews()
-
-
-        recyclerView?.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
-            //TODO
-        }
 
 
         scaleSpring.addListener(object : SimpleSpringListener() {

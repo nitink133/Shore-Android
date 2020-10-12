@@ -13,8 +13,8 @@ android {
         applicationId "com.theshoremedia"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 1
-        versionName "0.1"
+        versionCode 2
+        versionName "0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -119,5 +119,9 @@ dependencies {
     implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
     implementation("io.coil-kt:coil:0.11.0")
     implementation("io.coil-kt:coil-svg:0.11.0")
+    implementation 'com.huangyz0918:androidwm:0.2.3'
+    implementation 'com.hd.viewcapture:viewcapture:1.4'
+
+    implementation 'com.google.android.play:core:1.8.2'
 
 }

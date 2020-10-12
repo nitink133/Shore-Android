@@ -45,6 +45,12 @@ interface FactCheckHistoryDao {
     @Update
     fun markedAsFav(tableFactChecksHistoryModel: FactCheckHistoryModel)
 
+    @Query("UPDATE tableFactChecksHistory SET isRead= :isRead")
+    fun markAllAsRead(isRead: Boolean = true)
+
+    @Query("UPDATE tableFactChecksHistory SET isRead= :isRead WHERE forwardMessage = :forwardMessage")
+    fun updateReadStatus(isRead: Boolean = true, forwardMessage: String)
+
 
     @Query("SELECT * FROM tableFactChecksHistory WHERE forwardMessage = (:forwardMessage)")
     fun getNews(forwardMessage: String): FactCheckHistoryModel?

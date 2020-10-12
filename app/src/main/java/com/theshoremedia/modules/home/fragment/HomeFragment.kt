@@ -39,7 +39,7 @@ class HomeFragment : BaseFragment() {
             BaseViewPagerAdapter(
                 childFragmentManager
             )
-        adapter.addFragment(ManualFactCheckingFragment(), getString(R.string.fact_checks))
+        adapter.addFragment(InvestigateFragment(), getString(R.string.fact_checks))
         adapter.addFragment(FactCheckingSourcesFragment(), getString(R.string.sources))
         binding.viewpager.adapter = adapter
     }

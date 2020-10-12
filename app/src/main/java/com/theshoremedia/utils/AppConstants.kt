@@ -23,6 +23,7 @@ object AppConstants {
         const val ACTION_ACCESSIBILITY = 1002
         const val ACTION_BATTERY_SAVER = 1003
         const val ACTION_STORAGE = 1004
+        const val ACTION_UPDATE_APP = 1005
     }
 
     object FloatingViewType {
@@ -68,6 +69,7 @@ object AppConstants {
     object Key{
         const val REQUEST_CODE= "request_code"
         const val NOTIFICATION_ID= "notification_id"
+
     }
 
     object AccessibilityService{

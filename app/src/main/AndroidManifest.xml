@@ -23,21 +23,21 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
 
-        <activity
-            android:name=".activity.ShoreChecksActivity"
-            android:label="@string/check_it_with_shore">
+        <!--        <activity-->
+        <!--            android:name=".activity.ShoreChecksActivity"-->
+        <!--            android:label="@string/check_it_with_shore">-->
 
-            <intent-filter>
-                <action android:name="android.intent.action.PROCESS_TEXT" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/plain" />
-            </intent-filter>
+        <!--            <intent-filter>-->
+        <!--                <action android:name="android.intent.action.PROCESS_TEXT" />-->
+        <!--                <category android:name="android.intent.category.DEFAULT" />-->
+        <!--                <data android:mimeType="text/plain" />-->
+        <!--            </intent-filter>-->
 
-            <!--                        <intent-filter>-->
-            <!--                            <action android:name="android.intent.action.MAIN" />-->
-            <!--                            <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--                        </intent-filter>-->
-        </activity>
+        <!--            &lt;!&ndash;                        <intent-filter>&ndash;&gt;-->
+        <!--            &lt;!&ndash;                            <action android:name="android.intent.action.MAIN" />&ndash;&gt;-->
+        <!--            &lt;!&ndash;                            <category android:name="android.intent.category.LAUNCHER" />&ndash;&gt;-->
+        <!--            &lt;!&ndash;                        </intent-filter>&ndash;&gt;-->
+        <!--        </activity>-->
         <activity
             android:name=".activity.IntroScreenActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />

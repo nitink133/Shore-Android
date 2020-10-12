@@ -5,18 +5,21 @@ import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.view.doOnLayout
 import com.facebook.rebound.SimpleSpringListener
 import com.facebook.rebound.Spring
 import com.facebook.rebound.SpringSystem
 import com.theshoremedia.R
 import com.theshoremedia.database.entity.FactCheckHistoryModel
+import com.theshoremedia.database.helper.SourcesDatabaseHelper
 import com.theshoremedia.modules.floatingview.credibility_checker.services.CredibilityCheckerService
 import com.theshoremedia.utils.ShareUtils
+import com.theshoremedia.utils.ToastUtils
 import com.theshoremedia.utils.configs.SpringConfigs
 import com.theshoremedia.utils.extensions.loadImage
 import com.theshoremedia.utils.extensions.setFirstCharCapitalText
+import com.theshoremedia.utils.permissions.StoragePermissionsUtils
 
 
 /**
@@ -29,14 +32,10 @@ class ArticleView(context: Context) : LinearLayout(context) {
     private val scaleSpring = springSystem.createSpring()
     var isVisible: Boolean = false
     private val llRootNewsView: LinearLayout
-    private var mHeight: Int
-    private var mWidth: Int
 
 
     init {
         inflate(context, R.layout.bubble_article_view, this)
-        mHeight = height
-        mWidth = width
 
 
         llRootNewsView = findViewById(R.id.llRootNewsView)
@@ -45,13 +44,52 @@ class ArticleView(context: Context) : LinearLayout(context) {
         }
 
         findViewById<ImageView>(R.id.ivShare).setOnClickListener {
-            ShareUtils.takeScreenshotAndShare(view = llRootNewsView)
+            StoragePermissionsUtils.verifyPermission(context) {
+                if (it) {
+                    CredibilityCheckerService.getInstance().rootView.collapse()
+
+                    findViewById<TextView>(R.id.tvNewsDescription).maxLines = 20
+                    ShareUtils.takeScreenshotAndShare(llRootNewsView) {
+                        findViewById<TextView>(R.id.tvNewsDescription).maxLines = Integer.MAX_VALUE
+                    }
+                } else {
+                    ToastUtils.makeToast(
+                        context,
+                        context.getString(R.string.permission_storage_error)
+                    )
+                }
+            }
         }
 
-        doOnLayout {
-            mWidth = it.measuredWidth
-            mHeight = it.measuredHeight
+        val tvMoreForwardedMsg = findViewById<TextView>(R.id.tvMoreForwardedMsg)
+        val tvForwardedMessage = findViewById<TextView>(R.id.tvForwardedMessage)
+        val tvAboutSourceMore = findViewById<TextView>(R.id.tvAboutSourceMore)
+        val tvAboutTheSource = findViewById<TextView>(R.id.tvAboutTheSource)
+
+        tvMoreForwardedMsg.setOnClickListener {
+            val isExpended: Boolean = tvMoreForwardedMsg.tag as? Boolean ?: false
+            tvMoreForwardedMsg.tag = !isExpended
+            if (!isExpended) {
+                tvMoreForwardedMsg.text = context.getString(R.string.lbl_less)
+                tvForwardedMessage.maxLines = Integer.MAX_VALUE
+            } else {
+                tvMoreForwardedMsg.text = context.getString(R.string.lbl_more)
+                tvForwardedMessage.maxLines = 4
+            }
         }
+        tvAboutSourceMore.setOnClickListener {
+            val isExpended: Boolean = tvAboutSourceMore.tag as? Boolean ?: false
+            tvAboutSourceMore.tag = !isExpended
+            if (!isExpended) {
+                tvAboutSourceMore.text = context.getString(R.string.lbl_less)
+                tvAboutTheSource.maxLines = Integer.MAX_VALUE
+            } else {
+                tvAboutSourceMore.text = context.getString(R.string.lbl_more)
+                tvAboutTheSource.maxLines = 4
+            }
+        }
+
+
 
         scaleSpring.addListener(object : SimpleSpringListener() {
             override fun onSpringUpdate(spring: Spring) {
@@ -93,17 +131,23 @@ class ArticleView(context: Context) : LinearLayout(context) {
         findViewById<ImageView>(R.id.ivNewsIcon).loadImage(item.image)
         findViewById<AppCompatTextView>(R.id.tvForwardedMessage).text = item.forwardMessage
 
+
+        SourcesDatabaseHelper.instance?.getSourceInfo(item.sourceName) {
+            item.aboutSource = it
+            llRootNewsView.setTag(R.string.key_model, item)
+            findViewById<AppCompatTextView>(R.id.tvAboutTheSource).text = item.aboutSource?.about
+        }
+
+
         val anim = AlphaAnimation(0.0f, 1.0f)
         anim.duration = 100
         anim.repeatMode = Animation.RELATIVE_TO_SELF
         startAnimation(anim)
     }
 
+
 //    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
 //        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-//        Log.d("Nitin", "Width: $mWidth\nHeight: $mHeight")
-//        setMeasuredDimension(mWidth, mHeight)
+//        setMeasuredDimension(widthMeasureSpec, resolveSize(800, heightMeasureSpec));
 //    }
-
-
 }

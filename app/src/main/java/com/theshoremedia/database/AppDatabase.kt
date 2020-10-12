@@ -5,8 +5,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.theshoremedia.AppController
-import com.theshoremedia.database.dao.CustomSourcesDao
 import com.theshoremedia.database.dao.FactCheckHistoryDao
+import com.theshoremedia.database.dao.SourcesDao
 import com.theshoremedia.database.entity.FactCheckHistoryModel
 import com.theshoremedia.database.entity.NewsSourceModel
 
@@ -20,7 +20,7 @@ import com.theshoremedia.database.entity.NewsSourceModel
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun factChecksHistoryDao(): FactCheckHistoryDao?
-    abstract fun customSourcesDao(): CustomSourcesDao?
+    abstract fun customSourcesDao(): SourcesDao?
 
     companion object {
         private var databaseInstance: AppDatabase? = null

@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
+import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.theshoremedia.R
 
 /**
@@ -33,5 +35,10 @@ open class BaseFragment : Fragment() {
     fun getNavController(): NavController {
         val mainNavView = requireActivity().findViewById<View>(R.id.frame)
         return Navigation.findNavController(mainNavView)
+    }
+
+    fun navigate(destination: NavDirections) = with(findNavController()) {
+        currentDestination?.getAction(destination.actionId)
+            ?.let { navigate(destination) }
     }
 }

@@ -7,12 +7,14 @@ import com.theshoremedia.R
 import com.theshoremedia.activity.MainActivity
 import com.theshoremedia.database.entity.FactCheckHistoryModel
 import com.theshoremedia.database.helper.FactCheckHistoryDatabaseHelper
+import com.theshoremedia.database.helper.SourcesDatabaseHelper
 import com.theshoremedia.databinding.FragmentArticleViewBinding
 import com.theshoremedia.modules.base.BaseFragment
 import com.theshoremedia.modules.factchecks.fragments.ArticleFragmentArgs.fromBundle
 import com.theshoremedia.utils.ShareUtils
 import com.theshoremedia.utils.ToastUtils
 import com.theshoremedia.utils.extensions.loadImage
+import com.theshoremedia.utils.extensions.setFirstCharCapitalText
 
 
 class ArticleFragment : BaseFragment() {
@@ -40,8 +42,14 @@ class ArticleFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        binding.model = factCheckDataModel
         binding.ivNewsIcon.loadImage(factCheckDataModel.image)
+        SourcesDatabaseHelper.instance?.getSourceInfo(factCheckDataModel.sourceName) {
+            factCheckDataModel.aboutSource = it
+            binding.model = factCheckDataModel
+        }
+
+        binding.tvNewsSource.setFirstCharCapitalText(factCheckDataModel.sourceName)
+
 
         initListener()
     }
@@ -64,10 +72,10 @@ class ArticleFragment : BaseFragment() {
             binding.tvAboutSourceMore.tag = !isExpended
             if (!isExpended) {
                 binding.tvAboutSourceMore.text = getString(R.string.lbl_less)
-                binding.tvAboutSourceMore.maxLines = Integer.MAX_VALUE
+                binding.tvAboutTheSource.maxLines = Integer.MAX_VALUE
             } else {
                 binding.tvAboutSourceMore.text = getString(R.string.lbl_more)
-                binding.tvAboutSourceMore.maxLines = 4
+                binding.tvAboutTheSource.maxLines = 4
             }
         }
 
@@ -108,7 +116,11 @@ class ArticleFragment : BaseFragment() {
                 val isAboutSourceMsgExpended = binding.tvAboutSourceMore.tag as? Boolean ?: false
                 if (!isAboutSourceMsgExpended) binding.tvAboutSourceMore.performClick()
 
-                ShareUtils.takeScreenshotAndShare(mContext, binding.llRoot)
+                binding.tvNewsDescription.maxLines = 20
+                binding.llRoot.setTag(R.string.key_model, factCheckDataModel)
+                ShareUtils.takeScreenshotAndShare(binding.llRoot) {
+                    binding.tvNewsDescription.maxLines = Integer.MAX_VALUE
+                }
                 return true
             }
 

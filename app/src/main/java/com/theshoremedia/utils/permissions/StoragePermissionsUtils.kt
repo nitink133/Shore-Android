@@ -63,7 +63,7 @@ class StoragePermissionsUtils {
             listener.invoke()
         }
 
-        private fun verifyPermission(
+        fun verifyPermission(
             mContext: Context,
             listener: ((isEnabled: Boolean) -> Unit)
         ) {

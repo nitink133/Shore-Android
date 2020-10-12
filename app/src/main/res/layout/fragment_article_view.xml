@@ -47,7 +47,6 @@
                     android:layout_weight="1"
                     android:gravity="start"
                     android:maxLines="1"
-                    android:text="@{model.sourceName}"
                     android:textColor="@color/btnBgColorRed"
                     tools:text="@string/tiny_dummy_text" />
 
@@ -207,7 +206,7 @@
                     android:layout_marginBottom="@dimen/small_margin"
                     android:ellipsize="end"
                     android:maxLines="4"
-                    android:text="@string/medium_dummy_text"
+                    android:text="@{model.aboutSource.about}"
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/small_textsize"
                     tools:text="@string/extra_large_dummy_text" />

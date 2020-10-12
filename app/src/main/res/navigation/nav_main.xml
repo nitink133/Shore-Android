@@ -17,10 +17,6 @@
             android:id="@+id/actionToSearch"
             app:destination="@id/nav_search_fragment" />
 
-
-        <action
-            android:id="@+id/actionToArticle"
-            app:destination="@id/nav_article" />
     </fragment>
     <fragment
         android:id="@+id/nav_past_checks"
@@ -83,6 +79,12 @@
         <argument
             android:name="claim"
             app:argType="string" />
+
+        <action
+            android:id="@+id/actionToArticle"
+            app:destination="@id/nav_article"
+            app:popUpTo="@+id/nav_search_fragment"
+            app:popUpToInclusive="true" />
 
     </fragment>
 
