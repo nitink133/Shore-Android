@@ -69,21 +69,22 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
                     PreferenceUtils.savePref(getString(R.string.key_auto_detect), it)
                 }
             }
-        }
 
 //        FactCheckHistoryDatabaseHelper.instance?.addDummyData(this)
-        SourcesDatabaseHelper.instance?.storeCustomSourcesInDB(this)
-        // initializing navigation menu
-        setUpNavigationView()
-        setupNavigationController()
-        checkForAppUpdate()
+            SourcesDatabaseHelper.instance?.storeCustomSourcesInDB(this)
+            // initializing navigation menu
+            setUpNavigationView()
+            setupNavigationController()
+            checkForAppUpdate()
+        }
     }
 
     private fun setupNavigationController() {
         navHostFragment = supportFragmentManager
             .findFragmentById(R.id.frame) as NavHostFragment? ?: return
         val navController = navHostFragment.navController
-        appBarConfiguration = AppBarConfiguration(navController.graph) //configure nav controller
+        appBarConfiguration =
+            AppBarConfiguration(navController.graph) //configure nav controller
 
         binding.navView.setupWithNavController(navController)
 
@@ -322,7 +323,10 @@ class MainActivity : BaseActivity(), AppBarConfiguration.OnNavigateUpListener {
     }
 
 
-    private fun startAppUpdate(appUpdateInfo: AppUpdateInfo, type: Int = AppUpdateType.IMMEDIATE) {
+    private fun startAppUpdate(
+        appUpdateInfo: AppUpdateInfo,
+        type: Int = AppUpdateType.IMMEDIATE
+    ) {
         try {
             appUpdateManager!!.startUpdateFlowForResult(
                 appUpdateInfo,

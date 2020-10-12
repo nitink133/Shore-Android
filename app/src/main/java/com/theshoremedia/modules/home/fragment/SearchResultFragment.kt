@@ -88,6 +88,7 @@ class SearchResultFragment : BaseFragment() {
         val direction =
             SearchResultFragmentDirections.actionToArticle(factCheckHistoryModel)
         navigate(direction)
+
     }
 
     override fun onPageRefreshListener(data: Bundle?) {

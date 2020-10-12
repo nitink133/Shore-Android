@@ -1,5 +1,6 @@
 package com.theshoremedia.utils
 
+import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
@@ -12,6 +13,7 @@ import java.io.IOException
 import java.io.InputStream
 import java.nio.charset.Charset
 import java.util.*
+import kotlin.system.exitProcess
 
 
 /**
@@ -116,5 +118,19 @@ object ApplicationUtils {
         )
         sendIntent.type = "text/plain"
         context.startActivity(sendIntent)
+    }
+
+    fun restartApplication(mContext: Context?) {
+        if(mContext == null )return
+        if(mContext !is Activity)return
+        // Systems at 29/Q and later don't allow relaunch, but System.exit(0) on
+        // all supported systems will relaunch ... but by killing the process, then
+        // restarting the process with the back stack intact. We must make sure that
+        // the launch activity is the only thing in the back stack before exiting.
+        val pm = mContext.packageManager
+        val intent = pm.getLaunchIntentForPackage(mContext.packageName)
+        mContext.finishAffinity() // Finishes all activities.
+        mContext.startActivity(intent) // Start the launch activity
+        exitProcess(0) // System finishes and automatically relaunches us.
     }
 }

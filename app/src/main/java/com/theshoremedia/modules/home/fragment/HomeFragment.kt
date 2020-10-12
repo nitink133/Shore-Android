@@ -44,9 +44,7 @@ class HomeFragment : BaseFragment() {
         binding.viewpager.adapter = adapter
     }
 
-    companion object {
-        fun newInstance() = HomeFragment()
-    }
+
 
     override fun onPageRefreshListener(data: Bundle?) {
         super.onPageRefreshListener(data)

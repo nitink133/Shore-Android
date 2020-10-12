@@ -36,7 +36,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
                 if (!(findPreference(key) as SwitchPreference).isChecked) {
                     return
                 }
-                AccessibilityPermissionsUtils.checkPermission(mContext = this.requireContext()) { isEnabled ->
+                AccessibilityPermissionsUtils.checkPermission(mContext = requireActivity()) { isEnabled ->
                     (findPreference(key) as SwitchPreference).isChecked = isEnabled
                 }
             }

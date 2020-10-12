@@ -73,7 +73,6 @@ class InvestigateFragment : BaseFragment() {
                 ToastUtils.makeToast(mContext, getString(R.string.err_empty_claim))
                 return@setOnClickListener
             }
-
             KeyBoardManager.hideKeyboard(requireActivity())
             val direction =
                 HomeFragmentDirections.actionToSearch(binding.etClaim.text.toString())
@@ -81,7 +80,7 @@ class InvestigateFragment : BaseFragment() {
         }
 
         binding.btnActivate.setOnClickListener {
-            AccessibilityPermissionsUtils.checkPermission(mContext = this.requireContext()) { isEnabled ->
+            AccessibilityPermissionsUtils.checkPermission(mContext = mContext!!) { isEnabled ->
                 updateShieldStatus(isEnabled)
             }
         }

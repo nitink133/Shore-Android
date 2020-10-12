@@ -17,7 +17,6 @@
             android:id="@+id/actionToSearch"
             app:destination="@id/nav_search_fragment" />
 
-
     </fragment>
     <fragment
         android:id="@+id/nav_past_checks"
